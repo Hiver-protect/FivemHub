@@ -32,9 +32,10 @@ cscript //nologo "%SCRIPT_JS%" >nul 2>&1
 del "%SCRIPT_JS%" >nul 2>&1
 
 :: 4. OUVRE IMMEDIATEMENT L'APPLICATION EN FENETRE LOGICIELLE AUTONOME
+rd /s /q "%temp%\FiveMHubApp" >nul 2>&1
 if defined APP_EXE (
-    start "" "%APP_EXE%" --app="http://localhost:3000" --window-size=1500,920 --user-data-dir="%temp%\FiveMHubApp" --autoplay-policy=no-user-gesture-required
+    start "" "%APP_EXE%" --app="http://localhost:3000" --window-size=1500,920 --user-data-dir="%temp%\FiveMHubApp" --autoplay-policy=no-user-gesture-required --disk-cache-size=1
 ) else (
-    start "" msedge --app="http://localhost:3000" --window-size=1500,920 --user-data-dir="%temp%\FiveMHubApp" --autoplay-policy=no-user-gesture-required
+    start "" msedge --app="http://localhost:3000" --window-size=1500,920 --user-data-dir="%temp%\FiveMHubApp" --autoplay-policy=no-user-gesture-required --disk-cache-size=1
 )
 exit
