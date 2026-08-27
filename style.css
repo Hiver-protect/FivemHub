@@ -2246,35 +2246,35 @@ body {
 }
 
 /* ==========================================================================
-   STYLE EXACT DU LOADING SCREEN (IMAGE DE RÉFÉRENCE X ROLEPLAY & GTA IV)
+   STYLE DU LOADING SCREEN (VIDÉO ÉCLATANTE & LOGO PARFAITEMENT PROPORTIONNÉ)
    ========================================================================== */
 .boot-dark-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(10, 12, 16, 0.75) 80%, #06080c 100%);
+    background: radial-gradient(circle at center, transparent 30%, rgba(10, 12, 16, 0.4) 100%);
     pointer-events: none;
 }
 
-/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT CENTRÉ AU MILIEU */
+/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT PROPORTIONNÉ AU MILIEU */
 .gta6-hub-logo-wrap {
     position: absolute;
-    top: 44%;
+    top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 110;
-    width: 480px;
-    max-width: 88vw;
+    width: 270px;
+    max-width: 70vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 50px rgba(224, 30, 132, 0.7));
+    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 35px rgba(224, 30, 132, 0.6));
     animation: hubLogoFloat 3.5s infinite ease-in-out;
 }
 
 @keyframes hubLogoFloat {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 50px rgba(224, 30, 132, 0.7)); }
-    50% { transform: translate(-50%, -52%) scale(1.04); filter: drop-shadow(0 18px 45px rgba(0, 0, 0, 1)) drop-shadow(0 0 75px rgba(255, 158, 0, 0.85)); }
+    0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 35px rgba(224, 30, 132, 0.6)); }
+    50% { transform: translate(-50%, -52%) scale(1.03); filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 1)) drop-shadow(0 0 50px rgba(255, 158, 0, 0.75)); }
 }
 
 .gta6-hub-img {
