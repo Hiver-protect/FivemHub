@@ -2249,35 +2249,35 @@ body {
 }
 
 /* ==========================================================================
-   STYLE DU LOADING SCREEN (VIDÉO ÉCLATANTE & LOGO PARFAITEMENT PROPORTIONNÉ)
+   STYLE DU LOADING SCREEN (LOGO PARFAITEMENT CENTRÉ & BARRE EN BAS)
    ========================================================================== */
 .boot-dark-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 30%, rgba(10, 12, 16, 0.4) 100%);
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.15) 0%, rgba(10, 12, 16, 0.5) 80%, rgba(6, 8, 12, 0.85) 100%);
     pointer-events: none;
 }
 
-/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT PROPORTIONNÉ AU MILIEU */
+/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT CENTRÉ AU MILIEU */
 .gta6-hub-logo-wrap {
     position: absolute;
-    top: 42%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 110;
-    width: 270px;
-    max-width: 70vw;
+    width: 380px;
+    max-width: 80vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 35px rgba(224, 30, 132, 0.6));
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 45px rgba(224, 30, 132, 0.65));
     animation: hubLogoFloat 3.5s infinite ease-in-out;
 }
 
 @keyframes hubLogoFloat {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 35px rgba(224, 30, 132, 0.6)); }
-    50% { transform: translate(-50%, -52%) scale(1.03); filter: drop-shadow(0 12px 35px rgba(0, 0, 0, 1)) drop-shadow(0 0 50px rgba(255, 158, 0, 0.75)); }
+    0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 45px rgba(224, 30, 132, 0.65)); }
+    50% { transform: translate(-50%, -52%) scale(1.03); filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 1)) drop-shadow(0 0 65px rgba(255, 158, 0, 0.8)); }
 }
 
 .gta6-hub-img {
@@ -2290,9 +2290,9 @@ body {
 /* Barre de Progression Inférieure Pleine Largeur avec Bonhomme qui Court */
 .xrp-bottom-loader {
     position: absolute;
-    bottom: 35px;
-    left: 50px;
-    right: 50px;
+    bottom: 40px;
+    left: 60px;
+    right: 60px;
     z-index: 120;
 }
 
@@ -2300,30 +2300,32 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-family: var(--font-sub);
     font-weight: 800;
 }
 
 .xrp-status-text {
     color: #ffffff;
-    font-size: 0.95rem;
+    font-size: 1rem;
     letter-spacing: 1px;
     font-style: italic;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .xrp-percent-text {
     color: #ffffff;
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 900;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .xrp-progress-track {
     width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 4px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
     position: relative;
 }
 
@@ -2331,8 +2333,8 @@ body {
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg, #ff2a6d, #ff758c);
-    border-radius: 4px;
-    box-shadow: 0 0 15px rgba(255, 42, 109, 0.8);
+    border-radius: 6px;
+    box-shadow: 0 0 20px rgba(255, 42, 109, 0.9);
     position: relative;
     transition: width 0.2s ease-out;
 }
@@ -2341,13 +2343,13 @@ body {
 .xrp-running-runner {
     position: absolute;
     right: -16px;
-    top: -38px;
-    width: 36px;
-    height: 36px;
+    top: -40px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95));
     animation: runnerBob 0.35s infinite alternate ease-in-out;
 }
 
@@ -2368,7 +2370,7 @@ body {
     height: 16px;
     background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 0 12px #ffffff;
+    box-shadow: 0 0 14px #ffffff;
 }
 
 
