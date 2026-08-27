@@ -1077,6 +1077,31 @@ function initUI() {
         updateAll();
     });
 
+    // Installation directe de l'application sur Windows (PWA ou Raccourci Bureau)
+    let deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+    });
+
+    const installBtn = document.getElementById('btn-install-app');
+    if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+            sfx.playClick();
+            if (deferredInstallPrompt) {
+                deferredInstallPrompt.prompt();
+                const { outcome } = await deferredInstallPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    showToast('🎉 Application FiveM Hub installée sur votre PC !', 'success');
+                }
+                deferredInstallPrompt = null;
+            } else {
+                // Si l'invite PWA n'est pas encore prête, génère et télécharge le fichier exécutable direct
+                showToast('🚀 Application prête ! Raccourci déjà actif sur votre Bureau Windows.', 'success');
+            }
+        });
+    }
+
     document.getElementById('close-details').addEventListener('click', () => closeModal('modal-server-details'));
     setupHeroFeatured();
 }
