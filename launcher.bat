@@ -2,7 +2,10 @@
 title FiveM Hub Master Launcher
 cd /d "%~dp0"
 
-:: 1. DEMARRE LE SERVEUR NODE.JS S'IL N'EST PAS ENCORE ACTIF
+:: 1. AUTO-UPDATE EN TEMPS REEL DEPUIS GITHUB
+git pull origin main >nul 2>&1
+
+:: 2. DEMARRE LE SERVEUR NODE.JS S'IL N'EST PAS ENCORE ACTIF
 netstat -ano | findstr :3000 | findstr LISTENING >nul
 if %errorlevel% neq 0 (
     start /b "" node server.js
