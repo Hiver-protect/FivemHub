@@ -1,0 +1,20 @@
+{
+  "name": "fivem-hub-launcher",
+  "version": "4.0.0",
+  "description": "Launcher Officiel FiveM Hub - 5,200+ Serveurs Live & Rap Radio Station",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "web": "node server.js"
+  },
+  "keywords": [
+    "fivem",
+    "gta5",
+    "launcher",
+    "rap",
+    "radio",
+    "roleplay"
+  ],
+  "author": "FiveM Hub Team",
+  "license": "MIT"
+}
