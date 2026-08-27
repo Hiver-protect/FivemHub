@@ -4,12 +4,9 @@ cd /d "%~dp0"
 
 :: 1. CREE AUTOMATIQUEMENT LE RACCOURCI APPLICATION SUR LE VRAI BUREAU WINDOWS
 set "SCRIPT_JS=%temp%\create_fivem_shortcut.js"
-if not exist "%temp%\shortcut_created.flag" (
-    echo var wsh = new ActiveXObject("WScript.Shell"^); var sc = wsh.CreateShortcut(wsh.SpecialFolders("Desktop"^)^ + "\\FiveM Hub Universe.lnk"^); sc.TargetPath = "%~dp0launcher.bat"; sc.WorkingDirectory = "%~dp0"; sc.Description = "FiveM Hub Universe - Master Launcher"; sc.WindowStyle = 7; sc.Save(^); > "%SCRIPT_JS%"
-    cscript //nologo "%SCRIPT_JS%" >nul 2>&1
-    del "%SCRIPT_JS%" >nul 2>&1
-    echo 1 > "%temp%\shortcut_created.flag"
-)
+echo var wsh = new ActiveXObject("WScript.Shell"^); var sc = wsh.CreateShortcut(wsh.SpecialFolders("Desktop"^)^ + "\\FiveM Hub Universe.lnk"^); sc.TargetPath = "%~dp0launcher.bat"; sc.WorkingDirectory = "%~dp0"; sc.IconLocation = "%~dp0logo.ico, 0"; sc.Description = "FiveM Hub Universe - Master Launcher"; sc.WindowStyle = 7; sc.Save(^); > "%SCRIPT_JS%"
+cscript //nologo "%SCRIPT_JS%" >nul 2>&1
+del "%SCRIPT_JS%" >nul 2>&1
 
 :: 2. VERIFIE ET DEMARRE LE SERVEUR NODE.JS EN ARRIERE-PLAN
 netstat -ano | findstr :3000 | findstr LISTENING >nul
