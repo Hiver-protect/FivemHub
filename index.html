@@ -116,31 +116,39 @@
             <!-- Centre : Titre Vidéo Active & Actions Rapides -->
             <div class="hub-video-info-center">
                 <div class="video-tag-row">
-                    <span class="v-badge v-rstar">ROCKSTAR GAMES</span>
-                    <span class="v-badge v-res">4K ULTRA HD</span>
-                    <span class="v-badge v-live">SON ACTIF 🔊</span>
+                    <span class="v-badge v-rstar"><i class="fa-solid fa-star"></i> ROCKSTAR 4K</span>
+                    <span class="v-badge v-res"><i class="fa-solid fa-film"></i> ULTRA HD 60FPS</span>
+                    <span class="v-badge v-live"><i class="fa-solid fa-signal"></i> EN DIRECT</span>
                 </div>
-                <h1 class="active-video-title" id="active-video-title">Grand Theft Auto VI - Bande-Annonce Officielle 1</h1>
-                <p class="active-video-desc" id="active-video-desc">Bienvenue à Leonida State et Vice City. Regardez les vidéos officielles avec son 4K et suivez les annonces du Newswire en temps réel.</p>
+                <h1 class="active-video-title 3d-text-glow" id="active-video-title">Grand Theft Auto VI - Bande-Annonce Officielle 1</h1>
+                <p class="active-video-desc" id="active-video-desc">Bienvenue à Leonida State et Vice City. Regardez les vidéos officielles avec volume doux ajustable et suivez les annonces du Newswire en temps réel.</p>
+                
                 <div class="video-actions">
-                    <button class="btn-fullscreen-vid" id="btn-toggle-fullscreen">
+                    <button class="btn-fullscreen-vid btn-3d-glow" id="btn-toggle-fullscreen">
                         <i class="fa-solid fa-play"></i> Mode Cinéma Plein Écran
                     </button>
-                    <button class="btn-sound-toggle" id="btn-toggle-audio">
-                        <i class="fa-solid fa-volume-high"></i> Activer / Désactiver le Son
-                    </button>
-                    <a href="https://www.youtube.com/@RockstarGames" target="_blank" class="btn-external-channel">
-                        <i class="fa-brands fa-youtube"></i> Chaîne Rockstar Games ↗
+
+                    <!-- Curseur de Volume Direct pour un Son Parfait et Doux -->
+                    <div class="volume-control-pill">
+                        <button class="btn-vol-icon-toggle" id="btn-toggle-audio" title="Couper / Activer">
+                            <i class="fa-solid fa-volume-low" id="vol-speaker-icon"></i>
+                        </button>
+                        <input type="range" id="video-volume-slider" min="0" max="100" value="10" title="Régler le volume">
+                        <span class="vol-number-text" id="vol-level-text">10%</span>
+                    </div>
+
+                    <a href="https://www.youtube.com/@RockstarGames" target="_blank" class="btn-external-channel btn-3d-glass">
+                        <i class="fa-brands fa-youtube text-pink"></i> Rockstar Games ↗
                     </a>
-                    <a href="https://www.rockstargames.com/newswire" target="_blank" class="btn-external-channel">
-                        <i class="fa-solid fa-newspaper"></i> Rockstar Newswire ↗
+                    <a href="https://www.rockstargames.com/newswire" target="_blank" class="btn-external-channel btn-3d-glass">
+                        <i class="fa-solid fa-newspaper text-amber"></i> Newswire ↗
                     </a>
                 </div>
             </div>
 
             <!-- Modal Cinéma Plein Écran avec Bouton Quitter Flottant et Touche Échap -->
             <div class="cinema-fullscreen-modal" id="cinema-fullscreen-modal">
-                <button class="btn-exit-cinema" id="btn-exit-cinema" title="Quitter le plein écran (Échap)">
+                <button class="btn-exit-cinema btn-3d-glow" id="btn-exit-cinema" title="Quitter le plein écran (Échap)">
                     <i class="fa-solid fa-compress"></i> <span>Quitter le Plein Écran (Échap)</span>
                 </button>
                 <iframe id="cinema-fullscreen-iframe" class="cinema-iframe" 
@@ -154,45 +162,50 @@
 
             <!-- Bas : Sélecteur de Vidéos & Fil d'Annonces en Direct -->
             <div class="hub-bottom-panels">
-                <!-- Sélecteur de Vidéos & Bandes-Annonces -->
-                <div class="video-playlist-carousel">
+                <!-- Sélecteur de Vidéos & Bandes-Annonces 3D Cards -->
+                <div class="video-playlist-carousel glass-card-3d">
                     <div class="panel-header">
-                        <span><i class="fa-solid fa-film text-pink"></i> BANDES-ANNONCES & VIDÉOS</span>
+                        <span><i class="fa-solid fa-film text-pink"></i> BANDES-ANNONCES 4K & VIDÉOS</span>
+                        <span class="badge-sub-counter">4 VIDÉOS HD</span>
                     </div>
                     <div class="videos-list-scroll">
-                        <div class="video-card-item active" data-yt="QdBZY2fkU-0" data-title="Grand Theft Auto VI - Bande-Annonce Officielle 1" data-desc="Vice City, les lumières de la ville et les plages de Leonida. La première révélation officielle.">
+                        <div class="video-card-item card-3d-tilt active" data-yt="QdBZY2fkU-0" data-title="Grand Theft Auto VI - Bande-Annonce Officielle 1" data-desc="Vice City, les lumières de la ville et les plages de Leonida. La première révélation officielle.">
                             <div class="video-thumb" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&auto=format&fit=crop&q=80');">
                                 <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
+                                <span class="tag-4k-pill">4K</span>
                             </div>
                             <div class="video-meta">
                                 <strong>GTA VI Trailer 1</strong>
-                                <span>Rockstar Games • 4K</span>
+                                <span>Rockstar Games • 2026</span>
                             </div>
                         </div>
 
-                        <div class="video-card-item" data-yt="hvoD7ehZPcM" data-title="Grand Theft Auto V - Trailer Officiel PlayStation 5 & Xbox Series" data-desc="Découvrez Los Santos amélioré avec des graphismes 4K, ray tracing et 60 FPS.">
+                        <div class="video-card-item card-3d-tilt" data-yt="hvoD7ehZPcM" data-title="Grand Theft Auto V - Trailer Officiel PlayStation 5 & Xbox Series" data-desc="Découvrez Los Santos amélioré avec des graphismes 4K, ray tracing et 60 FPS.">
                             <div class="video-thumb" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&auto=format&fit=crop&q=80');">
                                 <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
+                                <span class="tag-4k-pill">60FPS</span>
                             </div>
                             <div class="video-meta">
                                 <strong>GTA V Next-Gen</strong>
-                                <span>Rockstar Games • 60 FPS</span>
+                                <span>Rockstar Games</span>
                             </div>
                         </div>
 
-                        <div class="video-card-item" data-yt="eaW0tYpxyp0" data-title="Red Dead Redemption 2 - Trailer de Lancement Officiel" data-desc="L'épopée d'Arthur Morgan et la bande de Van der Linde à travers l'Amérique sauvage.">
+                        <div class="video-card-item card-3d-tilt" data-yt="eaW0tYpxyp0" data-title="Red Dead Redemption 2 - Trailer de Lancement Officiel" data-desc="L'épopée d'Arthur Morgan et la bande de Van der Linde à travers l'Amérique sauvage.">
                             <div class="video-thumb" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=300&auto=format&fit=crop&q=80');">
                                 <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
+                                <span class="tag-4k-pill">4K</span>
                             </div>
                             <div class="video-meta">
                                 <strong>Red Dead Redemption II</strong>
-                                <span>Rockstar Games • 4K</span>
+                                <span>Rockstar Games</span>
                             </div>
                         </div>
 
-                        <div class="video-card-item" data-yt="7y_sR4qW1pM" data-title="FiveM Enhanced - Shaders & Performance 2026" data-desc="Présentation du nouveau moteur de rendu FiveM avec support des serveurs massifs.">
+                        <div class="video-card-item card-3d-tilt" data-yt="7y_sR4qW1pM" data-title="FiveM Enhanced - Shaders & Performance 2026" data-desc="Présentation du nouveau moteur de rendu FiveM avec support des serveurs massifs.">
                             <div class="video-thumb" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&auto=format&fit=crop&q=80');">
                                 <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
+                                <span class="tag-4k-pill">HD</span>
                             </div>
                             <div class="video-meta">
                                 <strong>FiveM Enhanced</strong>
@@ -202,24 +215,24 @@
                     </div>
                 </div>
 
-                <!-- Fil des Dernières Annonces Officielles -->
-                <div class="news-feed-panel">
+                <!-- Fil des Dernières Annonces Officielles 3D Glass -->
+                <div class="news-feed-panel glass-card-3d">
                     <div class="panel-header">
-                        <span><i class="fa-solid fa-bullhorn text-amber"></i> DERNIÈRES ANNONCES EN DIRECT</span>
+                        <span><i class="fa-solid fa-bullhorn text-amber"></i> ANNONCES EN DIRECT</span>
                         <a href="https://www.rockstargames.com/newswire" target="_blank" class="live-link">Newswire ↗</a>
                     </div>
                     <div class="news-items-scroll">
-                        <div class="news-entry">
+                        <div class="news-entry entry-3d">
                             <span class="news-source text-pink"><i class="fa-solid fa-star"></i> ROCKSTAR GAMES</span>
                             <h4>⭐ Grand Theft Auto VI : Nouvelle ère pour Leonida State</h4>
                             <p>Toutes les informations sur la sortie et les fonctionnalités immersives du moteur RAGE 9.</p>
                         </div>
-                        <div class="news-entry">
+                        <div class="news-entry entry-3d">
                             <span class="news-source text-green"><i class="fa-solid fa-gamepad"></i> CFX.RE / FIVEM</span>
                             <h4>🚀 FiveM Canary Build 3258 Déployé</h4>
                             <p>Amélioration des performances de chargement d'assets et synchronisation multi-joueurs à 144 FPS.</p>
                         </div>
-                        <div class="news-entry">
+                        <div class="news-entry entry-3d">
                             <span class="news-source text-cyan"><i class="fa-solid fa-shield"></i> SÉCURITÉ & ANTI-CHEAT</span>
                             <h4>🛡️ Mise à jour de protection active</h4>
                             <p>Les serveurs FiveM bénéficient de la nouvelle signature de détection en temps réel.</p>

@@ -1221,26 +1221,73 @@ function initUI() {
         }
     });
 
-    // Bouton Activer / Couper le Son de la Vidéo Principale
+    // Gestionnaire de Volume Doux et Curseur Interactif
+    let currentVolume = 10; // Volume initial très doux (10%) pour protéger les oreilles
     let isMainMuted = false;
+    const volSlider = document.getElementById('video-volume-slider');
+    const volText = document.getElementById('vol-level-text');
+    const volSpeakerIcon = document.getElementById('vol-speaker-icon');
     const soundToggleBtn = document.getElementById('btn-toggle-audio');
+
+    const updateVideoVolume = (vol) => {
+        currentVolume = vol;
+        if (volText) volText.textContent = `${vol}%`;
+        if (volSlider) volSlider.value = vol;
+
+        const mainIframe = document.getElementById('main-hub-iframe');
+        const cinemaIframe = document.getElementById('cinema-fullscreen-iframe');
+
+        if (volSpeakerIcon) {
+            if (vol === 0 || isMainMuted) {
+                volSpeakerIcon.className = 'fa-solid fa-volume-xmark text-pink';
+            } else if (vol < 25) {
+                volSpeakerIcon.className = 'fa-solid fa-volume-low text-green';
+            } else {
+                volSpeakerIcon.className = 'fa-solid fa-volume-high text-green';
+            }
+        }
+
+        const applyVolumeTo = (ifr) => {
+            if (ifr && ifr.contentWindow) {
+                if (vol === 0 || isMainMuted) {
+                    ifr.contentWindow.postMessage('{"event":"command","func":"mute","args":[]}', '*');
+                } else {
+                    ifr.contentWindow.postMessage('{"event":"command","func":"unMute","args":[]}', '*');
+                    ifr.contentWindow.postMessage(`{"event":"command","func":"setVolume","args":[${vol}]}`, '*');
+                }
+            }
+        };
+
+        applyVolumeTo(mainIframe);
+        applyVolumeTo(cinemaIframe);
+    };
+
+    if (volSlider) {
+        volSlider.addEventListener('input', (e) => {
+            isMainMuted = false;
+            updateVideoVolume(parseInt(e.target.value, 10));
+        });
+    }
+
     if (soundToggleBtn) {
         soundToggleBtn.addEventListener('click', () => {
             sfx.playClick();
-            const iframe = document.getElementById('main-hub-iframe');
             isMainMuted = !isMainMuted;
-            if (iframe && iframe.contentWindow) {
-                if (isMainMuted) {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"mute","args":[]}', '*');
-                    soundToggleBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> Son Coupé (Muet)';
-                } else {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":[]}', '*');
-                    iframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[30]}', '*');
-                    soundToggleBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i> Son Actif 🔊';
-                }
+            if (isMainMuted) {
+                updateVideoVolume(0);
+            } else {
+                updateVideoVolume(currentVolume > 0 ? currentVolume : 15);
             }
         });
     }
+
+    // Appliquer le volume doux automatiquement au lancement de chaque vidéo
+    document.querySelectorAll('.video-card-item').forEach(card => {
+        card.addEventListener('click', () => {
+            setTimeout(() => updateVideoVolume(currentVolume), 500);
+            setTimeout(() => updateVideoVolume(currentVolume), 1500);
+        });
+    });
 
     // Bouton Fermer le Launcher
     document.querySelectorAll('.close-btn').forEach(btn => {
