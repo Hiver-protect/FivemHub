@@ -322,6 +322,28 @@ body {
     transform: translateY(-2px);
 }
 
+.btn-sound-toggle {
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #22c55e;
+    font-family: var(--font-sub);
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+}
+
+.btn-sound-toggle:hover {
+    background: #22c55e;
+    color: #000;
+}
+
 .btn-external-channel {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -337,6 +359,57 @@ body {
     gap: 8px;
     backdrop-filter: blur(10px);
     transition: all 0.2s ease;
+}
+
+/* Modal Cinéma Plein Écran */
+.cinema-fullscreen-modal {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.cinema-fullscreen-modal.active {
+    display: flex;
+}
+
+.cinema-iframe {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+}
+
+.btn-exit-cinema {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    z-index: 1000000;
+    background: rgba(15, 18, 25, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-family: var(--font-sub);
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    transition: all 0.15s ease;
+}
+
+.btn-exit-cinema:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    transform: scale(1.05);
 }
 
 .btn-external-channel:hover {

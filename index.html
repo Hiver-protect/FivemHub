@@ -118,13 +118,16 @@
                 <div class="video-tag-row">
                     <span class="v-badge v-rstar">ROCKSTAR GAMES</span>
                     <span class="v-badge v-res">4K ULTRA HD</span>
-                    <span class="v-badge v-live">EN DIRECT</span>
+                    <span class="v-badge v-live">SON ACTIF 🔊</span>
                 </div>
                 <h1 class="active-video-title" id="active-video-title">Grand Theft Auto VI - Bande-Annonce Officielle 1</h1>
-                <p class="active-video-desc" id="active-video-desc">Bienvenue à Leonida State et Vice City. Regardez les vidéos officielles et suivez les annonces du Newswire en temps réel.</p>
+                <p class="active-video-desc" id="active-video-desc">Bienvenue à Leonida State et Vice City. Regardez les vidéos officielles avec son 4K et suivez les annonces du Newswire en temps réel.</p>
                 <div class="video-actions">
                     <button class="btn-fullscreen-vid" id="btn-toggle-fullscreen">
-                        <i class="fa-solid fa-expand"></i> Plein Écran Vidéo
+                        <i class="fa-solid fa-play"></i> Mode Cinéma Plein Écran
+                    </button>
+                    <button class="btn-sound-toggle" id="btn-toggle-audio">
+                        <i class="fa-solid fa-volume-high"></i> Activer / Désactiver le Son
                     </button>
                     <a href="https://www.youtube.com/@RockstarGames" target="_blank" class="btn-external-channel">
                         <i class="fa-brands fa-youtube"></i> Chaîne Rockstar Games ↗
@@ -133,6 +136,20 @@
                         <i class="fa-solid fa-newspaper"></i> Rockstar Newswire ↗
                     </a>
                 </div>
+            </div>
+
+            <!-- Modal Cinéma Plein Écran avec Bouton Quitter Flottant et Touche Échap -->
+            <div class="cinema-fullscreen-modal" id="cinema-fullscreen-modal">
+                <button class="btn-exit-cinema" id="btn-exit-cinema" title="Quitter le plein écran (Échap)">
+                    <i class="fa-solid fa-compress"></i> <span>Quitter le Plein Écran (Échap)</span>
+                </button>
+                <iframe id="cinema-fullscreen-iframe" class="cinema-iframe" 
+                    src="" 
+                    title="Fullscreen Rockstar Video" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
             </div>
 
             <!-- Bas : Sélecteur de Vidéos & Fil d'Annonces en Direct -->

@@ -1179,28 +1179,66 @@ function initUI() {
         });
     });
 
+    // Bouton Mode Cinéma Plein Écran
+    let activeYtId = "QdBZY2fkU-0";
+    const cinemaModal = document.getElementById('cinema-fullscreen-modal');
+    const cinemaIframe = document.getElementById('cinema-fullscreen-iframe');
+    const exitCinemaBtn = document.getElementById('btn-exit-cinema');
+
     const fsBtn = document.getElementById('btn-toggle-fullscreen');
     if (fsBtn) {
         fsBtn.addEventListener('click', () => {
             sfx.playClick();
-            const iframe = document.getElementById('main-hub-iframe');
-            if (iframe) {
-                if (iframe.requestFullscreen) {
-                    iframe.requestFullscreen();
-                } else if (iframe.webkitRequestFullscreen) {
-                    iframe.webkitRequestFullscreen();
-                }
+            const activeCard = document.querySelector('.video-card-item.active');
+            if (activeCard && activeCard.dataset.yt) {
+                activeYtId = activeCard.dataset.yt;
+            }
+            if (cinemaModal && cinemaIframe) {
+                cinemaIframe.src = `https://www.youtube.com/embed/${activeYtId}?autoplay=1&mute=0&controls=1&enablejsapi=1&rel=0`;
+                cinemaModal.classList.add('active');
             }
         });
     }
 
-    // Bouton Cache Cleaner
-    const cacheBtn = document.getElementById('btn-cache-cleaner');
-    if (cacheBtn) {
-        cacheBtn.addEventListener('click', (e) => {
-            e.preventDefault();
+    function closeCinema() {
+        if (cinemaModal && cinemaIframe) {
+            cinemaIframe.src = "about:blank";
+            cinemaModal.classList.remove('active');
+        }
+    }
+
+    if (exitCinemaBtn) {
+        exitCinemaBtn.addEventListener('click', () => {
             sfx.playClick();
-            openModal('modal-cache-settings');
+            closeCinema();
+        });
+    }
+
+    // Touche Échap pour quitter le plein écran
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeCinema();
+        }
+    });
+
+    // Bouton Activer / Couper le Son de la Vidéo Principale
+    let isMainMuted = false;
+    const soundToggleBtn = document.getElementById('btn-toggle-audio');
+    if (soundToggleBtn) {
+        soundToggleBtn.addEventListener('click', () => {
+            sfx.playClick();
+            const iframe = document.getElementById('main-hub-iframe');
+            isMainMuted = !isMainMuted;
+            if (iframe && iframe.contentWindow) {
+                if (isMainMuted) {
+                    iframe.contentWindow.postMessage('{"event":"command","func":"mute","args":[]}', '*');
+                    soundToggleBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> Son Coupé (Muet)';
+                } else {
+                    iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":[]}', '*');
+                    iframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[30]}', '*');
+                    soundToggleBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i> Son Actif 🔊';
+                }
+            }
         });
     }
 
