@@ -1042,19 +1042,23 @@ function initBootSplashScreen() {
     setTimeout(setSoftVolume, 3000);
 
     let progress = 0;
-    const totalDuration = 3500; // 3.5 secondes ultra rapide pour entrer directement dans l'interface
-    const intervalTime = 50;
+    const totalDuration = 20000; // Exactement 20 secondes (parfaitement dosé, immersif et naturel)
+    const intervalTime = 100;
 
     const steps = [
-        { p: 15, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K..." },
-        { p: 40, text: "INITIALISATION DU CLIENT FIVEM...", sub: "Allocation de la mémoire graphique (VRAM 8GB+)..." },
-        { p: 70, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
-        { p: 95, text: "SYNCHRONISATION DU MOTEUR AUDIO & RADIOS...", sub: "Connexion aux 500 Stations Rap HD" },
+        { p: 12, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K..." },
+        { p: 28, text: "TÉLÉCHARGEMENT DES RESSOURCES ROCKSTAR...", sub: "Initialisation des véhicules imports et textures HD" },
+        { p: 48, text: "INITIALISATION DU CLIENT FIVEM...", sub: "Allocation de la mémoire graphique (VRAM 8GB+)..." },
+        { p: 68, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
+        { p: 88, text: "SYNCHRONISATION DU MOTEUR AUDIO & RADIOS...", sub: "Connexion aux 500 Stations Rap HD" },
+        { p: 98, text: "FINALISATION DE L'APPLICATION...", sub: "Prêt pour le jeu !" },
         { p: 100, text: "BIENVENUE SUR FIVEM HUB UNIVERSE !", sub: "Lancement de l'application..." }
     ];
 
     const progressTimer = setInterval(() => {
-        progress += (100 / (totalDuration / intervalTime));
+        // Avancement fluide et naturel sur 20 secondes
+        const delta = (100 / (totalDuration / intervalTime)) * (0.85 + Math.random() * 0.3);
+        progress += delta;
         if (progress > 100) progress = 100;
 
         if (cornerFill) cornerFill.style.width = `${progress}%`;
