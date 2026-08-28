@@ -1172,93 +1172,73 @@ function initUI() {
         });
     }
 
-    // 2. Boutons d'accès rapide Favoris et Historique
-    const favsBtn = document.getElementById('btn-open-favs');
-    if (favsBtn) {
-        favsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            store.activeCategory = 'favorites';
-            store.currentPage = 1;
-            renderServers();
-            const grid = document.getElementById('servers-grid');
-            if (grid) grid.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-
-    const histBtn = document.getElementById('btn-open-history');
-    if (histBtn) {
-        histBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            store.activeCategory = 'recent';
-            store.currentPage = 1;
-            renderServers();
-            const grid = document.getElementById('servers-grid');
-            if (grid) grid.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-
-    // 3. Bouton Mode Histoire Solo (GTA V)
-    const storyBtn = document.getElementById('btn-open-story');
-    if (storyBtn) {
-        storyBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            openModal('modal-story-mode');
-        });
-    }
-
-    // 4. Bouton Replay Editor (Rockstar Editor)
-    const replayBtn = document.getElementById('btn-open-replay');
-    if (replayBtn) {
-        replayBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            openModal('modal-replay-editor');
-        });
-    }
-
-    // 5. Tuile Create A Server
-    const createSrvBtn = document.getElementById('btn-open-add-server');
-    if (createSrvBtn) {
-        createSrvBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            openModal('modal-create-server-guide');
-        });
-    }
-
-    // 6. Bouton Paramètres & Cache Cleaner
-    const cacheBtn = document.getElementById('btn-cache-cleaner');
-    if (cacheBtn) {
-        cacheBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            openModal('modal-cache-settings');
-        });
-    }
-
-    // 7. Bouton Fermer le Launcher
-    document.querySelectorAll('.close-btn').forEach(btn => {
+    // Navigation Rockstar Games Launcher (Switch des vues GTA VI / FiveM / GTA V / RDR2)
+    document.querySelectorAll('.game-nav-item').forEach(btn => {
         btn.addEventListener('click', () => {
-            if (confirm("Voulez-vous quitter FiveM Master Launcher ?")) {
-                window.close();
+            sfx.playClick();
+            document.querySelectorAll('.game-nav-item').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const targetView = btn.dataset.view;
+
+            document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+            const breadcrumbEl = document.getElementById('active-breadcrumb-name');
+
+            if (targetView === 'gtavi') {
+                const p = document.getElementById('view-gtavi');
+                if (p) p.classList.add('active');
+                if (breadcrumbEl) breadcrumbEl.textContent = 'GRAND THEFT AUTO VI';
+            } else if (targetView === 'fivem') {
+                const p = document.getElementById('view-fivem');
+                if (p) p.classList.add('active');
+                if (breadcrumbEl) breadcrumbEl.textContent = 'FIVEM MULTIPLAYER HUB';
+                renderServers();
+            } else if (targetView === 'gtav') {
+                if (breadcrumbEl) breadcrumbEl.textContent = 'GRAND THEFT AUTO V';
+                openModal('modal-story-mode');
+            } else if (targetView === 'rdr2') {
+                if (breadcrumbEl) breadcrumbEl.textContent = 'RED DEAD REDEMPTION II';
+                showToast("🤠 Red Dead Redemption II & RedM Hub prêt !", "info");
             }
         });
     });
 
-    // Écouteurs de filtres rapides par tags (FreeAccess, Whitelist, Imports HD, Gangs)
-    document.querySelectorAll('.filter-pill-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+    const rstarLaunchBtn = document.getElementById('btn-rstar-launch-story');
+    if (rstarLaunchBtn) {
+        rstarLaunchBtn.addEventListener('click', () => {
+            triggerServerLaunch('fivem://story', 'Grand Theft Auto VI / V - Mode Solo');
+        });
+    }
+
+    const viewServersListBtn = document.getElementById('btn-view-servers-list');
+    if (viewServersListBtn) {
+        viewServersListBtn.addEventListener('click', () => {
             sfx.playClick();
-            document.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            store.activeTagFilter = btn.dataset.tag;
+            const fivemTab = document.querySelector('.game-nav-item[data-view="fivem"]');
+            if (fivemTab) fivemTab.click();
+        });
+    }
+
+    const fivemMainSearch = document.getElementById('fivem-main-search');
+    if (fivemMainSearch) {
+        fivemMainSearch.addEventListener('input', (e) => {
+            store.searchQuery = e.target.value;
+            store.currentPage = 1;
+            renderServers();
+        });
+    }
+
+    document.querySelectorAll('.cntry-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            sfx.playClick();
+            document.querySelectorAll('.cntry-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            store.activeCategory = pill.dataset.cat;
             store.currentPage = 1;
             renderServers();
         });
     });
+
+    renderCompactFeaturedList();
 
     const searchInput = document.getElementById('search-input');
     const clearSearchBtn = document.getElementById('clear-search-btn');
@@ -1459,6 +1439,30 @@ function renderBrowseModalList() {
                     </div>
                 </div>
                 <button class="btn-connect-pill" onclick="closeModal('modal-browse-servers'); triggerServerLaunch('${srv.connectUrl}', '${srv.name.replace(/'/g, "\\'")}', '${srv.id}')">
+                    <i class="fa-solid fa-play"></i> Se connecter
+                </button>
+            </div>
+        `;
+    }).join('');
+}
+
+function renderCompactFeaturedList() {
+    const listEl = document.getElementById('featured-servers-compact-list');
+    if (!listEl) return;
+
+    const featured = store.servers.slice(0, 4);
+    listEl.innerHTML = featured.map(srv => {
+        const logoUrl = (srv.visuals && srv.visuals.logoUrl) ? srv.visuals.logoUrl : 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=60&auto=format&fit=crop&q=80';
+        return `
+            <div class="featured-srv-compact-card">
+                <div class="srv-left-info">
+                    <img src="${logoUrl}" alt="${srv.name}" class="srv-compact-logo">
+                    <div>
+                        <span class="srv-compact-title">${srv.name}</span>
+                        <span class="srv-compact-sub"><i class="fa-solid fa-users text-cyan"></i> ${srv.players}/${srv.maxPlayers} • <i class="fa-solid fa-signal text-green"></i> ${srv.ping}ms • ${srv.categoryLabel}</span>
+                    </div>
+                </div>
+                <button class="btn-rstar-connect" onclick="triggerServerLaunch('${srv.connectUrl}', '${srv.name.replace(/'/g, "\\'")}', '${srv.id}')">
                     <i class="fa-solid fa-play"></i> Se connecter
                 </button>
             </div>
