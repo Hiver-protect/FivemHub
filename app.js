@@ -1289,6 +1289,31 @@ function initUI() {
         });
     });
 
+    // Filtre des Catégories de Vidéos (GTA VI / GTA V / FiveM / RDR2)
+    document.querySelectorAll('.vid-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            sfx.playClick();
+            document.querySelectorAll('.vid-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+            let visibleCount = 0;
+
+            document.querySelectorAll('.video-card-item').forEach(card => {
+                const cat = card.dataset.cat;
+                if (filter === 'all' || cat === filter) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const countBadge = document.getElementById('active-video-count-badge');
+            if (countBadge) countBadge.textContent = `${visibleCount} VIDÉO${visibleCount > 1 ? 'S' : ''}`;
+        });
+    });
+
     // Bouton Fermer le Launcher
     document.querySelectorAll('.close-btn').forEach(btn => {
         btn.addEventListener('click', () => {
