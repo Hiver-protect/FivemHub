@@ -3578,6 +3578,12 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     display: flex;
     align-items: center;
     gap: 14px;
+    animation: slideInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInDown {
+    0% { opacity: 0; transform: translateY(-30px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .gta6-watermark-tag {
@@ -3640,7 +3646,7 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
-/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT CENTRÉ AU MILIEU */
+/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT CENTRÉ AVEC ANIMATION DE PULSATION NÉON 3D */
 .gta6-hub-logo-wrap {
     position: absolute;
     top: 45%;
@@ -3653,13 +3659,18 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 45px rgba(224, 30, 132, 0.65));
-    animation: hubLogoFloat 3.5s infinite ease-in-out;
+    animation: hubLogoCinematic 4s infinite ease-in-out;
 }
 
-@keyframes hubLogoFloat {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 45px rgba(224, 30, 132, 0.65)); }
-    50% { transform: translate(-50%, -52%) scale(1.03); filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 1)) drop-shadow(0 0 65px rgba(255, 158, 0, 0.8)); }
+@keyframes hubLogoCinematic {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(236, 72, 153, 0.6)) drop-shadow(0 0 60px rgba(255, 152, 0, 0.3));
+    }
+    50% {
+        transform: translate(-50%, -52%) scale(1.05);
+        filter: drop-shadow(0 15px 45px rgba(0, 0, 0, 1)) drop-shadow(0 0 55px rgba(0, 240, 255, 0.8)) drop-shadow(0 0 85px rgba(236, 72, 153, 0.7));
+    }
 }
 
 .gta6-hub-img {
@@ -3667,6 +3678,12 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     height: auto;
     display: block;
     object-fit: contain;
+    animation: logoGlowBreath 3s infinite alternate ease-in-out;
+}
+
+@keyframes logoGlowBreath {
+    0% { filter: brightness(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); }
+    100% { filter: brightness(1.15) drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)); }
 }
 
 /* Bouton Discret pour Passer l'Intro */
@@ -3692,6 +3709,7 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     gap: 8px;
     transition: var(--transition-fast);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    animation: slideInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .skip-splash-btn:hover {
