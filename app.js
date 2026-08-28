@@ -1021,7 +1021,7 @@ function initBootSplashScreen() {
     const bootTipText = document.getElementById('boot-tip-text');
 
     let progress = 0;
-    const totalDuration = 10000; // 10 secondes ultra fluides et optimisées
+    const totalDuration = 25000; // 25 secondes complètes pour savourer le trailer et l'intro FiveM
     const intervalTime = 100;
     const stepIncrement = 100 / (totalDuration / intervalTime);
 
