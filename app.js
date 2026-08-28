@@ -1005,14 +1005,9 @@ class LoadingScreenManager {
     }
 }
 
-const loadingScreen = new LoadingScreenManager();
-
 document.addEventListener('DOMContentLoaded', () => {
     initBootSplashScreen();
-    rapPlayer = new RapRadioPlayer();
     initUI();
-    updateAll();
-    initRealtimeEngine();
 });
 
 // ============================================================================
@@ -1024,41 +1019,32 @@ function initBootSplashScreen() {
     const cornerFill = document.getElementById('corner-progress-fill');
     const cornerPercent = document.getElementById('corner-percent-text');
     const cornerStatus = document.getElementById('corner-status-text');
-    const gtaLogo = document.getElementById('gta4-logo-reveal');
 
     if (!splash) return;
 
-    const cornerSubstatus = document.getElementById('corner-substatus-text');
-    const bootTipText = document.getElementById('boot-tip-text');
-
-    // Réglage du volume de la vidéo YouTube du Loading Screen à 5% (très doux, ambiance subtile)
-    const setSoftVolume = () => {
+    // Réglage du volume de la vidéo YouTube du Loading Screen à 0 (muet par défaut pour éviter le son trop fort)
+    const setMuteVolume = () => {
         if (bootIframe && bootIframe.contentWindow) {
-            bootIframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[5]}', '*');
+            bootIframe.contentWindow.postMessage('{"event":"command","func":"mute","args":[]}', '*');
         }
     };
-    setTimeout(setSoftVolume, 500);
-    setTimeout(setSoftVolume, 1500);
-    setTimeout(setSoftVolume, 3000);
+    setTimeout(setMuteVolume, 200);
+    setTimeout(setMuteVolume, 1000);
 
     let progress = 0;
-    const totalDuration = 20000; // Exactement 20 secondes (parfaitement dosé, immersif et naturel)
+    const totalDuration = 12000; // 12 secondes douces et immersives
     const intervalTime = 100;
 
     const steps = [
-        { p: 12, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K..." },
-        { p: 28, text: "TÉLÉCHARGEMENT DES RESSOURCES ROCKSTAR...", sub: "Initialisation des véhicules imports et textures HD" },
-        { p: 48, text: "INITIALISATION DU CLIENT FIVEM...", sub: "Allocation de la mémoire graphique (VRAM 8GB+)..." },
-        { p: 68, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
-        { p: 88, text: "SYNCHRONISATION DU MOTEUR AUDIO & RADIOS...", sub: "Connexion aux 500 Stations Rap HD" },
-        { p: 98, text: "FINALISATION DE L'APPLICATION...", sub: "Prêt pour le jeu !" },
-        { p: 100, text: "BIENVENUE SUR FIVEM HUB UNIVERSE !", sub: "Lancement de l'application..." }
+        { p: 20, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY..." },
+        { p: 45, text: "TÉLÉCHARGEMENT DES RESSOURCES ROCKSTAR..." },
+        { p: 70, text: "INITIALISATION DU PORTAIL VIDÉOS 4K..." },
+        { p: 90, text: "SYNCHRONISATION DU FLUX D'ANNONCES EN DIRECT..." },
+        { p: 100, text: "BIENVENUE SUR LE PORTAIL ROCKSTAR GAMES !" }
     ];
 
     const progressTimer = setInterval(() => {
-        // Avancement fluide et naturel sur 20 secondes
-        const delta = (100 / (totalDuration / intervalTime)) * (0.85 + Math.random() * 0.3);
-        progress += delta;
+        progress += (100 / (totalDuration / intervalTime));
         if (progress > 100) progress = 100;
 
         if (cornerFill) cornerFill.style.width = `${progress}%`;
@@ -1069,37 +1055,32 @@ function initBootSplashScreen() {
 
         if (progress >= 100) {
             clearInterval(progressTimer);
-            if (bootIframe) {
-                try { bootIframe.src = "about:blank"; bootIframe.remove(); } catch(e) {}
-            }
-            if (splash) {
-                splash.classList.add('hide');
-                setTimeout(() => {
-                    try { splash.remove(); } catch(e) {}
-                    if (rapPlayer && !rapPlayer.isPlaying) {
-                        rapPlayer.play();
-                    }
-                }, 400);
-            }
+            finishBootSplash();
         }
     }, intervalTime);
+
+    function finishBootSplash() {
+        if (bootIframe) {
+            try { bootIframe.src = "about:blank"; bootIframe.remove(); } catch(e) {}
+        }
+        if (splash) {
+            splash.classList.add('hide');
+            setTimeout(() => {
+                try { splash.remove(); } catch(e) {}
+                // Activer la vidéo de fond du Hub seulement maintenant
+                const mainIframe = document.getElementById('main-hub-iframe');
+                if (mainIframe && mainIframe.dataset.src) {
+                    mainIframe.src = mainIframe.dataset.src;
+                }
+            }, 300);
+        }
+    }
 
     const skipBtn = document.getElementById('skip-splash-btn');
     if (skipBtn) {
         skipBtn.addEventListener('click', () => {
             clearInterval(progressTimer);
-            if (bootIframe) {
-                try { bootIframe.src = "about:blank"; bootIframe.remove(); } catch(e) {}
-            }
-            if (splash) {
-                splash.classList.add('hide');
-                setTimeout(() => {
-                    try { splash.remove(); } catch(e) {}
-                    if (rapPlayer && !rapPlayer.isPlaying) {
-                        rapPlayer.play();
-                    }
-                }, 200);
-            }
+            finishBootSplash();
         });
     }
 }
