@@ -1042,39 +1042,19 @@ function initBootSplashScreen() {
     setTimeout(setSoftVolume, 3000);
 
     let progress = 0;
-    const totalDuration = 60000; // 60 secondes (1 minute complète)
-    const intervalTime = 100;
+    const totalDuration = 3500; // 3.5 secondes ultra rapide pour entrer directement dans l'interface
+    const intervalTime = 50;
 
     const steps = [
-        { p: 8, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K 2026..." },
-        { p: 20, text: "TÉLÉCHARGEMENT DES RESSOURCES ROCKSTAR...", sub: "Téléchargement des scripts officiels et véhicules imports (35%)" },
-        { p: 38, text: "INITIALISATION DU CLIENT FIVEM...", sub: "Allocation de la mémoire graphique (VRAM 8GB+)..." },
-        { p: 55, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
-        { p: 72, text: "CHARGEMENT DES PACKS GRAPHIQUES & TEXTURES...", sub: "Optimisation du rendu volumétrique et lumières néons Vice City" },
-        { p: 88, text: "SYNCHRONISATION DU MOTEUR AUDIO & RADIOS...", sub: "Connexion aux 500 Stations Rap HD (0ms jitter)" },
-        { p: 98, text: "FINALISATION DE L'APPLICATION...", sub: "Initialisation terminée • Prêt pour le jeu !" },
+        { p: 15, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K..." },
+        { p: 40, text: "INITIALISATION DU CLIENT FIVEM...", sub: "Allocation de la mémoire graphique (VRAM 8GB+)..." },
+        { p: 70, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
+        { p: 95, text: "SYNCHRONISATION DU MOTEUR AUDIO & RADIOS...", sub: "Connexion aux 500 Stations Rap HD" },
         { p: 100, text: "BIENVENUE SUR FIVEM HUB UNIVERSE !", sub: "Lancement de l'application..." }
     ];
 
-    const tips = [
-        "Respectez les règles de sommations et privilégiez les interactions vocales pour un RP immersif.",
-        "Pensez à configurer vos touches de radio et de microphone dans les paramètres de FiveM.",
-        "Le Fear RP et le Pain RP garantissent des scènes réalistes et respectueuses pour tous.",
-        "Consultez les salons Discord des serveurs pour connaître leurs règles d'économie spécifiques."
-    ];
-
-    let tipIndex = 0;
-    const tipInterval = setInterval(() => {
-        if (bootTipText) {
-            tipIndex = (tipIndex + 1) % tips.length;
-            bootTipText.textContent = tips[tipIndex];
-        }
-    }, 5000);
-
     const progressTimer = setInterval(() => {
-        // Progression réaliste avec variations naturelles FiveM
-        const delta = (100 / (totalDuration / intervalTime)) * (0.8 + Math.random() * 0.4);
-        progress += delta;
+        progress += (100 / (totalDuration / intervalTime));
         if (progress > 100) progress = 100;
 
         if (cornerFill) cornerFill.style.width = `${progress}%`;
@@ -1085,20 +1065,18 @@ function initBootSplashScreen() {
 
         if (progress >= 100) {
             clearInterval(progressTimer);
-            clearInterval(tipInterval);
-            // Coupure immédiate du flux YouTube et du son dès la complétion
             if (bootIframe) {
-                bootIframe.src = "about:blank";
-                bootIframe.remove();
+                try { bootIframe.src = "about:blank"; bootIframe.remove(); } catch(e) {}
             }
-            splash.classList.add('hide');
-            setTimeout(() => {
-                if (splash) splash.remove();
-                // Démarrage propre de la radio seulement maintenant
-                if (rapPlayer && !rapPlayer.isPlaying) {
-                    rapPlayer.play();
-                }
-            }, 600);
+            if (splash) {
+                splash.classList.add('hide');
+                setTimeout(() => {
+                    try { splash.remove(); } catch(e) {}
+                    if (rapPlayer && !rapPlayer.isPlaying) {
+                        rapPlayer.play();
+                    }
+                }, 400);
+            }
         }
     }, intervalTime);
 
@@ -1106,18 +1084,18 @@ function initBootSplashScreen() {
     if (skipBtn) {
         skipBtn.addEventListener('click', () => {
             clearInterval(progressTimer);
-            clearInterval(tipInterval);
             if (bootIframe) {
-                bootIframe.src = "about:blank";
-                bootIframe.remove();
+                try { bootIframe.src = "about:blank"; bootIframe.remove(); } catch(e) {}
             }
-            splash.classList.add('hide');
-            setTimeout(() => {
-                if (splash) splash.remove();
-                if (rapPlayer && !rapPlayer.isPlaying) {
-                    rapPlayer.play();
-                }
-            }, 600);
+            if (splash) {
+                splash.classList.add('hide');
+                setTimeout(() => {
+                    try { splash.remove(); } catch(e) {}
+                    if (rapPlayer && !rapPlayer.isPlaying) {
+                        rapPlayer.play();
+                    }
+                }, 200);
+            }
         });
     }
 }
