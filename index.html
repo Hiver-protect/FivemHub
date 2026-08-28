@@ -541,6 +541,45 @@
     <!-- =========================================================================
          MODALS OFFICIELLES FIVEM POUR CHAQUE BOUTON (100% FONCTIONNELLES)
          ========================================================================= -->
+    <!-- MODAL: Browse All Servers (Explorateur Officiel Complet de Serveurs) -->
+    <div class="modal-backdrop" id="modal-browse-servers">
+        <div class="modal-card modal-lg" style="max-width: 900px; max-height: 85vh; display: flex; flex-direction: column;">
+            <button class="modal-close" id="close-browse-servers"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <div class="modal-icon" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;"><i class="fa-solid fa-compass"></i></div>
+                <div>
+                    <h3>Explorateur de Serveurs FiveM (5,250 Serveurs En Direct)</h3>
+                    <p>Recherchez, filtrez par région et connectez-vous instantanément aux meilleurs serveurs mondiaux.</p>
+                </div>
+            </div>
+            <div class="modal-body" style="flex: 1; overflow-y: auto; padding: 14px 0;">
+                <div style="display: flex; gap: 10px; margin-bottom: 14px;">
+                    <div style="flex: 1; position: relative;">
+                        <input type="text" id="modal-browse-search" placeholder="Rechercher par nom, ville, tag (Canada, France, NoPixel, Flashback, PVP)..." style="width: 100%; background: #14171d; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 10px 14px; color: #fff; font-family: var(--font-sub);">
+                    </div>
+                    <select id="modal-browse-cat" style="background: #14171d; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 10px 14px; color: #fff; font-family: var(--font-sub);">
+                        <option value="all">Toutes Régions 🌐</option>
+                        <option value="rp-ca">Canada & Québec 🇨🇦</option>
+                        <option value="rp-fr">France & Belge 🇫🇷</option>
+                        <option value="rp-us">USA & UK 🇺🇸</option>
+                        <option value="rp-de">Allemagne 🇩🇪</option>
+                        <option value="rp-es">Espagne 🇪🇸</option>
+                        <option value="rp-br">Brésil 🇧🇷</option>
+                        <option value="pvp">PVP & RedZone 🎯</option>
+                    </select>
+                </div>
+                <div id="modal-browse-list" style="display: flex; flex-direction: column; gap: 8px;">
+                    <!-- Injected dynamically with servers -->
+                </div>
+            </div>
+            <div class="modal-actions" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px;">
+                <button type="button" class="btn-cancel" id="cancel-browse-servers">Fermer</button>
+                <button type="button" class="btn-play-primary" id="btn-browse-view-grid">
+                    <i class="fa-solid fa-grid-2"></i> Voir la Grille Complète
+                </button>
+            </div>
+        </div>
+    </div>
     <!-- MODAL: Mode Histoire / Story Mode Launch -->
     <div class="modal-backdrop" id="modal-story-mode">
         <div class="modal-card">

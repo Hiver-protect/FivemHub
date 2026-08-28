@@ -1179,20 +1179,37 @@ function initUI() {
         });
     });
 
-    // Boutons Action Tiles (Browse Servers, Favoris, Historique)
+    // Boutons Action Tiles (Browse Servers Modal, Favoris, Historique)
     const browseBtn = document.getElementById('btn-browse-all');
     if (browseBtn) {
         browseBtn.addEventListener('click', () => {
             sfx.playClick();
-            store.activeCategory = 'all';
-            store.currentPage = 1;
-            document.querySelectorAll('.cntry-tab').forEach(b => b.classList.remove('active'));
-            const allTab = document.querySelector('.cntry-tab[data-category="all"]');
-            if (allTab) allTab.classList.add('active');
-            renderServers();
+            openModal('modal-browse-servers');
+            renderBrowseModalList();
+        });
+    }
+
+    const closeBrowseBtn = document.getElementById('close-browse-servers');
+    if (closeBrowseBtn) closeBrowseBtn.addEventListener('click', () => closeModal('modal-browse-servers'));
+    const cancelBrowseBtn = document.getElementById('cancel-browse-servers');
+    if (cancelBrowseBtn) cancelBrowseBtn.addEventListener('click', () => closeModal('modal-browse-servers'));
+
+    const browseViewGridBtn = document.getElementById('btn-browse-view-grid');
+    if (browseViewGridBtn) {
+        browseViewGridBtn.addEventListener('click', () => {
+            closeModal('modal-browse-servers');
             const grid = document.getElementById('servers-grid');
             if (grid) grid.scrollIntoView({ behavior: 'smooth' });
         });
+    }
+
+    const browseSearchInput = document.getElementById('modal-browse-search');
+    const browseCatSelect = document.getElementById('modal-browse-cat');
+    if (browseSearchInput) {
+        browseSearchInput.addEventListener('input', () => renderBrowseModalList());
+    }
+    if (browseCatSelect) {
+        browseCatSelect.addEventListener('change', () => renderBrowseModalList());
     }
 
     const favsBtn = document.getElementById('btn-open-favs');
@@ -1406,6 +1423,45 @@ function openModal(modalId) {
 function closeModal(modalId) {
     const m = document.getElementById(modalId);
     if (m) m.classList.remove('open');
+}
+
+function renderBrowseModalList() {
+    const listEl = document.getElementById('modal-browse-list');
+    const searchVal = (document.getElementById('modal-browse-search')?.value || '').toLowerCase().trim();
+    const catVal = document.getElementById('modal-browse-cat')?.value || 'all';
+
+    if (!listEl) return;
+
+    let items = store.servers;
+    if (catVal !== 'all') {
+        items = items.filter(s => s.category === catVal);
+    }
+    if (searchVal) {
+        items = items.filter(s => 
+            (s.name && s.name.toLowerCase().includes(searchVal)) ||
+            (s.connectUrl && s.connectUrl.toLowerCase().includes(searchVal)) ||
+            (s.tags && s.tags.some(t => t.toLowerCase().includes(searchVal)))
+        );
+    }
+
+    const previewItems = items.slice(0, 30);
+    listEl.innerHTML = previewItems.map(srv => {
+        const logoUrl = (srv.visuals && srv.visuals.logoUrl) ? srv.visuals.logoUrl : 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=60&auto=format&fit=crop&q=80';
+        return `
+            <div style="display: flex; align-items: center; justify-content: space-between; background: #14171d; border: 1px solid rgba(255,255,255,0.07); padding: 10px 14px; border-radius: 6px;">
+                <div style="display: flex; align-items: center; gap: 12px; overflow: hidden;">
+                    <img src="${logoUrl}" alt="${srv.name}" style="width: 38px; height: 38px; border-radius: 6px; object-fit: cover;">
+                    <div>
+                        <strong style="color: #fff; font-size: 0.88rem; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px;">${srv.name}</strong>
+                        <span style="font-size: 0.72rem; color: #94a3b8;"><i class="fa-solid fa-users text-cyan"></i> ${srv.players}/${srv.maxPlayers} • <i class="fa-solid fa-signal text-green"></i> ${srv.ping}ms • ${srv.categoryLabel}</span>
+                    </div>
+                </div>
+                <button class="btn-connect-pill" onclick="closeModal('modal-browse-servers'); triggerServerLaunch('${srv.connectUrl}', '${srv.name.replace(/'/g, "\\'")}', '${srv.id}')">
+                    <i class="fa-solid fa-play"></i> Se connecter
+                </button>
+            </div>
+        `;
+    }).join('');
 }
 
 function updateCategoryTitle() {
