@@ -1428,38 +1428,77 @@ function updateCategoryTitle() {
     }
 }
 
-function setupHeroFeatured() {
-    const featured = store.servers.find(s => s.isFeatured) || store.servers[0];
+function setupHeroFeatured(srv) {
+    const featured = srv || store.servers.find(s => s.isFeatured) || store.servers[0];
     if (!featured) return;
 
-    const heroBg = document.getElementById('hero-bg');
-    heroBg.style.background = featured.visuals.palette.bg;
-    document.getElementById('hero-title').textContent = featured.name;
-    document.getElementById('hero-desc').textContent = featured.description;
-    document.getElementById('hero-category').textContent = featured.categoryLabel;
-    document.getElementById('hero-players').textContent = `${featured.players} / ${featured.maxPlayers}`;
-    document.getElementById('hero-ping').textContent = `${featured.ping} ms`;
-    document.getElementById('hero-cfx').textContent = featured.connectUrl;
+    const heroTitle = document.getElementById('hero-title');
+    const heroDesc = document.getElementById('hero-desc');
+    const heroPlayers = document.getElementById('hero-players');
+    const heroWatermark = document.getElementById('hero-watermark-txt');
+    const heroSquareLogo = document.getElementById('hero-square-logo');
+
+    if (heroTitle) heroTitle.textContent = featured.name;
+    if (heroDesc) heroDesc.textContent = featured.description;
+    if (heroPlayers) heroPlayers.textContent = `${featured.players} / ${featured.maxPlayers}`;
+    if (heroWatermark) heroWatermark.textContent = (featured.name || 'FIVEM').split(' ')[0].toUpperCase();
+
+    if (heroSquareLogo) {
+        if (featured.visuals && featured.visuals.logoUrl) {
+            heroSquareLogo.style.backgroundImage = `url(${featured.visuals.logoUrl})`;
+            heroSquareLogo.style.backgroundSize = 'cover';
+        } else {
+            heroSquareLogo.style.background = 'linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%)';
+        }
+    }
 
     const favBtn = document.getElementById('hero-fav-btn');
-    updateHeroFavIcon(featured.id);
-
-    favBtn.onclick = () => {
-        sfx.playClick();
-        store.toggleFavorite(featured.id);
+    if (favBtn) {
         updateHeroFavIcon(featured.id);
-        updateBadgeCounts();
-        if (store.activeCategory === 'favorites') renderServers();
-    };
+        favBtn.onclick = () => {
+            sfx.playClick();
+            store.toggleFavorite(featured.id);
+            updateHeroFavIcon(featured.id);
+            updateBadgeCounts();
+            if (store.activeCategory === 'favorites') renderServers();
+        };
+    }
 
-    document.getElementById('hero-play-btn').onclick = () => {
-        triggerServerLaunch(featured.connectUrl, featured.name, featured.id, featured.visuals);
-    };
+    const playBtn = document.getElementById('hero-play-btn');
+    if (playBtn) {
+        playBtn.onclick = () => {
+            triggerServerLaunch(featured.connectUrl, featured.name, featured.id, featured.visuals);
+        };
+    }
 
-    document.getElementById('hero-details-btn').onclick = () => {
-        sfx.playClick();
-        openServerDetails(featured);
-    };
+    renderInteractiveRibbon();
+}
+
+function renderInteractiveRibbon() {
+    const ribbon = document.getElementById('servers-ribbon');
+    if (!ribbon) return;
+
+    const top6 = store.servers.slice(0, 8);
+    ribbon.innerHTML = top6.map((srv, idx) => {
+        const isCurrent = idx === 0;
+        if (idx === 0) {
+            return `<div class="ribbon-card-pill ${isCurrent ? 'active' : ''}" data-srv-id="${srv.id}"><span class="pill-dot"></span> ${(srv.name || 'GOTHAM').split(' ')[0]}</div>`;
+        }
+        const imgUrl = (srv.visuals && srv.visuals.logoUrl) ? srv.visuals.logoUrl : 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=60&auto=format&fit=crop&q=80';
+        return `<div class="ribbon-avatar-pill" data-srv-id="${srv.id}" title="${srv.name}"><img src="${imgUrl}" alt="${srv.name}"></div>`;
+    }).join('');
+
+    ribbon.querySelectorAll('[data-srv-id]').forEach(pill => {
+        pill.addEventListener('click', () => {
+            sfx.playClick();
+            const srvId = pill.dataset.srvId;
+            const targetSrv = store.servers.find(s => s.id === srvId);
+            if (targetSrv) {
+                setupHeroFeatured(targetSrv);
+                showToast(`🎯 Serveur sélectionné : ${targetSrv.name}`, "info");
+            }
+        });
+    });
 }
 
 function updateHeroFavIcon(id) {
