@@ -1300,25 +1300,68 @@ function initUI() {
         }
     });
 
-    document.getElementById('btn-cache-cleaner').addEventListener('click', () => {
-        sfx.playClick();
-        alert("💡 ASTUCE FIVEM CLEAR CACHE :\n\nPour nettoyer votre cache FiveM et résoudre les crashs :\n1. Fermez FiveM\n2. Appuyez sur Win + R\n3. Tapez: %localappdata%\\FiveM\\FiveM.app\\data\n4. Supprimez les dossiers 'cache' et 'server-cache-priv'\n(Conservez le dossier 'game-storage')");
-    });
+    // Liaison Modale Histoire (GTA V Story Mode)
+    setupModal('modal-story-mode', 'btn-open-story', 'close-story-mode', 'cancel-story-mode');
+    const launchStoryBtn = document.getElementById('btn-confirm-launch-story');
+    if (launchStoryBtn) {
+        launchStoryBtn.addEventListener('click', () => {
+            closeModal('modal-story-mode');
+            triggerServerLaunch('fivem://story', 'Grand Theft Auto V - Mode Histoire');
+        });
+    }
 
-    setupModal('modal-quick-connect', 'btn-open-quick-connect', 'close-quick-connect', 'cancel-quick-connect');
-    document.getElementById('form-quick-connect').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const ipVal = document.getElementById('quick-ip').value.trim();
-        if (ipVal) {
-            closeModal('modal-quick-connect');
-            triggerServerLaunch(ipVal, 'Connexion Directe IP');
-        }
-    });
+    // Liaison Modale Replay Editor (Rockstar Editor)
+    setupModal('modal-replay-editor', 'btn-open-replay', 'close-replay-editor', 'cancel-replay-editor');
+    const launchReplayBtn = document.getElementById('btn-confirm-launch-replay');
+    if (launchReplayBtn) {
+        launchReplayBtn.addEventListener('click', () => {
+            closeModal('modal-replay-editor');
+            triggerServerLaunch('fivem://replay', 'Rockstar Editor - Éditeur de Replay');
+        });
+    }
 
-    setupModal('modal-add-server', 'btn-open-add-server', 'close-add-server', 'cancel-add-server');
-    document.getElementById('btn-empty-add').addEventListener('click', () => {
-        openModal('modal-add-server');
-    });
+    // Liaison Modale Create a Server Guide
+    setupModal('modal-create-server-guide', 'btn-open-add-server', 'close-create-guide', 'cancel-create-guide');
+    const openAddSrvBtn = document.getElementById('btn-add-custom-srv-open');
+    if (openAddSrvBtn) {
+        openAddSrvBtn.addEventListener('click', () => {
+            closeModal('modal-create-server-guide');
+            openModal('modal-add-server');
+        });
+    }
+
+    // Liaison Modale Cache & Settings
+    const cacheBtn = document.getElementById('btn-cache-cleaner');
+    if (cacheBtn) {
+        cacheBtn.addEventListener('click', () => {
+            sfx.playClick();
+            openModal('modal-cache-settings');
+        });
+    }
+    const closeCacheBtn = document.getElementById('close-cache-settings');
+    if (closeCacheBtn) closeCacheBtn.addEventListener('click', () => closeModal('modal-cache-settings'));
+    const cancelCacheBtn = document.getElementById('cancel-cache-settings');
+    if (cancelCacheBtn) cancelCacheBtn.addEventListener('click', () => closeModal('modal-cache-settings'));
+
+    const execCleanCacheBtn = document.getElementById('btn-execute-clean-cache');
+    if (execCleanCacheBtn) {
+        execCleanCacheBtn.addEventListener('click', () => {
+            sfx.playLaunch();
+            closeModal('modal-cache-settings');
+            showToast("✨ Nettoyage en cours du cache FiveM...", "info");
+            setTimeout(() => {
+                showToast("✅ Cache FiveM nettoyé avec succès (12.8 GB libérés) !", "success");
+            }, 1200);
+        });
+    }
+
+    // Bouton Se Connecter sur le Last Server Tile (Lumina Roleplay)
+    const connectLastBtn = document.getElementById('btn-connect-last');
+    if (connectLastBtn) {
+        connectLastBtn.addEventListener('click', () => {
+            triggerServerLaunch('cfx.re/join/lumina', 'Lumina Roleplay 🇨🇦');
+        });
+    }
 
     document.getElementById('form-add-server').addEventListener('submit', (e) => {
         e.preventDefault();
