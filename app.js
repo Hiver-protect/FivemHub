@@ -1172,73 +1172,62 @@ function initUI() {
         });
     }
 
-    // Navigation Rockstar Games Launcher (Switch des vues GTA VI / FiveM / GTA V / RDR2)
-    document.querySelectorAll('.game-nav-item').forEach(btn => {
-        btn.addEventListener('click', () => {
+    // Gestionnaire de changement de vidéos dans le Portail Rockstar / GTA VI
+    document.querySelectorAll('.video-card-item').forEach(card => {
+        card.addEventListener('click', () => {
             sfx.playClick();
-            document.querySelectorAll('.game-nav-item').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const targetView = btn.dataset.view;
+            document.querySelectorAll('.video-card-item').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
 
-            document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
-            const breadcrumbEl = document.getElementById('active-breadcrumb-name');
+            const ytId = card.dataset.yt;
+            const title = card.dataset.title;
+            const desc = card.dataset.desc;
 
-            if (targetView === 'gtavi') {
-                const p = document.getElementById('view-gtavi');
-                if (p) p.classList.add('active');
-                if (breadcrumbEl) breadcrumbEl.textContent = 'GRAND THEFT AUTO VI';
-            } else if (targetView === 'fivem') {
-                const p = document.getElementById('view-fivem');
-                if (p) p.classList.add('active');
-                if (breadcrumbEl) breadcrumbEl.textContent = 'FIVEM MULTIPLAYER HUB';
-                renderServers();
-            } else if (targetView === 'gtav') {
-                if (breadcrumbEl) breadcrumbEl.textContent = 'GRAND THEFT AUTO V';
-                openModal('modal-story-mode');
-            } else if (targetView === 'rdr2') {
-                if (breadcrumbEl) breadcrumbEl.textContent = 'RED DEAD REDEMPTION II';
-                showToast("🤠 Red Dead Redemption II & RedM Hub prêt !", "info");
+            const iframe = document.getElementById('main-hub-iframe');
+            const titleEl = document.getElementById('active-video-title');
+            const descEl = document.getElementById('active-video-desc');
+
+            if (iframe && ytId) {
+                iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${ytId}&enablejsapi=1&rel=0`;
+            }
+            if (titleEl && title) titleEl.textContent = title;
+            if (descEl && desc) descEl.textContent = desc;
+        });
+    });
+
+    const fsBtn = document.getElementById('btn-toggle-fullscreen');
+    if (fsBtn) {
+        fsBtn.addEventListener('click', () => {
+            sfx.playClick();
+            const iframe = document.getElementById('main-hub-iframe');
+            if (iframe) {
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen();
+                } else if (iframe.webkitRequestFullscreen) {
+                    iframe.webkitRequestFullscreen();
+                }
+            }
+        });
+    }
+
+    // Bouton Cache Cleaner
+    const cacheBtn = document.getElementById('btn-cache-cleaner');
+    if (cacheBtn) {
+        cacheBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            sfx.playClick();
+            openModal('modal-cache-settings');
+        });
+    }
+
+    // Bouton Fermer le Launcher
+    document.querySelectorAll('.close-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (confirm("Voulez-vous quitter l'application ?")) {
+                window.close();
             }
         });
     });
-
-    const rstarLaunchBtn = document.getElementById('btn-rstar-launch-story');
-    if (rstarLaunchBtn) {
-        rstarLaunchBtn.addEventListener('click', () => {
-            triggerServerLaunch('fivem://story', 'Grand Theft Auto VI / V - Mode Solo');
-        });
-    }
-
-    const viewServersListBtn = document.getElementById('btn-view-servers-list');
-    if (viewServersListBtn) {
-        viewServersListBtn.addEventListener('click', () => {
-            sfx.playClick();
-            const fivemTab = document.querySelector('.game-nav-item[data-view="fivem"]');
-            if (fivemTab) fivemTab.click();
-        });
-    }
-
-    const fivemMainSearch = document.getElementById('fivem-main-search');
-    if (fivemMainSearch) {
-        fivemMainSearch.addEventListener('input', (e) => {
-            store.searchQuery = e.target.value;
-            store.currentPage = 1;
-            renderServers();
-        });
-    }
-
-    document.querySelectorAll('.cntry-pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-            sfx.playClick();
-            document.querySelectorAll('.cntry-pill').forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
-            store.activeCategory = pill.dataset.cat;
-            store.currentPage = 1;
-            renderServers();
-        });
-    });
-
-    renderCompactFeaturedList();
 
     const searchInput = document.getElementById('search-input');
     const clearSearchBtn = document.getElementById('clear-search-btn');

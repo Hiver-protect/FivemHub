@@ -76,423 +76,138 @@
         </div>
     </div>
 
-    <div class="app-container rockstar-launcher-theme">
-        <!-- Rockstar Games Official Left Sidebar -->
-        <aside class="rockstar-sidebar">
-            <div class="rockstar-brand">
-                <div class="rstar-logo-wrap">
-                    <span class="rstar-r">R</span><span class="rstar-star">★</span>
-                </div>
-                <span class="rstar-brand-text">ROCKSTAR GAMES</span>
-            </div>
+    <!-- PORTAIL OFFICIEL VIDÉOS & ANNONCES ROCKSTAR GAMES / GTA VI / FIVEM -->
+    <div class="video-news-hub-container">
+        <!-- Arrière-plan Vidéo Plein Écran Dynamique -->
+        <div class="main-video-player-frame">
+            <iframe id="main-hub-iframe" class="hub-video-bg" 
+                src="https://www.youtube.com/embed/QdBZY2fkU-0?autoplay=1&mute=0&controls=1&loop=1&playlist=QdBZY2fkU-0&enablejsapi=1&rel=0" 
+                title="Grand Theft Auto VI Trailer 1 Official" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+            <div class="video-ambient-gradient"></div>
+        </div>
 
-            <div class="games-nav-section">
-                <span class="nav-section-title">VOS JEUX & UNIVERS</span>
-                <nav class="games-menu">
-                    <button class="game-nav-item active" data-view="gtavi">
-                        <div class="game-icon-pill gta6-pill">VI</div>
-                        <div class="game-nav-info">
-                            <span class="game-name">Grand Theft Auto VI</span>
-                            <span class="game-status text-pink">Vice City • 2026</span>
-                        </div>
-                    </button>
-                    <button class="game-nav-item" data-view="fivem">
-                        <div class="game-icon-pill fivem-pill"><i class="fa-solid fa-server"></i></div>
-                        <div class="game-nav-info">
-                            <span class="game-name">FiveM Multiplayer Hub</span>
-                            <span class="game-status text-green">5,250 Serveurs Live</span>
-                        </div>
-                    </button>
-                    <button class="game-nav-item" data-view="gtav">
-                        <div class="game-icon-pill gtav-pill">V</div>
-                        <div class="game-nav-info">
-                            <span class="game-name">Grand Theft Auto V</span>
-                            <span class="game-status text-muted">Mode Histoire & Online</span>
-                        </div>
-                    </button>
-                    <button class="game-nav-item" data-view="rdr2">
-                        <div class="game-icon-pill rdr2-pill">RDR</div>
-                        <div class="game-nav-info">
-                            <span class="game-name">Red Dead Redemption II</span>
-                            <span class="game-status text-amber">RedM RP Ready</span>
-                        </div>
-                    </button>
-                </nav>
-            </div>
-
-            <!-- Quick Utilities -->
-            <div class="sidebar-bottom-tools">
-                <button class="sidebar-tool-btn" id="btn-cache-cleaner" title="Paramètres & Nettoyage de Cache">
-                    <i class="fa-solid fa-gear"></i>
-                    <span>Paramètres & Cache</span>
-                </button>
-                <div class="rstar-user-profile">
-                    <div class="user-avatar-circle">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="user-details">
-                        <span class="user-name">SocialClub Player</span>
-                        <span class="user-status text-green"><i class="fa-solid fa-circle"></i> En Ligne</span>
+        <!-- Interface Épurée par-dessus la Vidéo -->
+        <div class="hub-overlay-ui">
+            <!-- Barre Supérieure -->
+            <header class="hub-top-bar">
+                <div class="brand-badge">
+                    <div class="rstar-badge">R★</div>
+                    <div class="hub-title-group">
+                        <span class="hub-brand-title">ROCKSTAR GAMES & FIVEM</span>
+                        <span class="hub-brand-sub">PORTAIL OFFICIEL • VIDÉOS 4K & ANNONCES</span>
                     </div>
                 </div>
-            </div>
-        </aside>
 
-        <!-- Main Display Viewport -->
-        <main class="rockstar-main-viewport">
-            <!-- Rockstar Top Header -->
-            <header class="rockstar-top-header">
-                <div class="header-breadcrumb">
-                    <span class="text-muted">ROCKSTAR GAMES LAUNCHER</span>
-                    <i class="fa-solid fa-chevron-right"></i>
-                    <span id="active-breadcrumb-name">GRAND THEFT AUTO VI</span>
-                </div>
-
-                <div class="header-right-actions">
-                    <div class="live-status-pill">
-                        <span class="pulse-dot"></span>
-                        <span>SERVEURS FIVEM : <strong>225,480 JOUEURS</strong></span>
+                <div class="hub-top-right">
+                    <div class="live-pill">
+                        <span class="pulse-dot-green"></span>
+                        <span>FLUX EN DIRECT • 2026</span>
                     </div>
-                    <button class="top-util-btn" id="btn-open-quick-connect" title="Connexion Directe IP">
-                        <i class="fa-solid fa-bolt"></i> Connexion IP
-                    </button>
-                    <button class="top-util-btn close-btn" title="Quitter le Launcher">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+                    <button class="icon-tool-btn" id="btn-cache-cleaner" title="Paramètres & Cache"><i class="fa-solid fa-gear"></i></button>
+                    <button class="icon-tool-btn close-btn" title="Fermer"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </header>
 
-            <!-- VIEW 1: GRAND THEFT AUTO VI SHOWCASE -->
-            <div class="view-panel active" id="view-gtavi">
-                <div class="gta6-hero-banner">
-                    <div class="gta6-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&auto=format&fit=crop&q=80');"></div>
-                    <div class="gta6-hero-gradient"></div>
-
-                    <div class="gta6-hero-content">
-                        <div class="gta6-badge-row">
-                            <span class="badge-rstar">ROCKSTAR GAMES EXCLUSIVE</span>
-                            <span class="badge-vice">LEONIDA STATE</span>
-                            <span class="badge-engine">RAGE 9 PRO ENGINE</span>
-                        </div>
-                        <h1 class="gta6-main-title">GRAND THEFT AUTO <span class="text-pink">VI</span></h1>
-                        <p class="gta6-tagline">Vice City, les lumières néon, les marais de Leonida et la plus grande aventure de l'histoire du jeu vidéo.</p>
-
-                        <div class="gta6-actions-row">
-                            <button class="btn-rstar-play" id="btn-rstar-launch-story">
-                                <i class="fa-solid fa-play"></i> DÉMARRER LE JEU
-                            </button>
-                            <button class="btn-rstar-secondary" id="btn-browse-all">
-                                <i class="fa-solid fa-compass"></i> EXPLORATEUR DE SERVEURS (5,250)
-                            </button>
-                        </div>
-                    </div>
+            <!-- Centre : Titre Vidéo Active & Actions Rapides -->
+            <div class="hub-video-info-center">
+                <div class="video-tag-row">
+                    <span class="v-badge v-rstar">ROCKSTAR GAMES</span>
+                    <span class="v-badge v-res">4K ULTRA HD</span>
+                    <span class="v-badge v-live">EN DIRECT</span>
                 </div>
+                <h1 class="active-video-title" id="active-video-title">Grand Theft Auto VI - Bande-Annonce Officielle 1</h1>
+                <p class="active-video-desc" id="active-video-desc">Bienvenue à Leonida State et Vice City. Regardez les vidéos officielles et suivez les annonces du Newswire en temps réel.</p>
+                <div class="video-actions">
+                    <button class="btn-fullscreen-vid" id="btn-toggle-fullscreen">
+                        <i class="fa-solid fa-expand"></i> Plein Écran Vidéo
+                    </button>
+                    <a href="https://www.youtube.com/@RockstarGames" target="_blank" class="btn-external-channel">
+                        <i class="fa-brands fa-youtube"></i> Chaîne Rockstar Games ↗
+                    </a>
+                    <a href="https://www.rockstargames.com/newswire" target="_blank" class="btn-external-channel">
+                        <i class="fa-solid fa-newspaper"></i> Rockstar Newswire ↗
+                    </a>
+                </div>
+            </div>
 
-                <!-- Live News & Servers Grid -->
-                <div class="rockstar-content-grid">
-                    <!-- News Feed Cards -->
-                    <div class="rstar-news-section">
-                        <div class="section-title-row">
-                            <h3><i class="fa-solid fa-newspaper text-pink"></i> ACTUALITÉS & ANNONCES OFFICIELLES</h3>
-                            <a href="https://www.rockstargames.com/newswire" target="_blank" class="view-all-link">Rockstar Newswire ↗</a>
-                        </div>
-                        <div class="news-cards-row">
-                            <div class="rstar-news-card">
-                                <div class="news-card-img" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80');"></div>
-                                <div class="news-card-body">
-                                    <span class="news-tag text-pink">GTA VI TRAILER 1</span>
-                                    <h4>Bienvenue à Vice City • Regardez la Vidéo HD</h4>
-                                    <p>Plongez au cœur des rues animées de Leonida State avec les nouvelles fonctionnalités de jeu.</p>
-                                </div>
+            <!-- Bas : Sélecteur de Vidéos & Fil d'Annonces en Direct -->
+            <div class="hub-bottom-panels">
+                <!-- Sélecteur de Vidéos & Bandes-Annonces -->
+                <div class="video-playlist-carousel">
+                    <div class="panel-header">
+                        <span><i class="fa-solid fa-film text-pink"></i> BANDES-ANNONCES & VIDÉOS</span>
+                    </div>
+                    <div class="videos-list-scroll">
+                        <div class="video-card-item active" data-yt="QdBZY2fkU-0" data-title="Grand Theft Auto VI - Bande-Annonce Officielle 1" data-desc="Vice City, les lumières de la ville et les plages de Leonida. La première révélation officielle.">
+                            <div class="video-thumb" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=300&auto=format&fit=crop&q=80');">
+                                <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
                             </div>
-                            <div class="rstar-news-card">
-                                <div class="news-card-img" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80');"></div>
-                                <div class="news-card-body">
-                                    <span class="news-tag text-green">FIVEM CANARY</span>
-                                    <h4>Build 3258 & Synchronisation 2026</h4>
-                                    <p>Optimisation majeure des assets et des temps de chargement pour tous les serveurs.</p>
-                                </div>
+                            <div class="video-meta">
+                                <strong>GTA VI Trailer 1</strong>
+                                <span>Rockstar Games • 4K</span>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Top Featured Servers in Launcher -->
-                    <div class="rstar-servers-section">
-                        <div class="section-title-row">
-                            <h3><i class="fa-solid fa-server text-cyan"></i> SERVEURS EN VEDETTE FIVEM</h3>
-                            <button class="view-all-btn" id="btn-view-servers-list"><i class="fa-solid fa-grid-2"></i> Voir les 5,250 Serveurs</button>
+                        <div class="video-card-item" data-yt="hvoD7ehZPcM" data-title="Grand Theft Auto V - Trailer Officiel PlayStation 5 & Xbox Series" data-desc="Découvrez Los Santos amélioré avec des graphismes 4K, ray tracing et 60 FPS.">
+                            <div class="video-thumb" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&auto=format&fit=crop&q=80');">
+                                <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
+                            </div>
+                            <div class="video-meta">
+                                <strong>GTA V Next-Gen</strong>
+                                <span>Rockstar Games • 60 FPS</span>
+                            </div>
                         </div>
-                        <div class="featured-servers-compact-list" id="featured-servers-compact-list">
-                            <!-- Injected dynamically with servers -->
+
+                        <div class="video-card-item" data-yt="eaW0tYpxyp0" data-title="Red Dead Redemption 2 - Trailer de Lancement Officiel" data-desc="L'épopée d'Arthur Morgan et la bande de Van der Linde à travers l'Amérique sauvage.">
+                            <div class="video-thumb" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=300&auto=format&fit=crop&q=80');">
+                                <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
+                            </div>
+                            <div class="video-meta">
+                                <strong>Red Dead Redemption II</strong>
+                                <span>Rockstar Games • 4K</span>
+                            </div>
+                        </div>
+
+                        <div class="video-card-item" data-yt="7y_sR4qW1pM" data-title="FiveM Enhanced - Shaders & Performance 2026" data-desc="Présentation du nouveau moteur de rendu FiveM avec support des serveurs massifs.">
+                            <div class="video-thumb" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=300&auto=format&fit=crop&q=80');">
+                                <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
+                            </div>
+                            <div class="video-meta">
+                                <strong>FiveM Enhanced</strong>
+                                <span>Cfx.re Community</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- VIEW 2: FIVEM MULTIPLAYER SERVER BROWSER -->
-            <div class="view-panel" id="view-fivem">
-                <div class="fivem-browser-header">
-                    <h2><i class="fa-solid fa-compass text-green"></i> Explorateur Officiel FiveM (5,250 Serveurs Live)</h2>
-                    <div class="browser-search-bar">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="fivem-main-search" placeholder="Rechercher par nom, pays (Canada, France, USA, PVP), ville ou cfx.re...">
+                <!-- Fil des Dernières Annonces Officielles -->
+                <div class="news-feed-panel">
+                    <div class="panel-header">
+                        <span><i class="fa-solid fa-bullhorn text-amber"></i> DERNIÈRES ANNONCES EN DIRECT</span>
+                        <a href="https://www.rockstargames.com/newswire" target="_blank" class="live-link">Newswire ↗</a>
+                    </div>
+                    <div class="news-items-scroll">
+                        <div class="news-entry">
+                            <span class="news-source text-pink"><i class="fa-solid fa-star"></i> ROCKSTAR GAMES</span>
+                            <h4>⭐ Grand Theft Auto VI : Nouvelle ère pour Leonida State</h4>
+                            <p>Toutes les informations sur la sortie et les fonctionnalités immersives du moteur RAGE 9.</p>
+                        </div>
+                        <div class="news-entry">
+                            <span class="news-source text-green"><i class="fa-solid fa-gamepad"></i> CFX.RE / FIVEM</span>
+                            <h4>🚀 FiveM Canary Build 3258 Déployé</h4>
+                            <p>Amélioration des performances de chargement d'assets et synchronisation multi-joueurs à 144 FPS.</p>
+                        </div>
+                        <div class="news-entry">
+                            <span class="news-source text-cyan"><i class="fa-solid fa-shield"></i> SÉCURITÉ & ANTI-CHEAT</span>
+                            <h4>🛡️ Mise à jour de protection active</h4>
+                            <p>Les serveurs FiveM bénéficient de la nouvelle signature de détection en temps réel.</p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="country-pills-row">
-                    <button class="cntry-pill active" data-cat="all">Tous les Serveurs 🌐</button>
-                    <button class="cntry-pill" data-cat="rp-ca">Canada & Québec 🇨🇦</button>
-                    <button class="cntry-pill" data-cat="rp-fr">France & Belge 🇫🇷</button>
-                    <button class="cntry-pill" data-cat="rp-us">USA & UK 🇺🇸</button>
-                    <button class="cntry-pill" data-cat="rp-de">Allemagne 🇩🇪</button>
-                    <button class="cntry-pill" data-cat="rp-es">Espagne 🇪🇸</button>
-                    <button class="cntry-pill" data-cat="rp-br">Brésil 🇧🇷</button>
-                    <button class="cntry-pill" data-cat="pvp">PVP & Arenas 🎯</button>
-                </div>
-
-                <div class="servers-grid-rockstar" id="servers-grid">
-                    <!-- Cards Injected Dynamically -->
-                </div>
-
-                <div class="pagination-wrap" id="pagination-wrap">
-                    <button class="btn-load-more" id="btn-load-more">
-                        <i class="fa-solid fa-chevron-down"></i>
-                        <span>Charger plus de serveurs</span>
-                    </button>
-                </div>
-            </div>
-        </main>
-    </div>
-
-
-
-    <!-- MODAL: Direct Quick Connect IP -->
-    <div class="modal-backdrop" id="modal-quick-connect">
-        <div class="modal-card">
-            <button class="modal-close" id="close-quick-connect"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <div class="modal-icon"><i class="fa-solid fa-bolt"></i></div>
-                <div>
-                    <h3>Connexion Rapide Directe</h3>
-                    <p>Entrez l'adresse IP ou le lien CFX pour lancer FiveM instantanément.</p>
-                </div>
-            </div>
-            <form id="form-quick-connect" class="modal-form">
-                <div class="input-group">
-                    <label for="quick-ip">IP:Port ou Code CFX</label>
-                    <div class="input-with-icon">
-                        <i class="fa-solid fa-network-wired"></i>
-                        <input type="text" id="quick-ip" placeholder="ex: 192.168.1.1:30120 ou cfx.re/join/xxxxxx" required>
-                    </div>
-                    <span class="input-hint">Exemples acceptés : <code>cfx.re/join/5k99p8</code>, <code>51.255.45.12:30120</code>, <code>play.monserveur.fr</code></span>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn-cancel" id="cancel-quick-connect">Annuler</button>
-                    <button type="submit" class="btn-play-primary">
-                        <i class="fa-solid fa-rocket"></i> Lancer & Se Connecter
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL: Add Custom Server -->
-    <div class="modal-backdrop" id="modal-add-server">
-        <div class="modal-card modal-lg">
-            <button class="modal-close" id="close-add-server"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <div class="modal-icon"><i class="fa-solid fa-plus"></i></div>
-                <div>
-                    <h3>Ajouter un Serveur à votre Launcher</h3>
-                    <p>Sauvegardez vos serveurs favoris pour les rejoindre en 1 clic à tout moment.</p>
-                </div>
-            </div>
-            <form id="form-add-server" class="modal-form">
-                <div class="form-row">
-                    <div class="input-group">
-                        <label for="custom-name">Nom du Serveur *</label>
-                        <input type="text" id="custom-name" placeholder="Ex: Mon Super Serveur RP" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="custom-category">Catégorie *</label>
-                        <select id="custom-category" required>
-                            <option value="rp-fr">Roleplay Français</option>
-                            <option value="rp-intl">Roleplay International</option>
-                            <option value="pvp">PVP / RedZone</option>
-                            <option value="drift">Drift & Courses</option>
-                            <option value="custom">Autre / Personnalisé</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label for="custom-connect">Lien de Connexion FiveM (IP:Port ou CFX code) *</label>
-                    <div class="input-with-icon">
-                        <i class="fa-solid fa-link"></i>
-                        <input type="text" id="custom-connect" placeholder="ex: 185.100.200.5:30120 ou cfx.re/join/xxxxxx" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="input-group">
-                        <label for="custom-banner">URL Image de Bannière (Optionnel)</label>
-                        <input type="url" id="custom-banner" placeholder="https://... image d'ambiance ou laisser vide">
-                    </div>
-                    <div class="input-group">
-                        <label for="custom-logo">URL Logo / Icône (Optionnel)</label>
-                        <input type="url" id="custom-logo" placeholder="https://... logo carré ou laisser vide">
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label for="custom-desc">Description Courte</label>
-                    <textarea id="custom-desc" rows="2" placeholder="Description, informations importantes, conditions d'entrée..."></textarea>
-                </div>
-
-                <div class="form-row">
-                    <div class="input-group">
-                        <label for="custom-tags">Tags (séparés par des virgules)</label>
-                        <input type="text" id="custom-tags" placeholder="WL, Économie Réelle, Voitures Custom, etc.">
-                    </div>
-                    <div class="input-group">
-                        <label for="custom-discord">Lien Discord (Optionnel)</label>
-                        <input type="url" id="custom-discord" placeholder="https://discord.gg/...">
-                    </div>
-                </div>
-
-    <!-- =========================================================================
-         MODALS OFFICIELLES FIVEM POUR CHAQUE BOUTON (100% FONCTIONNELLES)
-         ========================================================================= -->
-    <!-- MODAL: Browse All Servers (Explorateur Officiel Complet de Serveurs) -->
-    <div class="modal-backdrop" id="modal-browse-servers">
-        <div class="modal-card modal-lg" style="max-width: 900px; max-height: 85vh; display: flex; flex-direction: column;">
-            <button class="modal-close" id="close-browse-servers"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <div class="modal-icon" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;"><i class="fa-solid fa-compass"></i></div>
-                <div>
-                    <h3>Explorateur de Serveurs FiveM (5,250 Serveurs En Direct)</h3>
-                    <p>Recherchez, filtrez par région et connectez-vous instantanément aux meilleurs serveurs mondiaux.</p>
-                </div>
-            </div>
-            <div class="modal-body" style="flex: 1; overflow-y: auto; padding: 14px 0;">
-                <div style="display: flex; gap: 10px; margin-bottom: 14px;">
-                    <div style="flex: 1; position: relative;">
-                        <input type="text" id="modal-browse-search" placeholder="Rechercher par nom, ville, tag (Canada, France, NoPixel, Flashback, PVP)..." style="width: 100%; background: #14171d; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 10px 14px; color: #fff; font-family: var(--font-sub);">
-                    </div>
-                    <select id="modal-browse-cat" style="background: #14171d; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 10px 14px; color: #fff; font-family: var(--font-sub);">
-                        <option value="all">Toutes Régions 🌐</option>
-                        <option value="rp-ca">Canada & Québec 🇨🇦</option>
-                        <option value="rp-fr">France & Belge 🇫🇷</option>
-                        <option value="rp-us">USA & UK 🇺🇸</option>
-                        <option value="rp-de">Allemagne 🇩🇪</option>
-                        <option value="rp-es">Espagne 🇪🇸</option>
-                        <option value="rp-br">Brésil 🇧🇷</option>
-                        <option value="pvp">PVP & RedZone 🎯</option>
-                    </select>
-                </div>
-                <div id="modal-browse-list" style="display: flex; flex-direction: column; gap: 8px;">
-                    <!-- Injected dynamically with servers -->
-                </div>
-            </div>
-            <div class="modal-actions" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px;">
-                <button type="button" class="btn-cancel" id="cancel-browse-servers">Fermer</button>
-                <button type="button" class="btn-play-primary" id="btn-browse-view-grid">
-                    <i class="fa-solid fa-grid-2"></i> Voir la Grille Complète
-                </button>
-            </div>
-        </div>
-    </div>
-    <!-- MODAL: Mode Histoire / Story Mode Launch -->
-    <div class="modal-backdrop" id="modal-story-mode">
-        <div class="modal-card">
-            <button class="modal-close" id="close-story-mode"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <div class="modal-icon" style="background: rgba(34, 197, 94, 0.2); color: #22c55e;"><i class="fa-solid fa-play"></i></div>
-                <div>
-                    <h3>Lancer le Mode Histoire (Grand Theft Auto V)</h3>
-                    <p>Démarrez la campagne solo originale avec vos mods et scripts locaux.</p>
-                </div>
-            </div>
-            <div class="modal-body" style="padding: 16px 0; color: #94a3b8; font-size: 0.9rem; line-height: 1.5;">
-                <p>Le mode Histoire lance directement le solo de GTA V avec le support des mods FiveM, sans passer par les serveurs en ligne.</p>
-                <div style="background: rgba(255, 255, 255, 0.04); padding: 12px; border-radius: 8px; margin-top: 10px; border: 1px solid rgba(255, 255, 255, 0.08);">
-                    <i class="fa-solid fa-circle-check text-green"></i> <strong>Exécutable GTA5.exe détecté</strong> • Prêt pour le lancement
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button type="button" class="btn-cancel" id="cancel-story-mode">Annuler</button>
-                <button type="button" class="btn-play-primary" id="btn-confirm-launch-story">
-                    <i class="fa-solid fa-gamepad"></i> Démarrer le Mode Histoire
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: Éditeur de Replay / Rockstar Editor -->
-    <div class="modal-backdrop" id="modal-replay-editor">
-        <div class="modal-card">
-            <button class="modal-close" id="close-replay-editor"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <div class="modal-icon" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;"><i class="fa-solid fa-film"></i></div>
-                <div>
-                    <h3>Éditeur de Replay (Rockstar Editor)</h3>
-                    <p>Montez vos clips de gameplay, cinématiques et scènes RP enregistrées.</p>
-                </div>
-            </div>
-            <div class="modal-body" style="padding: 16px 0; color: #94a3b8; font-size: 0.9rem; line-height: 1.5;">
-                <p>Accédez à tous vos enregistrements FiveM en local (dossier <code>AppData/Local/FiveM/FiveM.app/data/recordings</code>) et lancez l'éditeur de caméras libres.</p>
-                <div style="display: flex; gap: 10px; margin-top: 12px;">
-                    <div style="flex: 1; background: #15181f; padding: 10px; border-radius: 6px; text-align: center;">
-                        <span style="display: block; font-size: 1.1rem; font-weight: 800; color: #fff;">18</span>
-                        <span style="font-size: 0.72rem; color: #64748b;">Clips Enregistrés</span>
-                    </div>
-                    <div style="flex: 1; background: #15181f; padding: 10px; border-radius: 6px; text-align: center;">
-                        <span style="display: block; font-size: 1.1rem; font-weight: 800; color: #22c55e;">4.2 GB</span>
-                        <span style="font-size: 0.72rem; color: #64748b;">Espace Utilisé</span>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button type="button" class="btn-cancel" id="cancel-replay-editor">Fermer</button>
-                <button type="button" class="btn-play-primary" id="btn-confirm-launch-replay">
-                    <i class="fa-solid fa-video"></i> Ouvrir l'Éditeur Rockstar
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: Create a Server Wizard -->
-    <div class="modal-backdrop" id="modal-create-server-guide">
-        <div class="modal-card modal-lg">
-            <button class="modal-close" id="close-create-guide"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <div class="modal-icon" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;"><i class="fa-solid fa-server"></i></div>
-                <div>
-                    <h3>Créer votre Propre Serveur FiveM (Guide & Setup)</h3>
-                    <p>Démarrez votre serveur GTA RP / Freeroam en 3 étapes simples.</p>
-                </div>
-            </div>
-            <div class="modal-body" style="padding: 14px 0; color: #cbd5e1; font-size: 0.88rem; line-height: 1.5;">
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <div style="background: #15181f; padding: 12px; border-radius: 8px; border-left: 3px solid #22c55e;">
-                        <strong style="color: #22c55e;">1. Obtenir une Clé de Licence CFX (txAdmin)</strong>
-                        <p style="font-size: 0.78rem; color: #94a3b8; margin-top: 4px;">Rendez-vous sur <a href="https://keymaster.fivem.net" target="_blank" style="color: #38bdf8;">keymaster.fivem.net</a> pour générer votre clé de licence gratuite.</p>
-                    </div>
-                    <div style="background: #15181f; padding: 12px; border-radius: 8px; border-left: 3px solid #38bdf8;">
-                        <strong style="color: #38bdf8;">2. Télécharger les Fichiers Serveur FXServer</strong>
-                        <p style="font-size: 0.78rem; color: #94a3b8; margin-top: 4px;">Téléchargez les derniers builds officiels FiveM Server Windows depuis <a href="https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/" target="_blank" style="color: #38bdf8;">runtime.fivem.net</a>.</p>
-                    </div>
-                    <div style="background: #15181f; padding: 12px; border-radius: 8px; border-left: 3px solid #e02424;">
-                        <strong style="color: #ff758c;">3. Lancer txAdmin et Configurer QBCore ou ESX</strong>
-                        <p style="font-size: 0.78rem; color: #94a3b8; margin-top: 4px;">Exécutez <code>FXServer.exe</code> et configurez votre base de données MySQL et vos scripts en 1 clic.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button type="button" class="btn-cancel" id="cancel-create-guide">Fermer</button>
-                <button type="button" class="btn-play-primary" id="btn-add-custom-srv-open">
-                    <i class="fa-solid fa-plus"></i> Ajouter mon Serveur au Launcher
-                </button>
             </div>
         </div>
     </div>
@@ -525,143 +240,6 @@
                 <button type="button" class="btn-cancel" id="cancel-cache-settings">Fermer</button>
                 <button type="button" class="btn-play-primary" id="btn-execute-clean-cache" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
                     <i class="fa-solid fa-trash-can"></i> Nettoyer le Cache Immédiatement
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: Server Details -->
-    <div class="modal-backdrop" id="modal-server-details">
-        <div class="modal-card modal-lg server-details-card">
-            <button class="modal-close" id="close-details"><i class="fa-solid fa-xmark"></i></button>
-            <div class="details-banner-wrap">
-                <img id="detail-banner-img" src="" alt="Banner" class="detail-banner">
-                <div class="detail-banner-overlay"></div>
-                <div class="detail-server-header">
-                    <img id="detail-logo-img" src="" alt="Logo" class="detail-logo">
-                    <div>
-                        <h2 id="detail-title" class="detail-title">Nom du Serveur</h2>
-                        <div class="detail-sub-info">
-                            <span id="detail-category-badge" class="badge">RP</span>
-                            <span class="detail-ip"><i class="fa-solid fa-server"></i> <span id="detail-cfx-text">cfx.re/join/xxxx</span></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="details-body">
-                <div class="detail-stats-grid">
-                    <div class="d-stat">
-                        <i class="fa-solid fa-users text-cyan"></i>
-                        <div>
-                            <div class="stat-number" id="detail-players">500 / 1024</div>
-                            <div class="stat-label">Joueurs en Ligne</div>
-                        </div>
-                    </div>
-                    <div class="d-stat">
-                        <i class="fa-solid fa-signal text-green"></i>
-                        <div>
-                            <div class="stat-number" id="detail-ping">24 ms</div>
-                            <div class="stat-label">Latence Moyenne</div>
-                        </div>
-                    </div>
-                    <div class="d-stat">
-                        <i class="fa-solid fa-shield-halved text-purple"></i>
-                        <div>
-                            <div class="stat-number">Actif & Sécurisé</div>
-                            <div class="stat-label">Anti-Cheat FiveM</div>
-                        </div>
-                    </div>
-                    <div class="d-stat">
-                        <i class="fa-solid fa-location-dot text-amber"></i>
-                        <div>
-                            <div class="stat-number" id="detail-region">France / Paris</div>
-                            <div class="stat-label">Localisation</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="detail-desc-box">
-                    <h4><i class="fa-solid fa-align-left"></i> À Propos du Serveur</h4>
-                    <p id="detail-description">Description complète du serveur FiveM.</p>
-                </div>
-
-                <div class="detail-actions-row">
-                    <a href="#" target="_blank" id="detail-discord-btn" class="btn-discord">
-                        <i class="fa-brands fa-discord"></i> Rejoindre le Discord
-                    </a>
-                    <button class="btn-copy-cfx" id="btn-copy-ip">
-                        <i class="fa-regular fa-copy"></i> Copier l'IP
-                    </button>
-                    <button class="btn-play-primary pulse" id="detail-play-btn">
-                        <i class="fa-solid fa-play"></i>
-                        <span>LANCER FIVEM & SE CONNECTER</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- VRAI LOADING SCREEN FIVEM AVEC VIDÉO & AMBIANCE GTA V / YOUTUBE -->
-    <div class="loading-screen-overlay" id="loading-screen-overlay">
-        <!-- Arrière-Plan Vidéo HD / GTA V Loading Screen (YouTube Embed & Fallback) -->
-        <div class="ls-video-container">
-            <iframe id="ls-youtube-iframe" class="ls-youtube-bg" 
-                src="" 
-                title="FiveM Loading Screen Video" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-            <div class="ls-video-overlay" id="ls-bg-slideshow"></div>
-        </div>
-
-        <div class="loading-screen-content">
-            <!-- Header du Loading Screen -->
-            <div class="ls-header">
-                <div class="ls-server-info">
-                    <span class="ls-badge">FIVEM CONNECT</span>
-                    <h1 class="ls-title" id="ls-server-name">Connexion au Serveur FiveM...</h1>
-                    <div class="ls-protocol" id="ls-protocol-display">fivem://connect/cfx.re/join/xxxxxx</div>
-                </div>
-
-                <div class="ls-lang-switch">
-                    <button class="ls-lang-btn active" id="lang-fr">🇫🇷 FR</button>
-                    <button class="ls-lang-btn" id="lang-en">🇬🇧 EN</button>
-                </div>
-            </div>
-
-            <!-- Conseil / Astuce RP -->
-            <div class="ls-tip-box">
-                <div class="ls-tip-icon">
-                    <i class="fa-solid fa-lightbulb"></i>
-                </div>
-                <div class="ls-tip-text">
-                    <h4 id="ls-tip-title">Conseil Roleplay</h4>
-                    <p id="ls-tip-content">Utilisez votre microphone et respectez le Fear RP pour la meilleure expérience de jeu.</p>
-                </div>
-            </div>
-
-            <!-- Barre de Chargement FiveM Authentique -->
-            <div class="ls-progress-container">
-                <div class="ls-progress-header">
-                    <span class="ls-step-text" id="ls-step-label">Téléchargement des scripts et ressources FiveM...</span>
-                    <span class="ls-percent" id="ls-percent-label">15%</span>
-                </div>
-                <div class="ls-bar-track">
-                    <div class="ls-bar-fill" id="ls-bar-fill"></div>
-                </div>
-            </div>
-
-            <!-- Pied de page avec bouton d'annulation -->
-            <div class="ls-footer">
-                <div class="ls-status-pill">
-                    <i class="fa-solid fa-circle-notch fa-spin"></i>
-                    <span id="ls-connecting-text">CONNEXION EN COURS</span>
-                </div>
-                <button class="ls-cancel-btn" id="btn-cancel-loading">
-                    <i class="fa-solid fa-xmark"></i>
-                    <span id="ls-cancel-text">Annuler / Retour au Hub</span>
                 </button>
             </div>
         </div>
