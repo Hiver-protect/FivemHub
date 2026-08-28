@@ -1020,17 +1020,24 @@ function initBootSplashScreen() {
     const cornerSubstatus = document.getElementById('corner-substatus-text');
     const bootTipText = document.getElementById('boot-tip-text');
 
+    // Réglage du volume de la vidéo YouTube du Loading Screen à 15% (très doux)
+    setTimeout(() => {
+        if (bootIframe && bootIframe.contentWindow) {
+            bootIframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[15]}', '*');
+        }
+    }, 1500);
+
     let progress = 0;
-    const totalDuration = 60000; // 60 secondes (1 minute complète) pour voir tout le trailer et l'intro
+    const totalDuration = 60000; // 60 secondes (1 minute complète)
     const intervalTime = 100;
-    const stepIncrement = 100 / (totalDuration / intervalTime);
 
     const steps = [
-        { p: 10, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K 2026..." },
-        { p: 25, text: "TÉLÉCHARGEMENT DES RESSOURCES ROCKSTAR...", sub: "Téléchargement des scripts officiels et véhicules imports (35%)" },
-        { p: 45, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
-        { p: 65, text: "CHARGEMENT DES PACKS GRAPHIQUES & TEXTURES...", sub: "Optimisation du rendu volumétrique et lumières néons Vice City" },
-        { p: 85, text: "SYNCHRONISATION DU MOTEUR AUDIO & RADIOS...", sub: "Connexion aux 500 Stations Rap HD (0ms jitter)" },
+        { p: 8, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K 2026..." },
+        { p: 20, text: "TÉLÉCHARGEMENT DES RESSOURCES ROCKSTAR...", sub: "Téléchargement des scripts officiels et véhicules imports (35%)" },
+        { p: 38, text: "INITIALISATION DU CLIENT FIVEM...", sub: "Allocation de la mémoire graphique (VRAM 8GB+)..." },
+        { p: 55, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
+        { p: 72, text: "CHARGEMENT DES PACKS GRAPHIQUES & TEXTURES...", sub: "Optimisation du rendu volumétrique et lumières néons Vice City" },
+        { p: 88, text: "SYNCHRONISATION DU MOTEUR AUDIO & RADIOS...", sub: "Connexion aux 500 Stations Rap HD (0ms jitter)" },
         { p: 98, text: "FINALISATION DE L'APPLICATION...", sub: "Initialisation terminée • Prêt pour le jeu !" },
         { p: 100, text: "BIENVENUE SUR FIVEM HUB UNIVERSE !", sub: "Lancement de l'application..." }
     ];
@@ -1048,10 +1055,12 @@ function initBootSplashScreen() {
             tipIndex = (tipIndex + 1) % tips.length;
             bootTipText.textContent = tips[tipIndex];
         }
-    }, 4500);
+    }, 5000);
 
     const progressTimer = setInterval(() => {
-        progress += stepIncrement;
+        // Progression réaliste avec variations naturelles FiveM
+        const delta = (100 / (totalDuration / intervalTime)) * (0.8 + Math.random() * 0.4);
+        progress += delta;
         if (progress > 100) progress = 100;
 
         if (cornerFill) cornerFill.style.width = `${progress}%`;
