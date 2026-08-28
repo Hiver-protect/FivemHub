@@ -1193,48 +1193,41 @@ function initUI() {
         });
     });
 
-    // Bouton Mode Cinéma Plein Écran
-    let activeYtId = "QdBZY2fkU-0";
-    const cinemaModal = document.getElementById('cinema-fullscreen-modal');
-    const cinemaIframe = document.getElementById('cinema-fullscreen-iframe');
+    // Bouton Mode Cinéma Plein Écran (Sur l'Iframe Unique pour Éviter Tout Doublon Sonore)
     const exitCinemaBtn = document.getElementById('btn-exit-cinema');
-
     const fsBtn = document.getElementById('btn-toggle-fullscreen');
-    if (fsBtn) {
-        fsBtn.addEventListener('click', () => {
-            sfx.playClick();
-            const activeCard = document.querySelector('.video-card-item.active');
-            if (activeCard && activeCard.dataset.yt) {
-                activeYtId = activeCard.dataset.yt;
-            }
-            if (cinemaModal && cinemaIframe) {
-                cinemaIframe.src = `https://www.youtube.com/embed/${activeYtId}?autoplay=1&mute=0&controls=1&enablejsapi=1&rel=0`;
-                cinemaModal.classList.add('active');
-                setTimeout(() => {
-                    updateVideoVolume(currentVolume > 0 ? currentVolume : 15);
-                }, 600);
-            }
-        });
-    }
 
-    function closeCinema() {
-        if (cinemaModal && cinemaIframe) {
-            cinemaIframe.src = "about:blank";
-            cinemaModal.classList.remove('active');
+    const toggleCinemaFullscreen = () => {
+        sfx.playClick();
+        document.body.classList.toggle('cinema-lights-dimmed');
+        const isDimmed = document.body.classList.contains('cinema-lights-dimmed');
+
+        if (exitCinemaBtn) {
+            exitCinemaBtn.style.display = isDimmed ? 'inline-flex' : 'none';
         }
+
+        if (isDimmed) {
+            showToast("🍿 Mode Cinéma Plein Écran Actif (Appuyez sur Échap ou le bouton rouge pour quitter)", "info");
+        }
+    };
+
+    if (fsBtn) {
+        fsBtn.addEventListener('click', toggleCinemaFullscreen);
     }
 
     if (exitCinemaBtn) {
         exitCinemaBtn.addEventListener('click', () => {
             sfx.playClick();
-            closeCinema();
+            document.body.classList.remove('cinema-lights-dimmed');
+            exitCinemaBtn.style.display = 'none';
         });
     }
 
-    // Touche Échap pour quitter le plein écran
+    // Touche Échap pour quitter le plein écran instantanément
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            closeCinema();
+            document.body.classList.remove('cinema-lights-dimmed');
+            if (exitCinemaBtn) exitCinemaBtn.style.display = 'none';
         }
     });
 

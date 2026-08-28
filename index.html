@@ -160,19 +160,10 @@
                 </div>
             </div>
 
-            <!-- Modal Cinéma Plein Écran avec Bouton Quitter Flottant et Touche Échap -->
-            <div class="cinema-fullscreen-modal" id="cinema-fullscreen-modal">
-                <button class="btn-exit-cinema btn-3d-glow" id="btn-exit-cinema" title="Quitter le plein écran (Échap)">
-                    <i class="fa-solid fa-compress"></i> <span>Quitter le Plein Écran (Échap)</span>
-                </button>
-                <iframe id="cinema-fullscreen-iframe" class="cinema-iframe" 
-                    src="" 
-                    title="Fullscreen Rockstar Video" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>
+            <!-- Bouton Flottant Quitter le Plein Écran (Visible uniquement en Mode Cinéma) -->
+            <button class="btn-exit-cinema btn-3d-glow" id="btn-exit-cinema" title="Quitter le plein écran (Échap)" style="display: none;">
+                <i class="fa-solid fa-compress"></i> <span>Quitter le Plein Écran (Échap)</span>
+            </button>
 
             <!-- Bas : Sélecteur de Vidéos & Fil d'Annonces en Direct -->
             <div class="hub-bottom-panels">
