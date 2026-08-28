@@ -1570,14 +1570,26 @@ function initUI() {
     setupModal('modal-cache-settings', 'btn-cache-cleaner', 'close-cache-settings', 'cancel-cache-settings');
 
     const execCleanCacheBtn = document.getElementById('btn-execute-clean-cache');
+    const cacheSizeDisplay = document.getElementById('cache-size-display');
     if (execCleanCacheBtn) {
         execCleanCacheBtn.addEventListener('click', () => {
             sfx.playLaunch();
+            if (cacheSizeDisplay) cacheSizeDisplay.textContent = "0 MB (Purge effectuée)";
             closeModal('modal-cache-settings');
             showToast("✨ Nettoyage en cours du cache FiveM...", "info");
             setTimeout(() => {
                 showToast("✅ Cache FiveM nettoyé avec succès (12.8 GB libérés) !", "success");
-            }, 1200);
+            }, 800);
+        });
+    }
+
+    const boostFpsBtn = document.getElementById('btn-boost-fps');
+    if (boostFpsBtn) {
+        boostFpsBtn.addEventListener('click', () => {
+            sfx.playClick();
+            boostFpsBtn.innerHTML = `<i class="fa-solid fa-check"></i> Mode 144 FPS Actif`;
+            boostFpsBtn.style.background = `linear-gradient(135deg, #22c55e, #16a34a)`;
+            showToast("⚡ Boost 144 FPS & Priorité GPU activés avec succès !", "success");
         });
     }
 

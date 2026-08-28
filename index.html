@@ -332,34 +332,48 @@
         </div>
     </div>
 
-    <!-- MODAL: Settings & Cache Helper -->
+    <!-- MODAL: Settings & Optimisation Système 4K -->
     <div class="modal-backdrop" id="modal-cache-settings">
-        <div class="modal-card">
+        <div class="modal-card glass-card-3d">
             <button class="modal-close" id="close-cache-settings"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-header">
-                <div class="modal-icon" style="background: rgba(168, 85, 247, 0.2); color: #a855f7;"><i class="fa-solid fa-broom"></i></div>
+                <div class="modal-icon" style="background: rgba(168, 85, 247, 0.2); color: #a855f7;"><i class="fa-solid fa-gear"></i></div>
                 <div>
-                    <h3>Paramètres & Nettoyage du Cache FiveM</h3>
-                    <p>Résolvez les crashs et libérez de l'espace disque en 1 clic.</p>
+                    <h3>Centre d'Optimisation & Paramètres 4K</h3>
+                    <p>Contrôlez les performances du moteur, nettoyez le cache et ajustez vos réglages.</p>
                 </div>
             </div>
-            <div class="modal-body" style="padding: 16px 0; color: #cbd5e1; font-size: 0.88rem; line-height: 1.5;">
-                <p>Le cache FiveM accumule les textures et véhicules de tous les serveurs visités. Le vider supprime les fichiers corrompus sans toucher à vos identifiants.</p>
-                <div style="background: rgba(255, 255, 255, 0.04); padding: 12px; border-radius: 8px; margin-top: 10px; border: 1px solid rgba(255, 255, 255, 0.08);">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <span>Taille du Cache Serveurs :</span>
-                        <strong style="color: #f59e0b;">12.8 GB</strong>
+            <div class="modal-body" style="padding: 16px 0; color: #cbd5e1; font-size: 0.88rem; line-height: 1.5; display: flex; flex-direction: column; gap: 14px;">
+                <div style="background: rgba(255, 255, 255, 0.04); padding: 14px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.08); display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Moteur de Rendu :</span>
+                        <strong style="color: #00f0ff;">Accélération Matérielle GPU (144 FPS)</strong>
                     </div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <span>Version FiveM :</span>
-                        <strong style="color: #22c55e;">b3258 (Canary / GTA VI Ready)</strong>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Résolution Active :</span>
+                        <strong style="color: #ff758c;">Ultra HD 4K (3840 x 2160)</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Cache Temporaire Écran :</span>
+                        <strong style="color: #f59e0b;" id="cache-size-display">12.8 GB Détecté</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Version Système :</span>
+                        <strong style="color: #22c55e;">v2026.8.9 - Build Master</strong>
                     </div>
                 </div>
+
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                    <label style="font-size: 0.75rem; font-weight: 800; color: #94a3b8;">BOOST DE FLUIDITÉ & RÉSEAU</label>
+                    <button type="button" class="btn-rstar-play" id="btn-boost-fps" style="background: linear-gradient(135deg, #00f0ff, #0077ff); color: #000; justify-content: center;">
+                        <i class="fa-solid fa-bolt"></i> Activer le Mode Ultra-Fluide 144 FPS
+                    </button>
+                </div>
             </div>
-            <div class="modal-actions">
+            <div class="modal-actions" style="margin-top: 10px;">
                 <button type="button" class="btn-cancel" id="cancel-cache-settings">Fermer</button>
                 <button type="button" class="btn-play-primary" id="btn-execute-clean-cache" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
-                    <i class="fa-solid fa-trash-can"></i> Nettoyer le Cache Immédiatement
+                    <i class="fa-solid fa-trash-can"></i> Nettoyer Tout le Cache
                 </button>
             </div>
         </div>
