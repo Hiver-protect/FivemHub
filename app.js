@@ -1021,17 +1021,17 @@ function initBootSplashScreen() {
     const bootTipText = document.getElementById('boot-tip-text');
 
     let progress = 0;
-    const totalDuration = 18000; // 18 secondes
-    const intervalTime = 180;
+    const totalDuration = 10000; // 10 secondes ultra fluides et optimisées
+    const intervalTime = 100;
     const stepIncrement = 100 / (totalDuration / intervalTime);
 
     const steps = [
-        { p: 15, text: "CHARGEMENT DU MONDE LOS SANTOS...", sub: "Synchronisation des coordonnées et shaders 2026..." },
-        { p: 35, text: "TÉLÉCHARGEMENT DES RESSOURCES...", sub: "Téléchargement: core_scripts.rpf (18.4 MB / 142 MB)" },
-        { p: 55, text: "INDEXATION DES 5,250 SERVEURS...", sub: "Indexation des passerelles CFX.re et anti-cheat..." },
-        { p: 75, text: "CHARGEMENT DES VÉHICULES CUSTOM...", sub: "Compilation des modèles 3D et textures HD (84/110)" },
-        { p: 90, text: "SYNCHRONISATION DES FLUX AUDIO...", sub: "Connexion 10 Radios Rap HD 192kbps (0ms jitter)" },
-        { p: 100, text: "INITIALISATION TERMINÉE !", sub: "Bienvenue sur FiveM Hub Universe • Bon jeu !" }
+        { p: 15, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K 2026..." },
+        { p: 35, text: "TÉLÉCHARGEMENT DES RESSOURCES ROCKSTAR...", sub: "Téléchargement des scripts officiels et véhicules imports" },
+        { p: 55, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
+        { p: 75, text: "COMPILATION DU MOTEUR AUDIO & RADIO...", sub: "Connexion aux 500 Stations Rap HD (0ms jitter)" },
+        { p: 95, text: "FINALISATION DE L'APPLICATION...", sub: "Initialisation terminée • Prêt pour le jeu !" },
+        { p: 100, text: "BIENVENUE SUR FIVEM HUB UNIVERSE !", sub: "Lancement de l'application..." }
     ];
 
     const tips = [
