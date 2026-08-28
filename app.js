@@ -1022,24 +1022,27 @@ function initBootSplashScreen() {
 
     if (!splash) return;
 
-    // Réglage du volume de la vidéo YouTube du Loading Screen à 0 (muet par défaut pour éviter le son trop fort)
-    const setMuteVolume = () => {
+    // Réglage du volume de la vidéo YouTube du Loading Screen à 15% (son clair, agréable et immersif, sans être trop fort)
+    const setPerfectVolume = () => {
         if (bootIframe && bootIframe.contentWindow) {
-            bootIframe.contentWindow.postMessage('{"event":"command","func":"mute","args":[]}', '*');
+            bootIframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":[]}', '*');
+            bootIframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[15]}', '*');
         }
     };
-    setTimeout(setMuteVolume, 200);
-    setTimeout(setMuteVolume, 1000);
+    setTimeout(setPerfectVolume, 300);
+    setTimeout(setPerfectVolume, 1000);
+    setTimeout(setPerfectVolume, 2500);
 
     let progress = 0;
-    const totalDuration = 12000; // 12 secondes douces et immersives
+    const totalDuration = 45000; // 45 secondes complètes pour bien profiter de la vidéo et du trailer
     const intervalTime = 100;
 
     const steps = [
-        { p: 20, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY..." },
-        { p: 45, text: "TÉLÉCHARGEMENT DES RESSOURCES ROCKSTAR..." },
-        { p: 70, text: "INITIALISATION DU PORTAIL VIDÉOS 4K..." },
-        { p: 90, text: "SYNCHRONISATION DU FLUX D'ANNONCES EN DIRECT..." },
+        { p: 15, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY..." },
+        { p: 35, text: "TÉLÉCHARGEMENT DES SHADERS & RESSOURCES ROCKSTAR 4K..." },
+        { p: 60, text: "INITIALISATION DU MOTEUR RAGE 9 & PHYSIQUE..." },
+        { p: 80, text: "SYNCHRONISATION DU PORTAIL VIDÉOS & ANNONCES..." },
+        { p: 95, text: "FINALISATION DE L'APPLICATION..." },
         { p: 100, text: "BIENVENUE SUR LE PORTAIL ROCKSTAR GAMES !" }
     ];
 
