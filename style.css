@@ -3768,7 +3768,8 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     border-radius: 6px;
     box-shadow: 0 0 20px rgba(255, 42, 109, 0.9);
     position: relative;
-    transition: width 0.2s ease-out;
+    transition: none !important; /* Contrôlé à 144 FPS natif par requestAnimationFrame */
+    will-change: width;
 }
 
 /* Bonhomme Silhouette en Course Animé */

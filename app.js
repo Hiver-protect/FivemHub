@@ -1033,9 +1033,9 @@ function initBootSplashScreen() {
     setTimeout(setPerfectVolume, 1000);
     setTimeout(setPerfectVolume, 2500);
 
-    let progress = 0;
-    const totalDuration = 45000; // 45 secondes complètes pour bien profiter de la vidéo et du trailer
-    const intervalTime = 100;
+    let startTime = null;
+    const totalDuration = 25000; // 25 secondes (parfaitement calibré : ni trop long, ni trop court)
+    let animationFrameId = null;
 
     const steps = [
         { p: 15, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY..." },
@@ -1046,21 +1046,28 @@ function initBootSplashScreen() {
         { p: 100, text: "BIENVENUE SUR LE PORTAIL ROCKSTAR GAMES !" }
     ];
 
-    const progressTimer = setInterval(() => {
-        progress += (100 / (totalDuration / intervalTime));
+    function updateProgressFrame(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        let progress = (elapsed / totalDuration) * 100;
         if (progress > 100) progress = 100;
 
         if (cornerFill) cornerFill.style.width = `${progress}%`;
         if (cornerPercent) cornerPercent.textContent = `%${Math.floor(progress)}`;
 
         const curStep = steps.find(s => progress <= s.p) || steps[steps.length - 1];
-        if (cornerStatus) cornerStatus.textContent = curStep.text;
+        if (cornerStatus && cornerStatus.textContent !== curStep.text) {
+            cornerStatus.textContent = curStep.text;
+        }
 
-        if (progress >= 100) {
-            clearInterval(progressTimer);
+        if (progress < 100) {
+            animationFrameId = requestAnimationFrame(updateProgressFrame);
+        } else {
             finishBootSplash();
         }
-    }, intervalTime);
+    }
+
+    animationFrameId = requestAnimationFrame(updateProgressFrame);
 
     function finishBootSplash() {
         if (bootIframe) {
