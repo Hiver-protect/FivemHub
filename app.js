@@ -1356,17 +1356,7 @@ function initUI() {
     }
 
     // Liaison Modale Cache & Settings
-    const cacheBtn = document.getElementById('btn-cache-cleaner');
-    if (cacheBtn) {
-        cacheBtn.addEventListener('click', () => {
-            sfx.playClick();
-            openModal('modal-cache-settings');
-        });
-    }
-    const closeCacheBtn = document.getElementById('close-cache-settings');
-    if (closeCacheBtn) closeCacheBtn.addEventListener('click', () => closeModal('modal-cache-settings'));
-    const cancelCacheBtn = document.getElementById('cancel-cache-settings');
-    if (cancelCacheBtn) cancelCacheBtn.addEventListener('click', () => closeModal('modal-cache-settings'));
+    setupModal('modal-cache-settings', 'btn-cache-cleaner', 'close-cache-settings', 'cancel-cache-settings');
 
     const execCleanCacheBtn = document.getElementById('btn-execute-clean-cache');
     if (execCleanCacheBtn) {
