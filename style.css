@@ -2379,7 +2379,7 @@ body {
     animation: pulse 1.5s infinite;
 }
 
-.gta6-build-tag {
+.gta6-build-tag, .gta6-fps-tag, .gta6-vram-tag {
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -2388,8 +2388,11 @@ body {
     font-family: var(--font-sub);
     font-size: 0.75rem;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.8);
     letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 /* Boîte de Conseils RP Dynamiques */

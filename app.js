@@ -1031,12 +1031,15 @@ function initBootSplashScreen() {
     const cornerSubstatus = document.getElementById('corner-substatus-text');
     const bootTipText = document.getElementById('boot-tip-text');
 
-    // Réglage du volume de la vidéo YouTube du Loading Screen à 15% (très doux)
-    setTimeout(() => {
+    // Réglage du volume de la vidéo YouTube du Loading Screen à 5% (très doux, ambiance subtile)
+    const setSoftVolume = () => {
         if (bootIframe && bootIframe.contentWindow) {
-            bootIframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[15]}', '*');
+            bootIframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[5]}', '*');
         }
-    }, 1500);
+    };
+    setTimeout(setSoftVolume, 500);
+    setTimeout(setSoftVolume, 1500);
+    setTimeout(setSoftVolume, 3000);
 
     let progress = 0;
     const totalDuration = 60000; // 60 secondes (1 minute complète)
