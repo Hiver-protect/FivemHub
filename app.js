@@ -60,9 +60,19 @@ function generateServerVisuals(name, category, index) {
 // 2. GÉNÉRATEUR DE 5,250 SERVEURS FIVEM AVEC IDENTITÉ UNIQUE
 // ============================================================================
 function generateUniqueFiveMServers(count = 5250) {
-    const frCities = ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Montpellier', 'Strasbourg', 'Bordeaux', 'Lille', 'Rennes', 'Toulon', 'Grenoble', 'Dijon', 'Angers', 'Nîmes', 'Brest', 'Tours', 'Amiens', 'Perpignan', 'Clermont-Ferrand'];
-    const frThemes = ['Flashback FreeAccess', 'GLife V2 Serious', 'District City', 'La Cité V', 'Nativ RP France', 'Horizon Roleplay', 'Eclipse City RP', 'Dynasty France', 'Nova Life RP', 'Cosmos RP', 'Avenir Roleplay', 'NightLife Paris', 'Underground RP', 'Genesis V', 'Cartel & Mafia RP', 'Guerre des Gangs RP', 'Bavière Roleplay', 'Riviera Roleplay', 'Olympus RP', 'French State RP', 'Liberté City', 'Los Santos Stories', 'Apex Roleplay FR'];
-    const intlThemes = ['NoPixel 4.0 WL', 'EchoRP 3.0', 'Prodigy RP 2.0', 'Onx Roleplay', 'TwitchRP USA', 'NewDay Roleplay', 'BlueBird Australia', 'Subversion RP', 'Badlands RP', 'California State Roleplay', 'Miami Vice RP', 'Liberty City V', 'Texas Outlaws RP', 'London Calling UK'];
+    const frCities = ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Montpellier', 'Bordeaux', 'Lille', 'Bruxelles', 'Genève', 'Strasbourg'];
+    const caCities = ['Montréal', 'Québec', 'Toronto', 'Vancouver', 'Ottawa', 'Laval', 'Gatineau', 'Sherbrooke', 'Calgary'];
+    const usCities = ['Los Angeles', 'New York', 'Miami', 'Chicago', 'Houston', 'Atlanta', 'Dallas', 'London', 'Manchester'];
+    const deCities = ['Berlin', 'München', 'Frankfurt', 'Hamburg', 'Köln', 'Stuttgart', 'Düsseldorf', 'Dortmund'];
+    const esCities = ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Buenos Aires', 'Bogotá', 'Mexico City', 'Santiago'];
+    const brCities = ['São Paulo', 'Rio de Janeiro', 'Brasília', 'Salvador', 'Fortaleza', 'Belo Horizonte', 'Curitiba'];
+
+    const frThemes = ['Flashback FreeAccess', 'GLife V2 Serious', 'District City', 'La Cité V', 'Nativ RP France', 'Horizon Roleplay', 'Eclipse City RP', 'Dynasty France', 'Nova Life RP', 'Cosmos RP', 'Avenir Roleplay', 'NightLife Paris', 'Bavière Roleplay', 'French State RP', 'Liberté City'];
+    const caThemes = ['Québec Nation RP', 'Montréal Underground RP', 'Nordic Roleplay QC', 'Laurentides RP', 'St-Laurent Roleplay', 'Maple Leaf Life QC', 'Caribou City RP', 'Gaspésie RP V2', 'Belle Province RP', 'Québec Serious RP'];
+    const usThemes = ['NoPixel 4.0 WL', 'EchoRP 3.0', 'Prodigy RP 2.0', 'Onx Roleplay', 'TwitchRP USA', 'NewDay Roleplay', 'California State RP', 'Miami Vice RP', 'Liberty City V', 'Texas Outlaws RP', 'London Calling UK', 'British Empire RP'];
+    const deThemes = ['Immortal Roleplay DE', 'GrandRP Deutschland', 'Berlin City Life V', 'Bavaria State RP', 'Hamburg Hafen RP', 'Frankfurt Undercover', 'GZRP Serious RP', 'Kaiserslautern RP'];
+    const esThemes = ['InfamesRP España', 'Marbella Vice V', 'Despistaos RP', 'La Cúpula RP', 'Madrid Capital RP', 'Nación Roleplay ES', 'Tijuana Stories RP', 'LATAM Underground'];
+    const brThemes = ['Complexo Roleplay BR', 'Cidade Alta V2', 'Favela da Rocinha RP', 'Hype RP Brasil', 'Bahia Stories RP', 'São Paulo Life RP', 'Rio Night RP', 'Brasil Realista 2026'];
     const pvpThemes = ['RedZone Arena 1v1', 'FFA GunGame FiveM', 'GangWar FFA 144FPS', 'PVP Clan Arena EU', 'Apex Fast Paced Deathmatch', 'Warzone FFA FiveM', 'RustV Survival PVP', 'Vortex 1v1 Ranked'];
     const driftThemes = ['Drift Paradise Touge', 'Ebisu Drift Park', 'Tokyo Drift Nights', 'JDM Street Culture', 'Car Meet & Cruise Los Santos', 'Stance Nation FiveM', 'Touge Legends Drift', 'Akina Mountain Drift'];
 
@@ -75,7 +85,7 @@ function generateUniqueFiveMServers(count = 5250) {
         { 
             name: 'Flashback FreeAccess RP [FR] - Saison V', 
             category: 'rp-fr', 
-            categoryLabel: 'Roleplay France 🇫🇷', 
+            categoryLabel: 'France & Belge 🇫🇷', 
             connectUrl: 'cfx.re/join/5k99p8', 
             region: 'France / Paris', 
             isFeatured: true, 
@@ -86,9 +96,22 @@ function generateUniqueFiveMServers(count = 5250) {
             logoUrl: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=120&auto=format&fit=crop&q=80'
         },
         { 
+            name: 'Québec Nation RP [Canada QC] - WL 2026', 
+            category: 'rp-ca', 
+            categoryLabel: 'Canada & Québec 🇨🇦', 
+            connectUrl: 'cfx.re/join/quebecrp', 
+            region: 'Canada / Montréal', 
+            isFeatured: false, 
+            players: 512, 
+            maxPlayers: 512, 
+            ping: 32,
+            bannerUrl: 'https://images.unsplash.com/photo-1517935703635-2717090c2210?w=800&auto=format&fit=crop&q=80',
+            logoUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=120&auto=format&fit=crop&q=80'
+        },
+        { 
             name: 'NoPixel 4.0 WL (Official US / EN)', 
-            category: 'rp-intl', 
-            categoryLabel: 'RP International 🌐', 
+            category: 'rp-us', 
+            categoryLabel: 'USA & UK 🇺🇸 🇬🇧', 
             connectUrl: 'cfx.re/join/nopixel4', 
             region: 'USA / Los Angeles', 
             isFeatured: false, 
@@ -99,9 +122,48 @@ function generateUniqueFiveMServers(count = 5250) {
             logoUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=120&auto=format&fit=crop&q=80'
         },
         { 
+            name: 'Complexo Roleplay Brasil 2026 [Oficial]', 
+            category: 'rp-br', 
+            categoryLabel: 'Brésil & Complexo 🇧🇷', 
+            connectUrl: 'cfx.re/join/complexobr', 
+            region: 'Brasil / São Paulo', 
+            isFeatured: false, 
+            players: 1024, 
+            maxPlayers: 1024, 
+            ping: 85,
+            bannerUrl: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&auto=format&fit=crop&q=80',
+            logoUrl: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=120&auto=format&fit=crop&q=80'
+        },
+        { 
+            name: 'Immortal Roleplay Deutschland V3', 
+            category: 'rp-de', 
+            categoryLabel: 'Allemagne 🇩🇪', 
+            connectUrl: 'cfx.re/join/immortalde', 
+            region: 'Deutschland / Berlin', 
+            isFeatured: false, 
+            players: 400, 
+            maxPlayers: 400, 
+            ping: 24,
+            bannerUrl: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=800&auto=format&fit=crop&q=80',
+            logoUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&auto=format&fit=crop&q=80'
+        },
+        { 
+            name: 'InfamesRP España & LATAM Oficial', 
+            category: 'rp-es', 
+            categoryLabel: 'Espagne & LATAM 🇪🇸', 
+            connectUrl: 'cfx.re/join/infameses', 
+            region: 'España / Madrid', 
+            isFeatured: false, 
+            players: 600, 
+            maxPlayers: 600, 
+            ping: 29,
+            bannerUrl: 'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&auto=format&fit=crop&q=80',
+            logoUrl: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=120&auto=format&fit=crop&q=80'
+        },
+        { 
             name: 'GLife Serious Roleplay France V2', 
             category: 'rp-fr', 
-            categoryLabel: 'Roleplay France 🇫🇷', 
+            categoryLabel: 'France & Belge 🇫🇷', 
             connectUrl: 'cfx.re/join/glifev2', 
             region: 'France / Lyon', 
             isFeatured: false, 
@@ -114,7 +176,7 @@ function generateUniqueFiveMServers(count = 5250) {
         { 
             name: 'RedZone Arena 1v1 EU [144 FPS+]', 
             category: 'pvp', 
-            categoryLabel: 'PVP & RedZone', 
+            categoryLabel: 'PVP & RedZone 🎯', 
             connectUrl: 'cfx.re/join/redzone1', 
             region: 'Europe / Francfort', 
             isFeatured: false, 
@@ -127,7 +189,7 @@ function generateUniqueFiveMServers(count = 5250) {
         { 
             name: 'Tokyo Nights & Touge Drift Paradise', 
             category: 'drift', 
-            categoryLabel: 'Drift & Courses', 
+            categoryLabel: 'Drift & Courses 🏎️', 
             connectUrl: 'cfx.re/join/tokyodrift', 
             region: 'Japan / Mount Akina', 
             isFeatured: false, 
@@ -136,32 +198,6 @@ function generateUniqueFiveMServers(count = 5250) {
             ping: 28,
             bannerUrl: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&auto=format&fit=crop&q=80',
             logoUrl: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=120&auto=format&fit=crop&q=80'
-        },
-        { 
-            name: 'District City V [FR FreeAccess]', 
-            category: 'rp-fr', 
-            categoryLabel: 'Roleplay France 🇫🇷', 
-            connectUrl: 'cfx.re/join/district', 
-            region: 'France / Marseille', 
-            isFeatured: false, 
-            players: 450, 
-            maxPlayers: 500, 
-            ping: 19,
-            bannerUrl: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=800&auto=format&fit=crop&q=80',
-            logoUrl: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=120&auto=format&fit=crop&q=80'
-        },
-        { 
-            name: 'Echo RP 3.0 (Official US Whitelist)', 
-            category: 'rp-intl', 
-            categoryLabel: 'RP International 🌐', 
-            connectUrl: 'cfx.re/join/echorp', 
-            region: 'USA / New York', 
-            isFeatured: false, 
-            players: 256, 
-            maxPlayers: 256, 
-            ping: 68,
-            bannerUrl: 'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&auto=format&fit=crop&q=80',
-            logoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80'
         }
     ];
 
@@ -192,23 +228,43 @@ function generateUniqueFiveMServers(count = 5250) {
         const rand = Math.random();
         let cat = 'rp-fr';
         let baseName = frThemes[Math.floor(Math.random() * frThemes.length)];
-        let catLabel = 'Roleplay France 🇫🇷';
+        let catLabel = 'France & Belge 🇫🇷';
         let region = 'France / ' + frCities[Math.floor(Math.random() * frCities.length)];
 
-        if (rand > 0.45 && rand <= 0.72) {
-            cat = 'rp-intl';
-            baseName = intlThemes[Math.floor(Math.random() * intlThemes.length)];
-            catLabel = 'RP International 🌐';
-            region = ['USA / Los Angeles', 'USA / New York', 'UK / London', 'Canada / Montreal'][Math.floor(Math.random() * 4)];
-        } else if (rand > 0.72 && rand <= 0.86) {
+        if (rand > 0.28 && rand <= 0.44) {
+            cat = 'rp-ca';
+            baseName = caThemes[Math.floor(Math.random() * caThemes.length)];
+            catLabel = 'Canada & Québec 🇨🇦';
+            region = 'Canada / ' + caCities[Math.floor(Math.random() * caCities.length)];
+        } else if (rand > 0.44 && rand <= 0.60) {
+            cat = 'rp-us';
+            baseName = usThemes[Math.floor(Math.random() * usThemes.length)];
+            catLabel = 'USA & UK 🇺🇸 🇬🇧';
+            region = 'USA / ' + usCities[Math.floor(Math.random() * usCities.length)];
+        } else if (rand > 0.60 && rand <= 0.72) {
+            cat = 'rp-de';
+            baseName = deThemes[Math.floor(Math.random() * deThemes.length)];
+            catLabel = 'Allemagne 🇩🇪';
+            region = 'Deutschland / ' + deCities[Math.floor(Math.random() * deCities.length)];
+        } else if (rand > 0.72 && rand <= 0.82) {
+            cat = 'rp-es';
+            baseName = esThemes[Math.floor(Math.random() * esThemes.length)];
+            catLabel = 'Espagne & LATAM 🇪🇸';
+            region = 'España / ' + esCities[Math.floor(Math.random() * esCities.length)];
+        } else if (rand > 0.82 && rand <= 0.90) {
+            cat = 'rp-br';
+            baseName = brThemes[Math.floor(Math.random() * brThemes.length)];
+            catLabel = 'Brésil & Complexo 🇧🇷';
+            region = 'Brasil / ' + brCities[Math.floor(Math.random() * brCities.length)];
+        } else if (rand > 0.90 && rand <= 0.96) {
             cat = 'pvp';
             baseName = pvpThemes[Math.floor(Math.random() * pvpThemes.length)];
-            catLabel = 'PVP & RedZone';
+            catLabel = 'PVP & RedZone 🎯';
             region = 'Europe / Francfort';
-        } else if (rand > 0.86) {
+        } else if (rand > 0.96) {
             cat = 'drift';
             baseName = driftThemes[Math.floor(Math.random() * driftThemes.length)];
-            catLabel = 'Drift & Courses';
+            catLabel = 'Drift & Courses 🏎️';
             region = 'Japan / Tokyo Touge';
         }
 
@@ -1198,8 +1254,12 @@ function updateCategoryTitle() {
         case 'recent': titleEl.textContent = 'Historique des Serveurs Récents'; break;
         case 'news-fivem': titleEl.textContent = '📢 Mises à Jour & Annonces Officielles FiveM (CFX.re / Rockstar)'; break;
         case 'news-rockstar': titleEl.textContent = '⭐ Rockstar Games Hub • Vidéos, GTA VI & Annonces Officielles'; break;
-        case 'rp-fr': titleEl.textContent = 'Serveurs Roleplay Francophones 🇫🇷'; break;
-        case 'rp-intl': titleEl.textContent = 'Serveurs Roleplay Internationaux 🌐'; break;
+        case 'rp-fr': titleEl.textContent = 'Serveurs France & Belge 🇫🇷'; break;
+        case 'rp-ca': titleEl.textContent = 'Serveurs Canada & Québec 🇨🇦'; break;
+        case 'rp-us': titleEl.textContent = 'Serveurs USA & UK 🇺🇸 🇬🇧'; break;
+        case 'rp-de': titleEl.textContent = 'Serveurs Allemagne (Deutschland) 🇩🇪'; break;
+        case 'rp-es': titleEl.textContent = 'Serveurs Espagne & LATAM 🇪🇸'; break;
+        case 'rp-br': titleEl.textContent = 'Serveurs Brésil & Complexo 🇧🇷'; break;
         case 'pvp': titleEl.textContent = 'Serveurs PVP, Arenas & RedZones 🎯'; break;
         case 'drift': titleEl.textContent = 'Serveurs Drift, Courses & Tuning 🏎️'; break;
         case 'custom': titleEl.textContent = 'Vos Serveurs Personnalisés 📁'; break;
@@ -1259,14 +1319,22 @@ function updateAll() {
 
 function updateBadgeCounts() {
     const all = store.servers;
-    document.getElementById('count-all').textContent = all.length.toLocaleString();
-    document.getElementById('count-favorites').textContent = store.favorites.length;
-    document.getElementById('count-recent').textContent = store.recent.length;
-    document.getElementById('count-rp-fr').textContent = all.filter(s => s.category === 'rp-fr').length;
-    document.getElementById('count-rp-intl').textContent = all.filter(s => s.category === 'rp-intl').length;
-    document.getElementById('count-pvp').textContent = all.filter(s => s.category === 'pvp').length;
-    document.getElementById('count-drift').textContent = all.filter(s => s.category === 'drift').length;
-    document.getElementById('count-custom').textContent = store.customServers.length;
+    const safeSet = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+    };
+    safeSet('count-all', all.length.toLocaleString());
+    safeSet('count-favorites', store.favorites.length);
+    safeSet('count-recent', store.recent.length);
+    safeSet('count-rp-fr', all.filter(s => s.category === 'rp-fr').length);
+    safeSet('count-rp-ca', all.filter(s => s.category === 'rp-ca').length);
+    safeSet('count-rp-us', all.filter(s => s.category === 'rp-us').length);
+    safeSet('count-rp-de', all.filter(s => s.category === 'rp-de').length);
+    safeSet('count-rp-es', all.filter(s => s.category === 'rp-es').length);
+    safeSet('count-rp-br', all.filter(s => s.category === 'rp-br').length);
+    safeSet('count-pvp', all.filter(s => s.category === 'pvp').length);
+    safeSet('count-drift', all.filter(s => s.category === 'drift').length);
+    safeSet('count-custom', store.customServers.length);
 }
 
 function renderServers(append = false) {
