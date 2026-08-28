@@ -1319,6 +1319,16 @@ function initUI() {
     // 1. Bouton Synchronisation des Flux en Temps Réel
     const syncFeedBtn = document.getElementById('btn-sync-live-feed');
     const syncStatusText = document.getElementById('live-feed-status-text');
+    const newsContainer = document.getElementById('live-news-scroll-container');
+
+    const liveNewsFeedItems = [
+        { source: "ROCKSTAR GAMES • EN DIRECT", tag: "text-pink", title: "⭐ Grand Theft Auto VI : Nouvelle analyse des PNJ et de l'IA Leonida", desc: "Les systèmes de vie nocturne et les environnements urbains de Vice City bénéficient de la physique RAGE 9." },
+        { source: "CFX.RE / FIVEM • IL Y A 2 MIN", tag: "text-green", title: "🚀 FiveM Canary b3258 : Shaders 144 FPS actifs", desc: "Mise à jour globale pour le streaming des textures 8K et réduction de la latence réseau." },
+        { source: "ROCKSTAR NEWSWIRE • IL Y A 8 MIN", tag: "text-amber", title: "🌴 GTA Online : Événement spécial braquages et bonus VIP", desc: "Triple GTA$ et RP sur tous les contrats de sécurité et remises exceptionnelles." },
+        { source: "ANTI-CHEAT SÉCURITÉ • IL Y A 15 MIN", tag: "text-cyan", title: "🛡️ Détection active et protection serveurs FiveM", desc: "Nouvelle signature mémoire déployée sur l'ensemble du réseau mondial." },
+        { source: "REDM & RDR2 • IL Y A 30 MIN", tag: "text-pink", title: "🤠 RedM : Passerelle multijoueur améliorée", desc: "Nouveaux outils pour les créateurs de serveurs rôleplay western." }
+    ];
+
     if (syncFeedBtn) {
         syncFeedBtn.addEventListener('click', () => {
             sfx.playClick();
@@ -1329,10 +1339,22 @@ function initUI() {
             setTimeout(() => {
                 if (icon) icon.classList.remove('rotating');
                 const now = new Date();
-                const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+                const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
                 if (syncStatusText) syncStatusText.textContent = `À JOUR (${timeStr})`;
-                showToast("✨ Flux Rockstar Games & Newswire synchronisés avec succès !", "success");
-            }, 1200);
+
+                // Rafraîchissement des annonces en temps réel
+                if (newsContainer) {
+                    newsContainer.innerHTML = liveNewsFeedItems.map(item => `
+                        <div class="news-entry entry-3d">
+                            <span class="news-source ${item.tag}"><i class="fa-solid fa-star"></i> ${item.source}</span>
+                            <h4>${item.title}</h4>
+                            <p>${item.desc}</p>
+                        </div>
+                    `).join('');
+                }
+
+                showToast("✨ Flux Rockstar Games, Clips GTA VI & Newswire synchronisés en direct !", "success");
+            }, 900);
         });
     }
 
