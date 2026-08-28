@@ -491,6 +491,7 @@ class LauncherStore {
         this.favorites = this.loadFavorites();
         this.recent = this.loadRecent();
         this.activeCategory = 'all';
+        this.activeTagFilter = 'all';
         this.searchQuery = '';
         this.sortBy = 'players';
         this.pageSize = 48;
@@ -585,6 +586,16 @@ class LauncherStore {
             list = list.filter(s => s.isCustom);
         } else if (this.activeCategory !== 'all') {
             list = list.filter(s => s.category === this.activeCategory);
+        }
+
+        // Filtre rapide par Tag (FreeAccess, Whitelist, Imports HD, Gangs)
+        if (this.activeTagFilter && this.activeTagFilter !== 'all') {
+            const tagTarget = this.activeTagFilter.toLowerCase();
+            list = list.filter(s => {
+                const inTags = s.tags && s.tags.some(t => t.toLowerCase().includes(tagTarget));
+                const inName = s.name && s.name.toLowerCase().includes(tagTarget);
+                return inTags || inName;
+            });
         }
 
         if (this.searchQuery.trim() !== '') {
@@ -1153,6 +1164,7 @@ function initRealtimeEngine() {
 }
 
 function initUI() {
+    // Écouteurs de navigation principale
     document.querySelectorAll('.nav-item').forEach(btn => {
         btn.addEventListener('click', () => {
             sfx.playClick();
@@ -1161,6 +1173,18 @@ function initUI() {
             store.activeCategory = btn.dataset.category;
             store.currentPage = 1;
             updateCategoryTitle();
+            renderServers();
+        });
+    });
+
+    // Écouteurs de filtres rapides par tags (FreeAccess, Whitelist, Imports HD, Gangs)
+    document.querySelectorAll('.filter-pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            sfx.playClick();
+            document.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            store.activeTagFilter = btn.dataset.tag;
+            store.currentPage = 1;
             renderServers();
         });
     });
