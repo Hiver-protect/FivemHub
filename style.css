@@ -3551,126 +3551,39 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
 }
 
 /* ==========================================================================
-   STYLE DU LOADING SCREEN (LOGO PARFAITEMENT CENTRÉ & BARRE EN BAS)
+   STYLE DU LOADING SCREEN (OPTIMISATION GPU 144 FPS / ZÉRO LAG)
    ========================================================================== */
 .boot-dark-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(10, 12, 16, 0.45) 80%, rgba(6, 8, 12, 0.85) 100%);
+    background: rgba(10, 12, 16, 0.45);
     pointer-events: none;
 }
 
 .gta6-scanline-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    background-size: 100% 4px, 6px 100%;
-    pointer-events: none;
-    opacity: 0.6;
+    display: none; /* Désactivé pour gain massif de performances GPU */
 }
 
-/* HUD Supérieur GTA VI & Leonida State */
-.gta6-top-info-hud {
-    position: absolute;
-    top: 30px;
-    left: 40px;
-    z-index: 150;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    animation: slideInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideInDown {
-    0% { opacity: 0; transform: translateY(-30px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-.gta6-watermark-tag {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(10, 12, 16, 0.75);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 42, 109, 0.4);
-    padding: 7px 16px;
-    border-radius: var(--radius-full);
-    font-family: var(--font-heading);
-    font-size: 0.78rem;
-    font-weight: 800;
-    color: #ff758c;
-    letter-spacing: 1.5px;
-    box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
-}
-
-.gta6-dot {
-    width: 8px;
-    height: 8px;
-    background: #ff2a6d;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #ff2a6d;
-    animation: pulse 1.5s infinite;
-}
-
-.gta6-build-tag, .gta6-fps-tag, .gta6-vram-tag {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 7px 14px;
-    border-radius: var(--radius-full);
-    font-family: var(--font-sub);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.8);
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* Boîte de Conseils RP Dynamiques */
-.gta6-tip-box {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(10, 12, 16, 0.85);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 8px 18px;
-    border-radius: var(--radius-md);
-    margin-bottom: 12px;
-    font-family: var(--font-sub);
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-}
-
-/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT CENTRÉ AVEC ANIMATION DE PULSATION NÉON 3D */
+/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT CENTRÉ & ACCÉLÉRÉ MATÉRIELLEMENT (GPU 144 FPS) */
 .gta6-hub-logo-wrap {
     position: absolute;
     top: 45%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate3d(-50%, -50%, 0);
     z-index: 110;
-    width: 380px;
+    width: 360px;
     max-width: 80vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: hubLogoCinematic 4s infinite ease-in-out;
+    will-change: transform;
+    animation: hubLogoGpuSmooth 3s infinite alternate ease-in-out;
 }
 
-@keyframes hubLogoCinematic {
-    0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(236, 72, 153, 0.6)) drop-shadow(0 0 60px rgba(255, 152, 0, 0.3));
-    }
-    50% {
-        transform: translate(-50%, -52%) scale(1.05);
-        filter: drop-shadow(0 15px 45px rgba(0, 0, 0, 1)) drop-shadow(0 0 55px rgba(0, 240, 255, 0.8)) drop-shadow(0 0 85px rgba(236, 72, 153, 0.7));
-    }
+@keyframes hubLogoGpuSmooth {
+    0% { transform: translate3d(-50%, -50%, 0) scale(1); }
+    100% { transform: translate3d(-50%, -52%, 0) scale(1.03); }
 }
 
 .gta6-hub-img {
@@ -3678,12 +3591,7 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     height: auto;
     display: block;
     object-fit: contain;
-    animation: logoGlowBreath 3s infinite alternate ease-in-out;
-}
-
-@keyframes logoGlowBreath {
-    0% { filter: brightness(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); }
-    100% { filter: brightness(1.15) drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)); }
+    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.85));
 }
 
 /* Bouton Discret pour Passer l'Intro */
