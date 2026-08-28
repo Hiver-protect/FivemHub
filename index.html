@@ -31,13 +31,23 @@
     <div class="app-boot-splash" id="app-boot-splash">
         <div class="boot-video-container">
             <iframe id="boot-youtube-iframe" class="boot-youtube-bg" 
-                src="https://www.youtube.com/embed/QdBZY2fkU-0?autoplay=1&mute=0&controls=0&disablekb=1&fs=0&loop=1&playlist=QdBZY2fkU-0&enablejsapi=1&rel=0&showinfo=0&iv_load_policy=3&modestbranding=1" 
+                src="https://www.youtube.com/embed/QdBZY2fkU-0?autoplay=1&mute=0&controls=0&disablekb=1&fs=0&loop=1&playlist=QdBZY2fkU-0&start=14&enablejsapi=1&rel=0&showinfo=0&iv_load_policy=3&modestbranding=1" 
                 title="Grand Theft Auto VI Official Trailer Rockstar Games" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen>
             </iframe>
             <div class="boot-dark-overlay"></div>
+            <div class="gta6-scanline-overlay"></div>
+        </div>
+
+        <!-- Badges d'Immersion GTA VI & Leonida State -->
+        <div class="gta6-top-info-hud">
+            <div class="gta6-watermark-tag">
+                <span class="gta6-dot"></span>
+                <span>LEONIDA STATE • VICE CITY 2026</span>
+            </div>
+            <div class="gta6-build-tag">BUILD 3258 • PRO ENGINE</div>
         </div>
 
         <!-- Logo Officiel Authentique FIVEM HUB LAUNCHER VI (Image Utilisateur Haute Définition) -->
@@ -52,8 +62,12 @@
 
         <!-- Barre de Progression Inférieure avec Silhouette du Bonhomme qui Court -->
         <div class="xrp-bottom-loader">
+            <div class="gta6-tip-box" id="boot-tip-box">
+                <i class="fa-solid fa-lightbulb text-amber"></i>
+                <span id="boot-tip-text">Bienvenue à Vice City. Chargez les ressources et préparez-vous pour l'immersion FiveM.</span>
+            </div>
             <div class="xrp-load-info-row">
-                <span class="xrp-status-text" id="corner-status-text">Sunucuya Giriliyor... (Connexion au monde FiveM...)</span>
+                <span class="xrp-status-text" id="corner-status-text">CHARGEMENT DU MONDE LEONIDA & VICE CITY...</span>
                 <span class="xrp-percent-text" id="corner-percent-text">%0</span>
             </div>
             <div class="xrp-progress-track">
