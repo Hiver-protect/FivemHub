@@ -1021,16 +1021,17 @@ function initBootSplashScreen() {
     const bootTipText = document.getElementById('boot-tip-text');
 
     let progress = 0;
-    const totalDuration = 25000; // 25 secondes complètes pour savourer le trailer et l'intro FiveM
+    const totalDuration = 60000; // 60 secondes (1 minute complète) pour voir tout le trailer et l'intro
     const intervalTime = 100;
     const stepIncrement = 100 / (totalDuration / intervalTime);
 
     const steps = [
-        { p: 15, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K 2026..." },
-        { p: 35, text: "TÉLÉCHARGEMENT DES RESSOURCES ROCKSTAR...", sub: "Téléchargement des scripts officiels et véhicules imports" },
-        { p: 55, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
-        { p: 75, text: "COMPILATION DU MOTEUR AUDIO & RADIO...", sub: "Connexion aux 500 Stations Rap HD (0ms jitter)" },
-        { p: 95, text: "FINALISATION DE L'APPLICATION...", sub: "Initialisation terminée • Prêt pour le jeu !" },
+        { p: 10, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K 2026..." },
+        { p: 25, text: "TÉLÉCHARGEMENT DES RESSOURCES ROCKSTAR...", sub: "Téléchargement des scripts officiels et véhicules imports (35%)" },
+        { p: 45, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
+        { p: 65, text: "CHARGEMENT DES PACKS GRAPHIQUES & TEXTURES...", sub: "Optimisation du rendu volumétrique et lumières néons Vice City" },
+        { p: 85, text: "SYNCHRONISATION DU MOTEUR AUDIO & RADIOS...", sub: "Connexion aux 500 Stations Rap HD (0ms jitter)" },
+        { p: 98, text: "FINALISATION DE L'APPLICATION...", sub: "Initialisation terminée • Prêt pour le jeu !" },
         { p: 100, text: "BIENVENUE SUR FIVEM HUB UNIVERSE !", sub: "Lancement de l'application..." }
     ];
 
@@ -1077,6 +1078,25 @@ function initBootSplashScreen() {
             }, 600);
         }
     }, intervalTime);
+
+    const skipBtn = document.getElementById('skip-splash-btn');
+    if (skipBtn) {
+        skipBtn.addEventListener('click', () => {
+            clearInterval(progressTimer);
+            clearInterval(tipInterval);
+            if (bootIframe) {
+                bootIframe.src = "about:blank";
+                bootIframe.remove();
+            }
+            splash.classList.add('hide');
+            setTimeout(() => {
+                if (splash) splash.remove();
+                if (rapPlayer && !rapPlayer.isPlaying) {
+                    rapPlayer.play();
+                }
+            }, 600);
+        });
+    }
 }
 
 // ============================================================================

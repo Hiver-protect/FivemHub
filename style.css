@@ -2298,6 +2298,38 @@ body {
     object-fit: contain;
 }
 
+/* Bouton Discret pour Passer l'Intro */
+.skip-splash-btn {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+    z-index: 150;
+    background: rgba(10, 12, 16, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sub);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition-fast);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.skip-splash-btn:hover {
+    background: rgba(255, 42, 109, 0.85);
+    border-color: #ff2a6d;
+    box-shadow: 0 0 20px rgba(255, 42, 109, 0.8);
+    transform: translateY(-2px);
+}
+
 /* Barre de Progression Inférieure Pleine Largeur avec Bonhomme qui Court */
 .xrp-bottom-loader {
     position: absolute;
