@@ -1176,6 +1176,14 @@ function initUI() {
             }
             if (titleEl && title) titleEl.textContent = title;
             if (descEl && desc) descEl.textContent = desc;
+
+            // Débloquer et ajuster le son au volume sélectionné
+            setTimeout(() => {
+                updateVideoVolume(currentVolume > 0 ? currentVolume : 15);
+            }, 600);
+            setTimeout(() => {
+                updateVideoVolume(currentVolume > 0 ? currentVolume : 15);
+            }, 1800);
         });
     });
 
@@ -1196,6 +1204,9 @@ function initUI() {
             if (cinemaModal && cinemaIframe) {
                 cinemaIframe.src = `https://www.youtube.com/embed/${activeYtId}?autoplay=1&mute=0&controls=1&enablejsapi=1&rel=0`;
                 cinemaModal.classList.add('active');
+                setTimeout(() => {
+                    updateVideoVolume(currentVolume > 0 ? currentVolume : 15);
+                }, 600);
             }
         });
     }
@@ -1222,7 +1233,7 @@ function initUI() {
     });
 
     // Gestionnaire de Volume Doux et Curseur Interactif
-    let currentVolume = 10; // Volume initial très doux (10%) pour protéger les oreilles
+    let currentVolume = 15; // Volume initial agréable (15%)
     let isMainMuted = false;
     const volSlider = document.getElementById('video-volume-slider');
     const volText = document.getElementById('vol-level-text');
@@ -1280,14 +1291,6 @@ function initUI() {
             }
         });
     }
-
-    // Appliquer le volume doux automatiquement au lancement de chaque vidéo
-    document.querySelectorAll('.video-card-item').forEach(card => {
-        card.addEventListener('click', () => {
-            setTimeout(() => updateVideoVolume(currentVolume), 500);
-            setTimeout(() => updateVideoVolume(currentVolume), 1500);
-        });
-    });
 
     // Filtre des Catégories de Vidéos (GTA VI / GTA V / FiveM / RDR2)
     document.querySelectorAll('.vid-filter-btn').forEach(btn => {
