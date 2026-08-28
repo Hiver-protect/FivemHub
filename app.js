@@ -1070,10 +1070,16 @@ function initBootSplashScreen() {
             splash.classList.add('hide');
             setTimeout(() => {
                 try { splash.remove(); } catch(e) {}
-                // Activer la vidéo de fond du Hub seulement maintenant
+                // Activer la vidéo de fond du Hub avec son doux à 15%
                 const mainIframe = document.getElementById('main-hub-iframe');
-                if (mainIframe && mainIframe.dataset.src) {
-                    mainIframe.src = mainIframe.dataset.src;
+                if (mainIframe) {
+                    mainIframe.src = "https://www.youtube.com/embed/QdBZY2fkU-0?autoplay=1&mute=0&controls=1&loop=1&playlist=QdBZY2fkU-0&enablejsapi=1&rel=0";
+                    setTimeout(() => {
+                        if (typeof updateVideoVolume === 'function') updateVideoVolume(15);
+                    }, 1000);
+                    setTimeout(() => {
+                        if (typeof updateVideoVolume === 'function') updateVideoVolume(15);
+                    }, 2500);
                 }
             }, 300);
         }
