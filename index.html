@@ -90,255 +90,227 @@
     <div class="ambient-glow cyan-glow"></div>
     <div class="ambient-glow purple-glow"></div>
 
-    <div class="app-container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="brand">
-                <div class="brand-vi-logo">
-                    <img src="logo_fivem_hub.png" alt="FiveM Hub Logo" class="mini-brand-img">
-                </div>
-                <div class="brand-text">
-                    <span class="brand-title">FIVEM<span class="highlight">HUB</span></span>
-                    <span class="brand-subtitle">5,200+ LIVE SERVERS</span>
-                </div>
-            </div>
-
-            <nav class="nav-menu">
-                <div class="nav-section-title">NAVIGATION PRINCIPALE</div>
-                <button class="nav-item active" data-category="all" id="nav-all">
-                    <i class="fa-solid fa-fire"></i>
-                    <span>Tous les Serveurs</span>
-                    <span class="nav-badge" id="count-all">5,250</span>
-                </button>
-                <button class="nav-item" data-category="favorites" id="nav-favorites">
-                    <i class="fa-solid fa-star text-amber"></i>
-                    <span>Favoris</span>
-                    <span class="nav-badge star-badge" id="count-favorites">0</span>
-                </button>
-                <button class="nav-item" data-category="recent" id="nav-recent">
-                    <i class="fa-solid fa-clock-rotate-left"></i>
-                    <span>Récents</span>
-                    <span class="nav-badge" id="count-recent">0</span>
-                </button>
-
-                <div class="nav-section-title">ACTUALITÉS & ANNONCES</div>
-                <button class="nav-item" data-category="news-fivem" id="nav-news-fivem">
-                    <i class="fa-solid fa-bullhorn text-cyan"></i>
-                    <span>Mises à Jour FiveM</span>
-                    <span class="nav-badge new-badge">NEW</span>
-                </button>
-                <button class="nav-item" data-category="news-rockstar" id="nav-news-rockstar">
-                    <i class="fa-brands fa-youtube text-red"></i>
-                    <span>Rockstar Games Hub</span>
-                    <span class="nav-badge star-badge">LIVE</span>
-                </button>
-
-                <div class="nav-section-title">CATÉGORIES & PAYS</div>
-                <button class="nav-item" data-category="rp-fr" id="nav-rp-fr">
-                    <i class="fa-solid fa-flag text-cyan"></i>
-                    <span>France & Belge 🇫🇷</span>
-                    <span class="nav-badge" id="count-rp-fr">0</span>
-                </button>
-                <button class="nav-item" data-category="rp-ca" id="nav-rp-ca">
-                    <i class="fa-solid fa-maple-leaf text-red"></i>
-                    <span>Canada & Québec 🇨🇦</span>
-                    <span class="nav-badge" id="count-rp-ca">0</span>
-                </button>
-                <button class="nav-item" data-category="rp-us" id="nav-rp-us">
-                    <i class="fa-solid fa-flag-usa text-purple"></i>
-                    <span>USA & UK 🇺🇸 🇬🇧</span>
-                    <span class="nav-badge" id="count-rp-us">0</span>
-                </button>
-                <button class="nav-item" data-category="rp-de" id="nav-rp-de">
-                    <i class="fa-solid fa-shield-halved text-amber"></i>
-                    <span>Allemagne 🇩🇪</span>
-                    <span class="nav-badge" id="count-rp-de">0</span>
-                </button>
-                <button class="nav-item" data-category="rp-es" id="nav-rp-es">
-                    <i class="fa-solid fa-sun text-yellow"></i>
-                    <span>Espagne & LATAM 🇪🇸</span>
-                    <span class="nav-badge" id="count-rp-es">0</span>
-                </button>
-                <button class="nav-item" data-category="rp-br" id="nav-rp-br">
-                    <i class="fa-solid fa-futbol text-green"></i>
-                    <span>Brésil & Complexo 🇧🇷</span>
-                    <span class="nav-badge" id="count-rp-br">0</span>
-                </button>
-                <button class="nav-item" data-category="pvp" id="nav-pvp">
-                    <i class="fa-solid fa-crosshairs text-red"></i>
-                    <span>PVP & RedZone 🎯</span>
-                    <span class="nav-badge" id="count-pvp">0</span>
-                </button>
-                <button class="nav-item" data-category="drift" id="nav-drift">
-                    <i class="fa-solid fa-car-side text-green"></i>
-                    <span>Drift & Courses 🏎️</span>
-                    <span class="nav-badge" id="count-drift">0</span>
-                </button>
-                <button class="nav-item" data-category="custom" id="nav-custom">
-                    <i class="fa-solid fa-folder-plus"></i>
-                    <span>Mes Serveurs Perso</span>
-                    <span class="nav-badge" id="count-custom">0</span>
-                </button>
-            </nav>
-
-            <div class="sidebar-footer">
-                <button class="quick-connect-btn" id="btn-open-quick-connect">
-                    <i class="fa-solid fa-bolt"></i>
-                    <span>Connexion Directe IP</span>
-                </button>
-                <button class="add-server-btn" id="btn-open-add-server">
-                    <i class="fa-solid fa-plus"></i>
-                    <span>Ajouter un Serveur</span>
-                </button>
-                <div class="fivem-status">
-                    <span class="status-indicator online"></span>
-                    <span class="status-text" id="live-sync-indicator">Synchronisé (5,250 En Ligne)</span>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="main-content">
-            <!-- Top Bar -->
-            <header class="top-header">
-                <div class="search-bar-wrapper">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="search-input" placeholder="Rechercher parmi 5,200+ serveurs (Flashback, NoPixel, Paris, Marseille, RedZone, Drift, IP, CFX)..." autocomplete="off">
-                    <button class="clear-search" id="clear-search-btn" style="display: none;">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-
-                <div class="header-actions">
-                    <button class="btn-refresh-live" id="btn-refresh-servers" title="Actualiser la liste">
-                        <i class="fa-solid fa-rotate" id="refresh-icon"></i>
-                        <span>Actualiser Live</span>
-                    </button>
-                    <button class="sound-toggle-btn" id="sound-toggle-btn" title="Sons d'interface">
-                        <i class="fa-solid fa-volume-high" id="sound-icon"></i>
-                    </button>
-                    <button class="header-tool-btn" id="btn-cache-cleaner" title="Aide au nettoyage du cache FiveM">
-                        <i class="fa-solid fa-broom"></i>
-                        <span>Cache Helper</span>
-                    </button>
-                    <div class="player-profile">
-                        <div class="player-avatar">
-                            <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=100&auto=format&fit=crop&q=80" alt="Avatar">
-                            <span class="player-badge">VIP</span>
-                        </div>
-                        <div class="player-info">
-                            <span class="player-name">FiveM Master</span>
-                            <span class="player-status">Client Prêt</span>
-                        </div>
+    <div class="app-container official-fivem-theme">
+        <!-- Main Layout with FiveM Official Grid and Feed -->
+        <div class="fivem-main-wrapper">
+            <!-- FiveM Official Top Bar Navigation -->
+            <header class="fivem-top-nav">
+                <div class="fivem-brand-links">
+                    <div class="fivem-logo-icon">
+                        <img src="logo_fivem_hub.png" alt="FiveM Logo" class="fivem-vector-logo">
                     </div>
+                    <a href="https://fivem.net" target="_blank" class="nav-tab-link active">FiveM.net <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="https://forum.cfx.re" target="_blank" class="nav-tab-link">Forum <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="https://cfx.re" target="_blank" class="nav-tab-link">Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <a href="https://discord.gg/fivem" target="_blank" class="nav-tab-link">Discord <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+
+                <div class="fivem-top-right-tools">
+                    <div class="live-player-metrics">
+                        <span class="metric-item"><i class="fa-solid fa-users text-dim"></i> 225.0k</span>
+                        <span class="metric-item"><i class="fa-solid fa-arrow-trend-up text-green"></i> 268.9k peak</span>
+                    </div>
+                    <button class="top-icon-btn" id="sound-toggle-btn" title="Audio"><i class="fa-solid fa-volume-high" id="sound-icon"></i></button>
+                    <button class="top-icon-btn" id="btn-cache-cleaner" title="Paramètres & Cache"><i class="fa-solid fa-gear"></i></button>
+                    <button class="top-icon-btn close-btn" title="Fermer"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </header>
 
-            <!-- Featured Banner (Hero Section) -->
-            <section class="featured-hero" id="featured-hero">
-                <div class="hero-banner-bg" id="hero-bg"></div>
-                <div class="hero-overlay"></div>
-                <div class="hero-content">
-                    <div class="hero-tags">
-                        <span class="hero-tag star"><i class="fa-solid fa-crown"></i> SERVEUR VEDETTE #1</span>
-                        <span class="hero-tag category" id="hero-category">ROLEPLAY FR</span>
-                        <span class="hero-tag status online"><i class="fa-solid fa-circle"></i> EN LIGNE (TEMPS RÉEL)</span>
-                    </div>
-                    <h1 class="hero-title" id="hero-title">FLASHBACK RP - SAISON V</h1>
-                    <p class="hero-desc" id="hero-desc">Plongez dans la métropole la plus immersive de FiveM. Économie réaliste, scripts custom exclusifs, métiers uniques et communauté active de plus de 100 000 membres.</p>
-                    
-                    <div class="hero-stats">
-                        <div class="hero-stat-item">
-                            <i class="fa-solid fa-users text-cyan"></i>
-                            <div>
-                                <span class="stat-val" id="hero-players">1024 / 1024</span>
-                                <span class="stat-lbl">Joueurs Connectés</span>
+            <!-- Main Content Grid & Right X.com Feed -->
+            <div class="fivem-body-grid">
+                <!-- Left Main Section -->
+                <div class="fivem-center-view">
+                    <!-- Top 3 Action Tiles -->
+                    <div class="fivem-action-tiles">
+                        <div class="action-tile browse-tile" id="btn-browse-all">
+                            <div class="tile-bg-pattern"></div>
+                            <span class="tile-title text-green-neon">BROWSE SERVERS</span>
+                            <i class="fa-solid fa-play tile-arrow-icon"></i>
+                        </div>
+
+                        <div class="action-tile last-server-tile">
+                            <span class="tile-header-label">LAST CONNECTED SERVER</span>
+                            <div class="last-server-row">
+                                <div class="server-mini-badge" id="last-server-badge">VI</div>
+                                <div class="last-server-info">
+                                    <span class="last-server-name" id="last-srv-name">Flashback Roleplay V</span>
+                                    <span class="last-server-desc">Le début d'une grande aventure à Los Santos !</span>
+                                </div>
+                            </div>
+                            <div class="last-server-bottom">
+                                <div class="last-server-stats">
+                                    <span><i class="fa-solid fa-users"></i> 1024/1024</span>
+                                    <span class="flag-icon">🇫🇷</span>
+                                </div>
+                                <button class="btn-connect-pill" id="btn-connect-last"><i class="fa-solid fa-play"></i> Se connecter</button>
                             </div>
                         </div>
-                        <div class="hero-stat-item">
-                            <i class="fa-solid fa-signal text-green"></i>
-                            <div>
-                                <span class="stat-val text-green" id="hero-ping">18 ms</span>
-                                <span class="stat-lbl">Latence Réseau</span>
+
+                        <div class="action-tiles-column">
+                            <div class="action-subtile" id="btn-open-favs">
+                                <span class="subtile-name">FAVORIS</span>
+                                <i class="fa-regular fa-heart"></i>
                             </div>
-                        </div>
-                        <div class="hero-stat-item">
-                            <i class="fa-solid fa-code-fork text-purple"></i>
-                            <div>
-                                <span class="stat-val" id="hero-cfx">cfx.re/join/5k99p8</span>
-                                <span class="stat-lbl">Connexion Directe</span>
+                            <div class="action-subtile" id="btn-open-history">
+                                <span class="subtile-name">HISTORIQUE</span>
+                                <i class="fa-solid fa-clock-rotate-left"></i>
                             </div>
                         </div>
                     </div>
 
-                    <div class="hero-buttons">
-                        <button class="btn-play-primary" id="hero-play-btn">
-                            <i class="fa-solid fa-play"></i>
-                            <span>JOUER MAINTENANT</span>
-                        </button>
-                        <button class="btn-secondary" id="hero-details-btn">
-                            <i class="fa-solid fa-circle-info"></i>
-                            <span>Détails & Discord</span>
-                        </button>
-                        <button class="btn-fav-icon" id="hero-fav-btn" title="Ajouter aux favoris">
-                            <i class="fa-regular fa-star"></i>
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Servers List Controls -->
-            <section class="servers-section">
-                <div class="section-header">
-                    <div class="section-title-wrap">
-                        <h2 class="section-title" id="current-category-title">Tous les Serveurs FiveM</h2>
-                        <span class="results-counter" id="results-count">5,250 serveurs disponibles</span>
-                    </div>
-
-                    <div class="section-filters">
-                        <div class="quick-tags-filters">
-                            <button class="filter-pill-btn active" data-tag="all">Tous</button>
-                            <button class="filter-pill-btn" data-tag="FreeAccess"><i class="fa-solid fa-unlock"></i> FreeAccess</button>
-                            <button class="filter-pill-btn" data-tag="Whitelist"><i class="fa-solid fa-lock"></i> Whitelist</button>
-                            <button class="filter-pill-btn" data-tag="Imports"><i class="fa-solid fa-car"></i> Imports HD</button>
-                            <button class="filter-pill-btn" data-tag="Gangs"><i class="fa-solid fa-gun"></i> Gangs & Illégal</button>
+                    <!-- Top Servers Header with Country Picker -->
+                    <div class="fivem-section-heading">
+                        <div class="heading-left">
+                            <span class="heading-text">TOP SERVERS</span>
+                            <span class="country-indicator" id="current-country-tag">🇨🇦 🇫🇷 🌐</span>
+                            <i class="fa-solid fa-chevron-up text-amber"></i>
                         </div>
-                        <div class="filter-group">
-                            <label><i class="fa-solid fa-arrow-down-short-wide"></i> Trier par:</label>
-                            <select id="sort-select">
-                                <option value="players">Nombre de Joueurs (Décroissant)</option>
-                                <option value="ping">Meilleur Ping (ms)</option>
-                                <option value="name">Nom (A-Z)</option>
-                                <option value="rating">Mieux Notés</option>
-                            </select>
+                        <!-- Country switch pills -->
+                        <div class="country-switch-tabs">
+                            <button class="cntry-tab active" data-category="all">Tous</button>
+                            <button class="cntry-tab" data-category="rp-ca">Canada 🇨🇦</button>
+                            <button class="cntry-tab" data-category="rp-fr">France 🇫🇷</button>
+                            <button class="cntry-tab" data-category="rp-us">USA & UK 🇺🇸</button>
+                            <button class="cntry-tab" data-category="rp-de">Allemagne 🇩🇪</button>
+                            <button class="cntry-tab" data-category="rp-es">Espagne 🇪🇸</button>
+                            <button class="cntry-tab" data-category="rp-br">Brésil 🇧🇷</button>
+                            <button class="cntry-tab" data-category="pvp">PVP 🎯</button>
                         </div>
                     </div>
+
+                    <!-- Massive Hero Server Card (Like Gotham in Official FiveM) -->
+                    <div class="fivem-hero-card" id="fivem-hero-card">
+                        <div class="hero-watermark-bg" id="hero-watermark-txt">FIVEM</div>
+                        <div class="hero-server-main">
+                            <div class="hero-logo-box" id="hero-square-logo">
+                                <img id="hero-real-img" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=200&auto=format&fit=crop&q=80" alt="Server Logo">
+                            </div>
+                            <div class="hero-server-details">
+                                <h1 class="hero-main-name" id="hero-title">GOTHAM ROLEPLAY</h1>
+                                <p class="hero-main-desc" id="hero-desc">Votre histoire. Votre serveur. Immersion totale avec économie équilibrée et scripts exclusifs.</p>
+                                <div class="hero-player-count">
+                                    <i class="fa-solid fa-users"></i>
+                                    <span id="hero-players">1024/1024</span>
+                                    <span class="peak-text">• 1240 peak (24h)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hero-card-footer">
+                            <div class="hero-connect-actions">
+                                <button class="btn-fivem-connect" id="hero-play-btn">
+                                    <i class="fa-solid fa-play"></i> Se connecter
+                                </button>
+                                <button class="btn-fivem-fav" id="hero-fav-btn">
+                                    <i class="fa-regular fa-heart"></i>
+                                </button>
+                            </div>
+                            <div class="hero-dlc-tags">
+                                <span class="dlc-tag" id="hero-tag-1">DLC: Bottom Dollar Bounties</span>
+                                <span class="dlc-tag" id="hero-tag-2"><i class="fa-solid fa-map"></i> San Andreas</span>
+                                <span class="dlc-tag" id="hero-tag-3"><i class="fa-solid fa-user-shield"></i> RP WL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Server Carousel Badges (Like Official FiveM) -->
+                    <div class="fivem-servers-ribbon" id="servers-ribbon">
+                        <!-- Dynamic Server Pills -->
+                    </div>
+
+                    <!-- Servers Grid / Search Section -->
+                    <div class="fivem-grid-wrapper">
+                        <div class="search-filter-bar">
+                            <div class="search-input-box">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="search-input" placeholder="Rechercher par nom, cfx.re, ville ou IP directe...">
+                            </div>
+                            <div class="quick-tags-filters">
+                                <button class="filter-pill-btn active" data-tag="all">Tous</button>
+                                <button class="filter-pill-btn" data-tag="FreeAccess">FreeAccess</button>
+                                <button class="filter-pill-btn" data-tag="Whitelist">Whitelist</button>
+                                <button class="filter-pill-btn" data-tag="Imports">Imports HD</button>
+                            </div>
+                        </div>
+                        <div class="servers-grid" id="servers-grid">
+                            <!-- Cards Injected Dynamically -->
+                        </div>
+                        <div class="pagination-wrap" id="pagination-wrap">
+                            <button class="btn-load-more" id="btn-load-more">
+                                <i class="fa-solid fa-chevron-down"></i>
+                                <span>Charger plus de serveurs</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Official FiveM Buttons Bar -->
+                    <div class="fivem-bottom-action-bar">
+                        <div class="bottom-left-btns">
+                            <button class="bottom-action-pill" id="btn-open-story">
+                                <span>HISTOIRE</span>
+                                <i class="fa-solid fa-play"></i>
+                            </button>
+                            <button class="bottom-action-pill" id="btn-open-replay">
+                                <span>ÉDITEUR DE REPLAY</span>
+                                <i class="fa-solid fa-rotate"></i>
+                            </button>
+                        </div>
+
+                        <div class="create-server-tile" id="btn-open-add-server">
+                            <div class="create-srv-text">
+                                <span class="create-title">CREATE A SERVER</span>
+                                <span class="create-sub">Find out how to set up your own FiveM server!</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square create-arrow"></i>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Servers Grid -->
-                <div class="servers-grid" id="servers-grid">
-                    <!-- Dynamic server cards will be injected by JavaScript -->
-                </div>
+                <!-- Right X.COM Official Feed Sidebar (Like FiveM Official) -->
+                <aside class="fivem-feed-sidebar">
+                    <!-- Stress Test Announcement Banner -->
+                    <div class="feed-announcement-card">
+                        <div class="announcement-header">
+                            <i class="fa-solid fa-triangle-exclamation text-amber"></i>
+                            <span>FIVEM FOR GTAV ENHANCED: STRESS TEST</span>
+                        </div>
+                        <p class="announcement-desc">Join us on FiveM Hub for the official server live sync test and play on thousands of verified servers with the community.</p>
+                        <a href="https://forum.cfx.re" target="_blank" class="announcement-link">Click for details.</a>
+                    </div>
 
-                <!-- Pagination / Load More -->
-                <div class="pagination-wrap" id="pagination-wrap">
-                    <button class="btn-load-more" id="btn-load-more">
-                        <i class="fa-solid fa-chevron-down"></i>
-                        <span>Charger 48 Serveurs Supplémentaires (5,200+ disponibles)</span>
-                    </button>
-                </div>
+                    <!-- X.COM Official Feed -->
+                    <div class="xcom-feed-box">
+                        <div class="xcom-header">
+                            <span>X.COM FEED</span>
+                            <i class="fa-regular fa-circle-question text-dim"></i>
+                        </div>
 
-                <!-- Empty State -->
-                <div class="empty-state" id="empty-state" style="display: none;">
-                    <div class="empty-icon"><i class="fa-solid fa-server"></i></div>
-                    <h3>Aucun serveur trouvé</h3>
-                    <p>Essayez une autre recherche ou ajoutez votre serveur personnalisé !</p>
-                    <button class="add-server-btn-inline" id="btn-empty-add">
-                        <i class="fa-solid fa-plus"></i> Ajouter un Serveur
-                    </button>
-                </div>
-            </section>
-        </main>
+                        <div class="feed-posts-list">
+                            <div class="feed-post-item">
+                                <div class="feed-post-meta">
+                                    <span class="feed-author">Cfx.re/FiveM</span>
+                                    <span class="feed-time">En direct</span>
+                                </div>
+                                <p class="feed-text">The official FiveM Hub Master Launcher update is here, highlighting community-created servers, live audio radio streams, assets, and more!</p>
+                                <a href="https://forum.cfx.re" target="_blank" class="feed-link">Read more on our forums: forum.cfx.re</a>
+                                <div class="feed-post-img-wrap">
+                                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&auto=format&fit=crop&q=80" alt="Spotlight" class="feed-thumb">
+                                </div>
+                            </div>
+
+                            <div class="feed-post-item">
+                                <div class="feed-post-meta">
+                                    <span class="feed-author">Rockstar Games / FiveM</span>
+                                    <span class="feed-time">Nouveau Build</span>
+                                </div>
+                                <p class="feed-text">Support for GTA Online Leonida & Vice City assets is now live on FiveM server release channel for build 3258 and higher.</p>
+                                <a href="https://forum.cfx.re" target="_blank" class="feed-link">Read more on forum.cfx.re</a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
     </div>
 
     <!-- =========================================================================

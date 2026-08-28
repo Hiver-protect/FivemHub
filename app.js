@@ -1167,18 +1167,57 @@ function initRealtimeEngine() {
 }
 
 function initUI() {
-    // Écouteurs de navigation principale
-    document.querySelectorAll('.nav-item').forEach(btn => {
+    // Écouteurs d'onglets pays FiveM officiel (.cntry-tab)
+    document.querySelectorAll('.cntry-tab').forEach(btn => {
         btn.addEventListener('click', () => {
             sfx.playClick();
-            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.cntry-tab').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             store.activeCategory = btn.dataset.category;
             store.currentPage = 1;
-            updateCategoryTitle();
             renderServers();
         });
     });
+
+    // Boutons Action Tiles (Browse Servers, Favoris, Historique)
+    const browseBtn = document.getElementById('btn-browse-all');
+    if (browseBtn) {
+        browseBtn.addEventListener('click', () => {
+            sfx.playClick();
+            store.activeCategory = 'all';
+            store.currentPage = 1;
+            document.querySelectorAll('.cntry-tab').forEach(b => b.classList.remove('active'));
+            const allTab = document.querySelector('.cntry-tab[data-category="all"]');
+            if (allTab) allTab.classList.add('active');
+            renderServers();
+            const grid = document.getElementById('servers-grid');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    const favsBtn = document.getElementById('btn-open-favs');
+    if (favsBtn) {
+        favsBtn.addEventListener('click', () => {
+            sfx.playClick();
+            store.activeCategory = 'favorites';
+            store.currentPage = 1;
+            renderServers();
+            const grid = document.getElementById('servers-grid');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    const histBtn = document.getElementById('btn-open-history');
+    if (histBtn) {
+        histBtn.addEventListener('click', () => {
+            sfx.playClick();
+            store.activeCategory = 'recent';
+            store.currentPage = 1;
+            renderServers();
+            const grid = document.getElementById('servers-grid');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
 
     // Écouteurs de filtres rapides par tags (FreeAccess, Whitelist, Imports HD, Gangs)
     document.querySelectorAll('.filter-pill-btn').forEach(btn => {
@@ -1196,44 +1235,57 @@ function initUI() {
     const clearSearchBtn = document.getElementById('clear-search-btn');
     let searchDebounceTimer = null;
 
-    searchInput.addEventListener('input', (e) => {
-        const val = e.target.value;
-        clearSearchBtn.style.display = val ? 'block' : 'none';
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value;
+            if (clearSearchBtn) clearSearchBtn.style.display = val ? 'block' : 'none';
 
-        if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
-        searchDebounceTimer = setTimeout(() => {
-            store.searchQuery = val;
+            if (searchDebounceTimer) clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(() => {
+                store.searchQuery = val;
+                store.currentPage = 1;
+                renderServers();
+            }, 100);
+        });
+    }
+
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+            if (searchInput) searchInput.value = '';
+            store.searchQuery = '';
+            store.currentPage = 1;
+            clearSearchBtn.style.display = 'none';
+            renderServers();
+        });
+    }
+
+    const sortSelect = document.getElementById('sort-select');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            sfx.playClick();
+            store.sortBy = e.target.value;
             store.currentPage = 1;
             renderServers();
-        }, 100);
-    });
+        });
+    }
 
-    clearSearchBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        store.searchQuery = '';
-        store.currentPage = 1;
-        clearSearchBtn.style.display = 'none';
-        renderServers();
-    });
+    const refreshBtn = document.getElementById('btn-refresh-servers');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            sfx.playClick();
+            showToast("Liste des serveurs rafraîchie !", "success");
+            updateAll();
+        });
+    }
 
-    document.getElementById('sort-select').addEventListener('change', (e) => {
-        sfx.playClick();
-        store.sortBy = e.target.value;
-        store.currentPage = 1;
-        renderServers();
-    });
-
-    document.getElementById('btn-refresh-servers').addEventListener('click', () => {
-        sfx.playClick();
-        showToast("Liste des serveurs rafraîchie !", "success");
-        updateAll();
-    });
-
-    document.getElementById('btn-load-more').addEventListener('click', () => {
-        sfx.playClick();
-        store.currentPage++;
-        renderServers(true);
-    });
+    const loadMoreBtn = document.getElementById('btn-load-more');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            sfx.playClick();
+            store.currentPage++;
+            renderServers(true);
+        });
+    }
 
     const soundBtn = document.getElementById('sound-toggle-btn');
     const soundIcon = document.getElementById('sound-icon');
