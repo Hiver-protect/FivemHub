@@ -93,26 +93,31 @@
     <div class="app-container official-fivem-theme">
         <!-- Main Layout with FiveM Official Grid and Feed -->
         <div class="fivem-main-wrapper">
-            <!-- FiveM Official Top Bar Navigation -->
+            <!-- FiveM Official Top Bar Navigation Exacte -->
             <header class="fivem-top-nav">
-                <div class="fivem-brand-links">
-                    <div class="fivem-logo-icon">
-                        <img src="logo_fivem_hub.png" alt="FiveM Logo" class="fivem-vector-logo">
+                <div class="top-nav-left">
+                    <span class="fps-indicator">73fps</span>
+                    <div class="fivem-lambda-logo">
+                        <svg viewBox="0 0 24 24" class="lambda-svg"><path d="M12 2L4 22h3.5l4.5-12 4.5 12H20L12 2z" fill="#ffffff"/></svg>
                     </div>
-                    <a href="https://fivem.net" target="_blank" class="nav-tab-link active">FiveM.net <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    <a href="https://forum.cfx.re" target="_blank" class="nav-tab-link">Forum <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    <a href="https://cfx.re" target="_blank" class="nav-tab-link">Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    <a href="https://discord.gg/fivem" target="_blank" class="nav-tab-link">Discord <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    <div class="fivem-links-row">
+                        <a href="https://fivem.net" target="_blank" class="nav-tab-link active">FiveM.net <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://forum.cfx.re" target="_blank" class="nav-tab-link">Forum <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://cfx.re" target="_blank" class="nav-tab-link">Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://discord.gg/fivem" target="_blank" class="nav-tab-link">Discord <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
                 </div>
 
-                <div class="fivem-top-right-tools">
-                    <div class="live-player-metrics">
-                        <span class="metric-item"><i class="fa-solid fa-users text-dim"></i> 225.0k</span>
-                        <span class="metric-item"><i class="fa-solid fa-arrow-trend-up text-green"></i> 268.9k peak</span>
+                <div class="top-nav-right">
+                    <div class="fivem-user-count">
+                        <div class="count-row"><i class="fa-solid fa-users"></i> 225.0k</div>
+                        <div class="count-row"><i class="fa-solid fa-arrow-trend-up"></i> 268.9k</div>
                     </div>
-                    <button class="top-icon-btn" id="sound-toggle-btn" title="Audio"><i class="fa-solid fa-volume-high" id="sound-icon"></i></button>
-                    <button class="top-icon-btn" id="btn-cache-cleaner" title="Paramètres & Cache"><i class="fa-solid fa-gear"></i></button>
-                    <button class="top-icon-btn close-btn" title="Fermer"><i class="fa-solid fa-xmark"></i></button>
+                    <div class="fivem-cfx-badge">
+                        <img src="logo_fivem_hub.png" alt="CFX Badge" class="cfx-tiny-logo">
+                    </div>
+                    <button class="top-sq-btn" id="btn-cache-cleaner" title="Paramètres & Cache"><i class="fa-solid fa-gear"></i></button>
+                    <button class="top-sq-btn close-btn" title="Fermer"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </header>
 
@@ -123,26 +128,33 @@
                     <!-- Top 3 Action Tiles -->
                     <div class="fivem-action-tiles">
                         <div class="action-tile browse-tile" id="btn-browse-all">
-                            <div class="tile-bg-pattern"></div>
-                            <span class="tile-title text-green-neon">BROWSE SERVERS</span>
-                            <i class="fa-solid fa-play tile-arrow-icon"></i>
+                            <div class="browse-tile-content">
+                                <span class="tile-title text-green-neon">BROWSE SERVERS</span>
+                                <i class="fa-solid fa-play tile-arrow-icon"></i>
+                            </div>
                         </div>
 
                         <div class="action-tile last-server-tile">
                             <span class="tile-header-label">LAST CONNECTED SERVER</span>
                             <div class="last-server-row">
-                                <div class="server-mini-badge" id="last-server-badge">VI</div>
+                                <div class="server-mini-badge" id="last-server-badge">
+                                    <i class="fa-solid fa-gamepad"></i>
+                                </div>
                                 <div class="last-server-info">
-                                    <span class="last-server-name" id="last-srv-name">Flashback Roleplay V</span>
-                                    <span class="last-server-desc">Le début d'une grande aventure à Los Santos !</span>
+                                    <span class="last-server-name" id="last-srv-name">Lumina Roleplay</span>
+                                    <span class="last-server-desc">Le début d'une grande aventure!</span>
                                 </div>
                             </div>
                             <div class="last-server-bottom">
                                 <div class="last-server-stats">
-                                    <span><i class="fa-solid fa-users"></i> 1024/1024</span>
-                                    <span class="flag-icon">🇫🇷</span>
+                                    <span><i class="fa-solid fa-users"></i> 149/1024</span>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <span class="flag-icon">🇨🇦</span>
                                 </div>
-                                <button class="btn-connect-pill" id="btn-connect-last"><i class="fa-solid fa-play"></i> Se connecter</button>
+                                <div class="last-server-actions">
+                                    <button class="btn-fav-small" id="hero-fav-small"><i class="fa-solid fa-heart text-green"></i></button>
+                                    <button class="btn-connect-pill" id="btn-connect-last">Se connecter</button>
+                                </div>
                             </div>
                         </div>
 
@@ -162,7 +174,7 @@
                     <div class="fivem-section-heading">
                         <div class="heading-left">
                             <span class="heading-text">TOP SERVERS</span>
-                            <span class="country-indicator" id="current-country-tag">🇨🇦 🇫🇷 🌐</span>
+                            <span class="country-indicator" id="current-country-tag">🇨🇦</span>
                             <i class="fa-solid fa-chevron-up text-amber"></i>
                         </div>
                         <!-- Country switch pills -->
@@ -180,42 +192,43 @@
 
                     <!-- Massive Hero Server Card (Like Gotham in Official FiveM) -->
                     <div class="fivem-hero-card" id="fivem-hero-card">
-                        <div class="hero-watermark-bg" id="hero-watermark-txt">FIVEM</div>
+                        <div class="hero-watermark-bg" id="hero-watermark-txt">GOTHAM</div>
                         <div class="hero-server-main">
-                            <div class="hero-logo-box" id="hero-square-logo">
-                                <img id="hero-real-img" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=200&auto=format&fit=crop&q=80" alt="Server Logo">
-                            </div>
+                            <div class="hero-logo-box gotham-gradient-box" id="hero-square-logo"></div>
                             <div class="hero-server-details">
-                                <h1 class="hero-main-name" id="hero-title">GOTHAM ROLEPLAY</h1>
-                                <p class="hero-main-desc" id="hero-desc">Votre histoire. Votre serveur. Immersion totale avec économie équilibrée et scripts exclusifs.</p>
+                                <h1 class="hero-main-name" id="hero-title">GOTHAM</h1>
+                                <p class="hero-main-desc" id="hero-desc">Votre histoire. Votre serveur. Montréal 2.0, l'immersion totale.</p>
                                 <div class="hero-player-count">
                                     <i class="fa-solid fa-users"></i>
-                                    <span id="hero-players">1024/1024</span>
-                                    <span class="peak-text">• 1240 peak (24h)</span>
+                                    <span id="hero-players">0/514</span>
+                                    <span class="peak-text">• 43 peak (24h)</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="hero-card-footer">
                             <div class="hero-connect-actions">
-                                <button class="btn-fivem-connect" id="hero-play-btn">
-                                    <i class="fa-solid fa-play"></i> Se connecter
-                                </button>
-                                <button class="btn-fivem-fav" id="hero-fav-btn">
+                                <button class="btn-fivem-connect-exact" id="hero-play-btn">Se connecter</button>
+                                <button class="btn-fivem-fav-exact" id="hero-fav-btn">
                                     <i class="fa-regular fa-heart"></i>
                                 </button>
                             </div>
                             <div class="hero-dlc-tags">
-                                <span class="dlc-tag" id="hero-tag-1">DLC: Bottom Dollar Bounties</span>
-                                <span class="dlc-tag" id="hero-tag-2"><i class="fa-solid fa-map"></i> San Andreas</span>
-                                <span class="dlc-tag" id="hero-tag-3"><i class="fa-solid fa-user-shield"></i> RP WL</span>
+                                <span class="dlc-tag">DLC: Bottom Dollar Bounties</span>
+                                <span class="dlc-tag"><i class="fa-solid fa-map"></i> San Andreas</span>
+                                <span class="dlc-tag"><i class="fa-solid fa-shield"></i> RP</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Server Carousel Badges (Like Official FiveM) -->
                     <div class="fivem-servers-ribbon" id="servers-ribbon">
-                        <!-- Dynamic Server Pills -->
+                        <div class="ribbon-card-pill active"><span class="pill-dot"></span> GOTHAM</div>
+                        <div class="ribbon-avatar-pill"><img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=60&auto=format&fit=crop&q=80" alt="S1"></div>
+                        <div class="ribbon-avatar-pill"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=60&auto=format&fit=crop&q=80" alt="S2"></div>
+                        <div class="ribbon-avatar-pill"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=60&auto=format&fit=crop&q=80" alt="S3"></div>
+                        <div class="ribbon-avatar-pill"><img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=60&auto=format&fit=crop&q=80" alt="S4"></div>
+                        <div class="ribbon-avatar-pill"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=60&auto=format&fit=crop&q=80" alt="S5"></div>
                     </div>
 
                     <!-- Servers Grid / Search Section -->
@@ -274,7 +287,7 @@
                             <i class="fa-solid fa-triangle-exclamation text-amber"></i>
                             <span>FIVEM FOR GTAV ENHANCED: STRESS TEST</span>
                         </div>
-                        <p class="announcement-desc">Join us on FiveM Hub for the official server live sync test and play on thousands of verified servers with the community.</p>
+                        <p class="announcement-desc">Join us Friday 4th of September at 17:00 UTC for our second public stress test on FiveM for GTAV Enhanced and play on various minigames with the community.</p>
                         <a href="https://forum.cfx.re" target="_blank" class="announcement-link">Click for details.</a>
                     </div>
 
@@ -289,10 +302,10 @@
                             <div class="feed-post-item">
                                 <div class="feed-post-meta">
                                     <span class="feed-author">Cfx.re/FiveM</span>
-                                    <span class="feed-time">En direct</span>
+                                    <span class="feed-time">8 months ago</span>
                                 </div>
-                                <p class="feed-text">The official FiveM Hub Master Launcher update is here, highlighting community-created servers, live audio radio streams, assets, and more!</p>
-                                <a href="https://forum.cfx.re" target="_blank" class="feed-link">Read more on our forums: forum.cfx.re</a>
+                                <p class="feed-text">The holiday edition of the Community Spotlight is here, highlighting community-created servers, streams, assets, and more!</p>
+                                <a href="https://forum.cfx.re" target="_blank" class="feed-link">Read more on our forums: forum.cfx.re/t/5373133</a>
                                 <div class="feed-post-img-wrap">
                                     <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&auto=format&fit=crop&q=80" alt="Spotlight" class="feed-thumb">
                                 </div>
@@ -300,11 +313,11 @@
 
                             <div class="feed-post-item">
                                 <div class="feed-post-meta">
-                                    <span class="feed-author">Rockstar Games / FiveM</span>
-                                    <span class="feed-time">Nouveau Build</span>
+                                    <span class="feed-author">Cfx.re/FiveM</span>
+                                    <span class="feed-time">9 months ago</span>
                                 </div>
-                                <p class="feed-text">Support for GTA Online Leonida & Vice City assets is now live on FiveM server release channel for build 3258 and higher.</p>
-                                <a href="https://forum.cfx.re" target="_blank" class="feed-link">Read more on forum.cfx.re</a>
+                                <p class="feed-text">Support for the GTA Online: A Safehouse in the Hills update is now available on FiveM's canary release channel for server versions 23683 or higher.</p>
+                                <a href="https://forum.cfx.re" target="_blank" class="feed-link">Read more on our forums: forum.cfx.re/t/5371288</a>
                             </div>
                         </div>
                     </div>
