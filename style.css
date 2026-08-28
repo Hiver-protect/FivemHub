@@ -2390,22 +2390,24 @@ body {
 .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 100;
+    z-index: 1000000 !important;
     opacity: 0;
     visibility: hidden;
-    transition: var(--transition-smooth);
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
     padding: 20px;
 }
 
 .modal-backdrop.open {
     opacity: 1;
     visibility: visible;
+    pointer-events: all;
 }
 
 .modal-card {

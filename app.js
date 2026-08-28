@@ -1179,42 +1179,22 @@ function initUI() {
         });
     });
 
-    // Boutons Action Tiles (Browse Servers Modal, Favoris, Historique)
+    // 1. Bouton BROWSE SERVERS (Explorateur de Serveurs)
     const browseBtn = document.getElementById('btn-browse-all');
     if (browseBtn) {
-        browseBtn.addEventListener('click', () => {
+        browseBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             sfx.playClick();
             openModal('modal-browse-servers');
             renderBrowseModalList();
         });
     }
 
-    const closeBrowseBtn = document.getElementById('close-browse-servers');
-    if (closeBrowseBtn) closeBrowseBtn.addEventListener('click', () => closeModal('modal-browse-servers'));
-    const cancelBrowseBtn = document.getElementById('cancel-browse-servers');
-    if (cancelBrowseBtn) cancelBrowseBtn.addEventListener('click', () => closeModal('modal-browse-servers'));
-
-    const browseViewGridBtn = document.getElementById('btn-browse-view-grid');
-    if (browseViewGridBtn) {
-        browseViewGridBtn.addEventListener('click', () => {
-            closeModal('modal-browse-servers');
-            const grid = document.getElementById('servers-grid');
-            if (grid) grid.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-
-    const browseSearchInput = document.getElementById('modal-browse-search');
-    const browseCatSelect = document.getElementById('modal-browse-cat');
-    if (browseSearchInput) {
-        browseSearchInput.addEventListener('input', () => renderBrowseModalList());
-    }
-    if (browseCatSelect) {
-        browseCatSelect.addEventListener('change', () => renderBrowseModalList());
-    }
-
+    // 2. Boutons d'accès rapide Favoris et Historique
     const favsBtn = document.getElementById('btn-open-favs');
     if (favsBtn) {
-        favsBtn.addEventListener('click', () => {
+        favsBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             sfx.playClick();
             store.activeCategory = 'favorites';
             store.currentPage = 1;
@@ -1226,7 +1206,8 @@ function initUI() {
 
     const histBtn = document.getElementById('btn-open-history');
     if (histBtn) {
-        histBtn.addEventListener('click', () => {
+        histBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             sfx.playClick();
             store.activeCategory = 'recent';
             store.currentPage = 1;
@@ -1235,6 +1216,55 @@ function initUI() {
             if (grid) grid.scrollIntoView({ behavior: 'smooth' });
         });
     }
+
+    // 3. Bouton Mode Histoire Solo (GTA V)
+    const storyBtn = document.getElementById('btn-open-story');
+    if (storyBtn) {
+        storyBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            sfx.playClick();
+            openModal('modal-story-mode');
+        });
+    }
+
+    // 4. Bouton Replay Editor (Rockstar Editor)
+    const replayBtn = document.getElementById('btn-open-replay');
+    if (replayBtn) {
+        replayBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            sfx.playClick();
+            openModal('modal-replay-editor');
+        });
+    }
+
+    // 5. Tuile Create A Server
+    const createSrvBtn = document.getElementById('btn-open-add-server');
+    if (createSrvBtn) {
+        createSrvBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            sfx.playClick();
+            openModal('modal-create-server-guide');
+        });
+    }
+
+    // 6. Bouton Paramètres & Cache Cleaner
+    const cacheBtn = document.getElementById('btn-cache-cleaner');
+    if (cacheBtn) {
+        cacheBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            sfx.playClick();
+            openModal('modal-cache-settings');
+        });
+    }
+
+    // 7. Bouton Fermer le Launcher
+    document.querySelectorAll('.close-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (confirm("Voulez-vous quitter FiveM Master Launcher ?")) {
+                window.close();
+            }
+        });
+    });
 
     // Écouteurs de filtres rapides par tags (FreeAccess, Whitelist, Imports HD, Gangs)
     document.querySelectorAll('.filter-pill-btn').forEach(btn => {
