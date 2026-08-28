@@ -224,6 +224,10 @@ function generateUniqueFiveMServers(count = 5250) {
         });
     });
 
+    // Dictionnaire d'extensions et d'attributs de serveurs pour ZÉRO doublon
+    const serverModes = ['Saison 2', 'Saison 3', 'Saison 4', 'Saison 5', 'FreeAccess', 'Whitelist', 'Hardcore RP', 'Serious RP', 'Semie-WL', 'Full Custom', 'Imports 2026', 'Économie Réelle', 'Gang & LSPD', 'Illégal & Cartel', '100k Start', 'Custom Scripts', 'Vocal Mumble', 'Leonida Ready', 'V2.0', 'V3.5', 'V4.0', 'V5.0', 'Ultra Realistic', 'No Lag 144FPS'];
+    const takenNames = new Set(majors.map(m => m.name.toLowerCase()));
+
     for (let i = servers.length + 1; i <= count; i++) {
         const rand = Math.random();
         let cat = 'rp-fr';
@@ -279,8 +283,15 @@ function generateUniqueFiveMServers(count = 5250) {
             if (!serverTags.includes(rt)) serverTags.push(rt);
         }
 
-        const numSuffix = i > 30 ? `#${i}` : `V${(i % 5) + 1}`;
-        const finalName = `${baseName} ${numSuffix}`;
+        const modeAttr = serverModes[(i + Math.floor(Math.random() * 10)) % serverModes.length];
+        let finalName = `${baseName} [${modeAttr}] #${i}`;
+        
+        // ZÉRO DOUBLON : Vérification stricte d'unicité
+        if (takenNames.has(finalName.toLowerCase())) {
+            finalName = `${baseName} [${modeAttr}] #${i}-${cfxCode.toUpperCase()}`;
+        }
+        takenNames.add(finalName.toLowerCase());
+
         const visuals = generateServerVisuals(finalName, cat, i);
 
         servers.push({
@@ -290,7 +301,7 @@ function generateUniqueFiveMServers(count = 5250) {
             categoryLabel: catLabel,
             connectUrl: `cfx.re/join/${cfxCode}`,
             visuals: visuals,
-            description: `Serveur ${catLabel} actif avec économie équilibrée, scripts 2026, véhicules réalistes, mapping Los Santos customisé et communauté soudée.`,
+            description: `Serveur ${catLabel} unique et actif avec économie équilibrée, scripts 2026, mapping custom et communauté dédiée.`,
             players: curP,
             maxPlayers: maxP,
             ping: pingVal,
@@ -298,7 +309,7 @@ function generateUniqueFiveMServers(count = 5250) {
             tags: serverTags,
             discord: `https://discord.gg/${cfxCode}`,
             isFeatured: false,
-            rating: (Math.random() * 1.3 + 3.7).toFixed(1)
+            rating: (4.2 + (Math.random() * 0.8)).toFixed(1)
         });
     }
 
