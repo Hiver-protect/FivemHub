@@ -17,78 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Arrière-Plan Cinématique GTA V / FiveM Silencieux & Stylé -->
-    <div class="launcher-cinema-bg" id="launcher-cinema-bg">
-        <div class="launcher-cinema-slide active" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&auto=format&fit=crop&q=80');"></div>
-        <div class="launcher-cinema-slide" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1600&auto=format&fit=crop&q=80');"></div>
-        <div class="launcher-cinema-slide" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1600&auto=format&fit=crop&q=80');"></div>
-        <div class="launcher-cinema-slide" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&auto=format&fit=crop&q=80');"></div>
-        <div class="launcher-cinema-overlay"></div>
-    </div>
 
-    <!-- Écran de Démarrage / VRAI LOADING SCREEN GTA VI ROCKSTAR GAMES OFFICIEL CENTRÉ & BARRE AVEC BONHOMME -->
-    <div class="app-boot-splash" id="app-boot-splash">
-        <div class="boot-video-container">
-            <iframe id="boot-youtube-iframe" class="boot-youtube-bg" 
-                src="https://www.youtube.com/embed/QdBZY2fkU-0?autoplay=1&mute=0&controls=0&disablekb=1&fs=0&loop=1&playlist=QdBZY2fkU-0&start=14&enablejsapi=1&rel=0&showinfo=0&iv_load_policy=3&modestbranding=1" 
-                title="Grand Theft Auto VI Official Trailer Rockstar Games" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-            <div class="boot-dark-overlay"></div>
-            <div class="gta6-scanline-overlay"></div>
-        </div>
-
-        <!-- Badges d'Immersion GTA VI & Leonida State -->
-        <div class="gta6-top-info-hud">
-            <div class="gta6-watermark-tag">
-                <span class="gta6-dot"></span>
-                <span>LEONIDA STATE • VICE CITY 2026</span>
-            </div>
-            <div class="gta6-build-tag">BUILD 3258 • PRO ENGINE</div>
-            <div class="gta6-fps-tag"><i class="fa-solid fa-gauge-high text-cyan"></i> 60.0 FPS</div>
-            <div class="gta6-vram-tag"><i class="fa-solid fa-microchip text-green"></i> VRAM 8.4 GB / 16 GB</div>
-        </div>
-
-        <!-- Logo Officiel Authentique FIVEM HUB LAUNCHER VI (Image Utilisateur Haute Définition) -->
-        <div class="gta6-hub-logo-wrap">
-            <img src="logo_fivem_hub.png" alt="FiveM Hub Launcher VI Logo" class="gta6-hub-img">
-        </div>
-
-        <button class="skip-splash-btn" id="skip-splash-btn" title="Passer l'introduction et entrer dans l'application">
-            <i class="fa-solid fa-forward"></i>
-            <span>PASSER L'INTRO</span>
-        </button>
-
-        <!-- Barre de Progression Inférieure avec Silhouette du Bonhomme qui Court -->
-        <div class="xrp-bottom-loader">
-            <div class="gta6-tip-box" id="boot-tip-box">
-                <i class="fa-solid fa-lightbulb text-amber"></i>
-                <span id="boot-tip-text">Bienvenue à Vice City. Chargez les ressources et préparez-vous pour l'immersion FiveM.</span>
-            </div>
-            <div class="xrp-load-info-row">
-                <span class="xrp-status-text" id="corner-status-text">CHARGEMENT DU MONDE LEONIDA & VICE CITY...</span>
-                <span class="xrp-percent-text" id="corner-percent-text">%0</span>
-            </div>
-            <div class="xrp-progress-track">
-                <div class="xrp-progress-fill" id="corner-progress-fill">
-                    <!-- Silhouette du Bonhomme qui Court Animé -->
-                    <div class="xrp-running-runner">
-                        <svg viewBox="0 0 24 24" class="runner-svg" fill="#ffffff">
-                            <path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.8-1.6 8.1-4.9-1-.4 2 6.5 1.3z"/>
-                        </svg>
-                        <span class="runner-glow-dot"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="stars-bg"></div>
-    <div class="ambient-glow cyan-glow"></div>
-    <div class="ambient-glow purple-glow"></div>
 
     <div class="app-container official-fivem-theme">
         <!-- Main Layout with FiveM Official Grid and Feed -->
@@ -393,56 +322,7 @@
         </div>
     </div>
 
-    <!-- =========================================================================
-         FULLSCREEN GTA V CINEMATIC LOADING SCREEN (FRENCH & ENGLISH)
-         ========================================================================= -->
-    <div class="loading-screen-overlay" id="loading-screen-overlay">
-        <div class="ls-bg-slideshow" id="ls-bg-slideshow"></div>
-        <div class="ls-vignette"></div>
-        <div class="ls-grid-pattern"></div>
 
-        <div class="ls-top-bar">
-            <div class="ls-brand">
-                <i class="fa-solid fa-gamepad"></i>
-                <span>FIVEM MASTER LAUNCHER</span>
-            </div>
-            <div class="ls-lang-switch">
-                <button class="lang-btn active" id="lang-fr" data-lang="fr">FRANÇAIS 🇫🇷</button>
-                <button class="lang-btn" id="lang-en" data-lang="en">ENGLISH 🇬🇧</button>
-            </div>
-        </div>
-
-        <div class="ls-center-info">
-            <div class="ls-server-header">
-                <span class="ls-connecting-badge"><i class="fa-solid fa-circle-notch fa-spin"></i> <span id="ls-connecting-text">CONNEXION EN COURS</span></span>
-                <h1 class="ls-server-name" id="ls-server-name">FLASHBACK RP</h1>
-                <p class="ls-protocol-text" id="ls-protocol-display">fivem://connect/cfx.re/join/5k99p8</p>
-            </div>
-        </div>
-
-        <div class="ls-bottom-section">
-            <div class="ls-tips-card">
-                <div class="ls-tip-tag"><i class="fa-solid fa-lightbulb"></i> <span id="ls-tip-title">CONSEIL ROLEPLAY</span></div>
-                <p class="ls-tip-content" id="ls-tip-content">N'oubliez pas de configurer votre microphone dans les paramètres GTA V et FiveM (Touche N pour parler par défaut).</p>
-            </div>
-
-            <div class="ls-progress-container">
-                <div class="ls-progress-labels">
-                    <span id="ls-step-label">Initialisation du protocole FiveM...</span>
-                    <span id="ls-percent-label">15%</span>
-                </div>
-                <div class="ls-progress-bar-bg">
-                    <div class="ls-progress-bar-fill" id="ls-bar-fill"></div>
-                </div>
-            </div>
-
-            <div class="ls-actions">
-                <button class="ls-cancel-btn" id="btn-cancel-loading">
-                    <i class="fa-solid fa-xmark"></i> <span id="ls-cancel-text">Annuler / Retour au Hub</span>
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- MODAL: Direct Quick Connect IP -->
     <div class="modal-backdrop" id="modal-quick-connect">
