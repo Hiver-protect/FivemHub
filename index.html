@@ -104,10 +104,13 @@
                 </div>
 
                 <div class="hub-top-right">
-                    <div class="live-pill">
+                    <button class="live-pill live-sync-pulse" id="btn-sync-live-feed" title="Rechercher les nouvelles vidéos et annonces Rockstar Games en direct">
                         <span class="pulse-dot-green"></span>
-                        <span>FLUX EN DIRECT • 2026</span>
-                    </div>
+                        <span id="live-feed-status-text">SYNCHRO EN DIRECT 2026</span>
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </button>
+                    <button class="icon-tool-btn" id="btn-add-custom-video" title="Ajouter une Vidéo YouTube en direct"><i class="fa-solid fa-plus"></i></button>
+                    <button class="icon-tool-btn" id="btn-cinema-lights" title="Mode Salle de Cinéma (Extinction des feux)"><i class="fa-solid fa-lightbulb"></i></button>
                     <button class="icon-tool-btn" id="btn-cache-cleaner" title="Paramètres & Cache"><i class="fa-solid fa-gear"></i></button>
                     <button class="icon-tool-btn close-btn" title="Fermer"><i class="fa-solid fa-xmark"></i></button>
                 </div>
@@ -116,9 +119,9 @@
             <!-- Centre : Titre Vidéo Active & Actions Rapides -->
             <div class="hub-video-info-center">
                 <div class="video-tag-row">
-                    <span class="v-badge v-rstar"><i class="fa-solid fa-star"></i> ROCKSTAR 4K</span>
-                    <span class="v-badge v-res"><i class="fa-solid fa-film"></i> ULTRA HD 60FPS</span>
-                    <span class="v-badge v-live"><i class="fa-solid fa-signal"></i> EN DIRECT</span>
+                    <span class="v-badge v-rstar"><i class="fa-solid fa-star"></i> ROCKSTAR OFFICIEL</span>
+                    <span class="v-badge v-res"><i class="fa-solid fa-film"></i> 4K 60FPS</span>
+                    <span class="v-badge v-live"><i class="fa-solid fa-tower-broadcast"></i> AUTO-FLUX ACTIF</span>
                 </div>
                 <h1 class="active-video-title 3d-text-glow" id="active-video-title">Grand Theft Auto VI - Bande-Annonce Officielle 1</h1>
                 <p class="active-video-desc" id="active-video-desc">Bienvenue à Leonida State et Vice City. Regardez les vidéos officielles avec volume doux ajustable et suivez les annonces du Newswire en temps réel.</p>
@@ -133,12 +136,12 @@
                         <button class="btn-vol-icon-toggle" id="btn-toggle-audio" title="Couper / Activer">
                             <i class="fa-solid fa-volume-low" id="vol-speaker-icon"></i>
                         </button>
-                        <input type="range" id="video-volume-slider" min="0" max="100" value="10" title="Régler le volume">
-                        <span class="vol-number-text" id="vol-level-text">10%</span>
+                        <input type="range" id="video-volume-slider" min="0" max="100" value="15" title="Régler le volume">
+                        <span class="vol-number-text" id="vol-level-text">15%</span>
                     </div>
 
-                    <a href="https://www.youtube.com/@RockstarGames" target="_blank" class="btn-external-channel btn-3d-glass">
-                        <i class="fa-brands fa-youtube text-pink"></i> Rockstar Games ↗
+                    <a href="https://www.youtube.com/@RockstarGames/videos" target="_blank" class="btn-external-channel btn-3d-glass" id="btn-yt-official-link">
+                        <i class="fa-brands fa-youtube text-pink"></i> YouTube Rockstar Games ↗
                     </a>
                     <a href="https://www.rockstargames.com/newswire" target="_blank" class="btn-external-channel btn-3d-glass">
                         <i class="fa-solid fa-newspaper text-amber"></i> Newswire ↗
@@ -292,6 +295,33 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Ajouter une Vidéo YouTube Personnalisée / Récente en Direct -->
+    <div class="modal-backdrop" id="modal-add-video">
+        <div class="modal-card glass-card-3d">
+            <button class="modal-close" id="close-add-video"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <div class="modal-icon" style="background: rgba(236, 72, 153, 0.2); color: #ec4899;"><i class="fa-brands fa-youtube"></i></div>
+                <div>
+                    <h3>Ajouter une Vidéo YouTube en Direct</h3>
+                    <p>Collez le lien de n'importe quelle nouvelle vidéo de Rockstar Games pour la jouer instantanément.</p>
+                </div>
+            </div>
+            <div class="modal-body" style="padding: 16px 0; color: #cbd5e1; font-size: 0.88rem; line-height: 1.5; display: flex; flex-direction: column; gap: 12px;">
+                <div>
+                    <label style="font-size: 0.75rem; font-weight: 800; color: #94a3b8; display: block; margin-bottom: 4px;">LIEN OU ID YOUTUBE (ex: https://youtube.com/watch?v=...)</label>
+                    <input type="text" id="custom-yt-input" placeholder="https://www.youtube.com/watch?v=..." style="width: 100%; background: #11141c; border: 1px solid rgba(255,255,255,0.15); padding: 10px 14px; border-radius: 8px; color: #fff; outline: none;">
+                </div>
+                <div>
+                    <label style="font-size: 0.75rem; font-weight: 800; color: #94a3b8; display: block; margin-bottom: 4px;">TITRE DE LA VIDÉO</label>
+                    <input type="text" id="custom-yt-title" placeholder="Grand Theft Auto VI - Bande-Annonce 2..." style="width: 100%; background: #11141c; border: 1px solid rgba(255,255,255,0.15); padding: 10px 14px; border-radius: 8px; color: #fff; outline: none;">
+                </div>
+                <button class="btn-rstar-play" id="btn-submit-custom-video" style="width: 100%; justify-content: center; margin-top: 6px;">
+                    <i class="fa-solid fa-play"></i> Lancer & Ajouter au Portail 4K
+                </button>
             </div>
         </div>
     </div>

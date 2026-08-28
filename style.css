@@ -221,6 +221,47 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.live-pill:hover {
+    background: rgba(34, 197, 94, 0.25);
+    border-color: #22c55e;
+    transform: scale(1.03);
+}
+
+.live-sync-pulse i.rotating {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* Mode Extinction des Feux Cinéma */
+body.cinema-lights-dimmed .hub-top-bar,
+body.cinema-lights-dimmed .hub-bottom-panels,
+body.cinema-lights-dimmed .live-ticker-bar {
+    opacity: 0.05 !important;
+    pointer-events: none !important;
+    transition: opacity 0.5s ease;
+}
+
+body.cinema-lights-dimmed:hover .hub-top-bar,
+body.cinema-lights-dimmed:hover .hub-bottom-panels,
+body.cinema-lights-dimmed:hover .live-ticker-bar {
+    opacity: 0.95 !important;
+    pointer-events: all !important;
+}
+
+body.cinema-lights-dimmed .hub-video-info-center {
+    opacity: 0.15;
+    transition: opacity 0.5s ease;
+}
+
+body.cinema-lights-dimmed:hover .hub-video-info-center {
+    opacity: 1;
 }
 
 .pulse-dot-green {

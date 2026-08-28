@@ -1317,6 +1317,119 @@ function initUI() {
         });
     });
 
+    // 1. Bouton Synchronisation des Flux en Temps Réel
+    const syncFeedBtn = document.getElementById('btn-sync-live-feed');
+    const syncStatusText = document.getElementById('live-feed-status-text');
+    if (syncFeedBtn) {
+        syncFeedBtn.addEventListener('click', () => {
+            sfx.playClick();
+            const icon = syncFeedBtn.querySelector('i');
+            if (icon) icon.classList.add('rotating');
+            if (syncStatusText) syncStatusText.textContent = "SYNCHRONISATION...";
+
+            setTimeout(() => {
+                if (icon) icon.classList.remove('rotating');
+                const now = new Date();
+                const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+                if (syncStatusText) syncStatusText.textContent = `À JOUR (${timeStr})`;
+                showToast("✨ Flux Rockstar Games & Newswire synchronisés avec succès !", "success");
+            }, 1200);
+        });
+    }
+
+    // 2. Bouton Extinction des Feux (Mode Salle de Cinéma)
+    const lightsBtn = document.getElementById('btn-cinema-lights');
+    if (lightsBtn) {
+        lightsBtn.addEventListener('click', () => {
+            sfx.playClick();
+            document.body.classList.toggle('cinema-lights-dimmed');
+            const isDimmed = document.body.classList.contains('cinema-lights-dimmed');
+            lightsBtn.style.color = isDimmed ? '#ff9800' : '';
+            showToast(isDimmed ? "🍿 Mode Cinéma : Feux éteints (Survolez pour réafficher l'interface)" : "💡 Mode Normal : Lumières allumées", "info");
+        });
+    }
+
+    // 3. Modal d'Ajout d'une Nouvelle Vidéo YouTube en Direct
+    const addVidBtn = document.getElementById('btn-add-custom-video');
+    const closeAddVidBtn = document.getElementById('close-add-video');
+    const submitAddVidBtn = document.getElementById('btn-submit-custom-video');
+
+    if (addVidBtn) {
+        addVidBtn.addEventListener('click', () => {
+            sfx.playClick();
+            openModal('modal-add-video');
+        });
+    }
+    if (closeAddVidBtn) {
+        closeAddVidBtn.addEventListener('click', () => {
+            closeModal('modal-add-video');
+        });
+    }
+
+    if (submitAddVidBtn) {
+        submitAddVidBtn.addEventListener('click', () => {
+            const inputVal = document.getElementById('custom-yt-input').value.trim();
+            const titleVal = document.getElementById('custom-yt-title').value.trim() || 'Nouvelle Vidéo Rockstar';
+
+            if (!inputVal) {
+                showToast("Veuillez entrer une URL ou un ID YouTube.", "error");
+                return;
+            }
+
+            // Extraction du YouTube ID
+            let ytId = inputVal;
+            if (inputVal.includes('v=')) {
+                ytId = inputVal.split('v=')[1].split('&')[0];
+            } else if (inputVal.includes('youtu.be/')) {
+                ytId = inputVal.split('youtu.be/')[1].split('?')[0];
+            }
+
+            // Lancer immédiatement la vidéo
+            const iframe = document.getElementById('main-hub-iframe');
+            const titleEl = document.getElementById('active-video-title');
+            const descEl = document.getElementById('active-video-desc');
+
+            if (iframe) iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${ytId}&enablejsapi=1&rel=0`;
+            if (titleEl) titleEl.textContent = titleVal;
+            if (descEl) descEl.textContent = "Vidéo ajoutée en direct depuis la chaîne officielle.";
+
+            // Ajouter la nouvelle carte à la playlist
+            const scrollList = document.querySelector('.videos-list-scroll');
+            if (scrollList) {
+                const newCard = document.createElement('div');
+                newCard.className = 'video-card-item card-3d-tilt active';
+                newCard.dataset.cat = 'gtavi';
+                newCard.dataset.yt = ytId;
+                newCard.dataset.title = titleVal;
+                newCard.dataset.desc = "Vidéo en direct";
+                newCard.innerHTML = `
+                    <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/${ytId}/hqdefault.jpg');">
+                        <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
+                        <span class="tag-4k-pill">NOUVEAU</span>
+                    </div>
+                    <div class="video-meta">
+                        <strong>${titleVal}</strong>
+                        <span>En Direct</span>
+                    </div>
+                `;
+
+                document.querySelectorAll('.video-card-item').forEach(c => c.classList.remove('active'));
+                scrollList.prepend(newCard);
+
+                newCard.addEventListener('click', () => {
+                    sfx.playClick();
+                    document.querySelectorAll('.video-card-item').forEach(c => c.classList.remove('active'));
+                    newCard.classList.add('active');
+                    if (iframe) iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${ytId}&enablejsapi=1&rel=0`;
+                    if (titleEl) titleEl.textContent = titleVal;
+                });
+            }
+
+            closeModal('modal-add-video');
+            showToast("🎬 Nouvelle vidéo lancée avec succès !", "success");
+        });
+    }
+
     // Bouton Fermer le Launcher
     document.querySelectorAll('.close-btn').forEach(btn => {
         btn.addEventListener('click', () => {
