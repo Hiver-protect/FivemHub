@@ -104,6 +104,10 @@
                 </div>
 
                 <div class="hub-top-right">
+                    <button class="live-pill live-shield-pulse" id="btn-open-newswire-center" title="Ouvrir le Centre d'Annonces & Mises à Jour Rockstar Games en Direct" style="background: rgba(255, 152, 0, 0.15); border-color: rgba(255, 152, 0, 0.4); color: #ff9800;">
+                        <i class="fa-solid fa-bullhorn text-amber"></i>
+                        <span>ANNONCES EN DIRECT (NEWSWIRE)</span>
+                    </button>
                     <button class="live-pill live-sync-pulse" id="btn-sync-live-feed" title="Rechercher les nouvelles vidéos et annonces Rockstar Games en direct">
                         <span class="pulse-dot-green"></span>
                         <span id="live-feed-status-text">SYNCHRO EN DIRECT 2026</span>
@@ -111,17 +115,32 @@
                     </button>
                     <button class="icon-tool-btn" id="btn-add-custom-video" title="Ajouter une Vidéo YouTube en direct"><i class="fa-solid fa-plus"></i></button>
                     <button class="icon-tool-btn" id="btn-cinema-lights" title="Mode Salle de Cinéma (Extinction des feux)"><i class="fa-solid fa-lightbulb"></i></button>
-                    <button class="icon-tool-btn" id="btn-cache-cleaner" title="Paramètres & Cache"><i class="fa-solid fa-gear"></i></button>
+                    <button class="icon-tool-btn" id="btn-cache-cleaner" title="Paramètres & Optimisation 4K"><i class="fa-solid fa-gear"></i></button>
                     <button class="icon-tool-btn close-btn" title="Fermer"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </header>
 
+            <!-- BANDEAU FLASH INFO TEMPS RÉEL (24/7 DÉFILANT & FLUIDE) -->
+            <div class="live-breaking-ticker" id="live-breaking-ticker">
+                <div class="ticker-badge"><i class="fa-solid fa-bolt text-amber"></i> FLASH NEWSWIRE</div>
+                <div class="ticker-content-track">
+                    <span class="ticker-item"><i class="fa-solid fa-star text-pink"></i> ⭐ <strong>GTA VI</strong> : Révélation officielle de Leonida State et météo dynamique RAGE 9 en 4K 60FPS</span>
+                    <span class="ticker-divider">•</span>
+                    <span class="ticker-item"><i class="fa-solid fa-server text-cyan"></i> <strong>FiveM Hub</strong> : Canary Build 3258 actif • 5,250 serveurs en ligne</span>
+                    <span class="ticker-divider">•</span>
+                    <span class="ticker-item"><i class="fa-solid fa-signal text-green"></i> <strong>Rockstar Social Club</strong> : Services 100% opérationnels • Ping 14ms</span>
+                    <span class="ticker-divider">•</span>
+                    <span class="ticker-item"><i class="fa-solid fa-car text-amber"></i> <strong>GTA Online</strong> : Bonus triple GTA$ & RP sur les contrats de nuit</span>
+                </div>
+            </div>
+
             <!-- Centre : Titre Vidéo Active & Actions Rapides -->
             <div class="hub-video-info-center">
                 <div class="video-tag-row">
-                    <span class="v-badge v-rstar"><i class="fa-solid fa-star"></i> ROCKSTAR OFFICIEL</span>
+                    <span class="v-badge v-rstar"><i class="fa-solid fa-star"></i> ROCKSTAR GAMES OFFICIEL</span>
                     <span class="v-badge v-res"><i class="fa-solid fa-film"></i> 4K 60FPS</span>
-                    <span class="v-badge v-live"><i class="fa-solid fa-tower-broadcast"></i> AUTO-FLUX ACTIF</span>
+                    <span class="v-badge v-live"><i class="fa-solid fa-tower-broadcast"></i> AUTO-FLUX EN DIRECT</span>
+                    <span class="v-badge v-ping" id="live-rockstar-ping"><i class="fa-solid fa-gauge-high text-green"></i> PING 14 MS</span>
                 </div>
                 <h1 class="active-video-title 3d-text-glow" id="active-video-title">Grand Theft Auto VI - Bande-Annonce Officielle 1</h1>
                 <p class="active-video-desc" id="active-video-desc">Bienvenue à Leonida State et Vice City. Regardez les vidéos officielles avec volume doux ajustable et suivez les annonces du Newswire en temps réel.</p>
@@ -149,8 +168,6 @@
                 </div>
             </div>
 
-
-
             <!-- Bouton Flottant Quitter le Plein Écran (Visible uniquement en Mode Cinéma) -->
             <button class="btn-exit-cinema btn-3d-glow" id="btn-exit-cinema" title="Quitter le plein écran (Échap)" style="display: none;">
                 <i class="fa-solid fa-compress"></i> <span>Quitter le Plein Écran (Échap)</span>
@@ -163,13 +180,12 @@
                     <div class="panel-header">
                         <div class="panel-title-group">
                             <span><i class="fa-solid fa-film text-pink"></i> BANDES-ANNONCES 4K & VIDÉOS</span>
-                            <span class="badge-sub-counter" id="active-video-count-badge">6 VIDÉOS OFFICIELLES</span>
+                            <span class="badge-sub-counter" id="active-video-count-badge">8 VIDÉOS OFFICIELLES</span>
                         </div>
                         <div class="video-filter-pills">
                             <button class="vid-filter-btn active" data-filter="all">TOUT</button>
                             <button class="vid-filter-btn" data-filter="gtavi">GTA VI</button>
                             <button class="vid-filter-btn" data-filter="gtav">GTA V</button>
-                            <button class="vid-filter-btn" data-filter="fivem">FIVEM</button>
                             <button class="vid-filter-btn" data-filter="rdr2">RDR2</button>
                         </div>
                     </div>
@@ -246,7 +262,7 @@
                             </div>
                         </div>
 
-                        <!-- 7. GTA Online The Diamond Casino & Resort (e2_t3A4rS9k) -->
+                        <!-- 7. GTA Online The Diamond Casino & Resort (VjZ5YjX1n3g) -->
                         <div class="video-card-item card-3d-tilt" data-cat="gtav" data-yt="VjZ5YjX1n3g" data-title="GTA Online: The Diamond Casino - Trailer Officiel" data-desc="Vivez le luxe absolu, jeux de table, penthouses et braquages d'élite à Los Santos.">
                             <div class="video-thumb" style="background-image: url('https://i.ytimg.com/vi/VjZ5YjX1n3g/hqdefault.jpg');">
                                 <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
@@ -272,34 +288,66 @@
                     </div>
                 </div>
 
-                <!-- Fil des Dernières Annonces Officielles 3D Glass -->
+                <!-- Grand Fil des Dernières Annonces Officielles 3D Glass -->
                 <div class="news-feed-panel glass-card-3d">
                     <div class="panel-header">
-                        <span><i class="fa-solid fa-bullhorn text-amber"></i> ANNONCES EN DIRECT (TEMPS RÉEL)</span>
+                        <div class="panel-title-group">
+                            <span><i class="fa-solid fa-bullhorn text-amber"></i> ANNONCES ROCKSTAR GAMES (TEMPS RÉEL)</span>
+                            <span class="live-status-badge"><span class="pulse-dot-green"></span> FLUX EN DIRECT</span>
+                        </div>
                         <a href="https://www.rockstargames.com/newswire" target="_blank" class="live-link">Newswire ↗</a>
                     </div>
-                    <div class="news-items-scroll" id="live-news-scroll-container">
-                        <div class="news-entry entry-3d">
-                            <span class="news-source text-pink"><i class="fa-solid fa-star"></i> ROCKSTAR GAMES • IL Y A 5 MIN</span>
-                            <h4>⭐ Grand Theft Auto VI : Leonida State en 4K Ray-Tracing</h4>
-                            <p>Toutes les informations sur la physique de l'eau, les environnements denses et le moteur RAGE 9.</p>
+                    <!-- Statut des Services Rockstar en Direct -->
+                    <div class="rockstar-services-grid">
+                        <div class="service-pill" title="Statut Social Club">
+                            <span class="srv-dot online"></span>
+                            <span class="srv-name">Social Club</span>
+                            <span class="srv-ping" id="sc-ping-val">14ms</span>
                         </div>
-                        <div class="news-entry entry-3d">
-                            <span class="news-source text-green"><i class="fa-solid fa-gamepad"></i> CFX.RE / FIVEM • IL Y A 12 MIN</span>
-                            <h4>🚀 FiveM Canary Build 3258 Déployé avec Succès</h4>
-                            <p>Optimisation du streaming des assets, réduction de 40% des drops de FPS et mémoire optimisée.</p>
+                        <div class="service-pill" title="Serveurs GTA Online">
+                            <span class="srv-dot online"></span>
+                            <span class="srv-name">GTA Online</span>
+                            <span class="srv-ping">1.45M Joueurs</span>
                         </div>
-                        <div class="news-entry entry-3d">
-                            <span class="news-source text-cyan"><i class="fa-solid fa-shield"></i> SÉCURITÉ & ANTI-CHEAT • IL Y A 25 MIN</span>
-                            <h4>🛡️ Détection Temps Réel Active</h4>
-                            <p>Blocage automatique des injections mémoire et protection des données serveurs 24/7.</p>
+                        <div class="service-pill" title="Serveurs FiveM Hub">
+                            <span class="srv-dot online"></span>
+                            <span class="srv-name">FiveM Hub</span>
+                            <span class="srv-ping">5,250 Live</span>
                         </div>
-                        <div class="news-entry entry-3d">
-                            <span class="news-source text-amber"><i class="fa-solid fa-car"></i> GTA ONLINE • IL Y A 1H</span>
-                            <h4>🏎️ Nouveaux Véhicules & Événement Double GTA$</h4>
-                            <p>Récompenses doublées sur les contrats de vol et réductions exclusives sur les garages.</p>
+                        <div class="service-pill" title="Moteur GTA VI">
+                            <span class="srv-dot online"></span>
+                            <span class="srv-name">GTA VI DB</span>
+                            <span class="srv-ping">RAGE 9</span>
                         </div>
                     </div>
+                    <!-- Flux d'actualités interactives -->
+                    <div class="news-items-scroll" id="live-news-scroll-container">
+                        <!-- Rempli dynamiquement en temps réel par app.js -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL GRAND FORMAT: Détails de l'Annonce Rockstar Games en Direct -->
+    <div class="modal-backdrop" id="modal-news-detail">
+        <div class="modal-card glass-card-3d" style="max-width: 760px; width: 90%;">
+            <button class="modal-close" id="close-news-detail"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <div class="modal-icon" style="background: rgba(255, 152, 0, 0.2); color: #ff9800;"><i class="fa-solid fa-newspaper"></i></div>
+                <div>
+                    <h3 id="news-detail-title" style="font-family: var(--font-heading); font-size: 1.15rem; color: #fff;">Annonce Officielle Rockstar Games</h3>
+                    <p id="news-detail-meta" style="color: #ff9800; font-weight: 700; font-size: 0.8rem; margin-top: 2px;">ROCKSTAR GAMES • TEMPS RÉEL</p>
+                </div>
+            </div>
+            <div class="modal-body" style="padding: 16px 0; color: #cbd5e1; font-size: 0.95rem; line-height: 1.65;">
+                <div id="news-detail-body-text" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); padding: 18px; border-radius: 10px; margin-bottom: 16px;">
+                    Chargement de l'article officiel...
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <a href="https://www.rockstargames.com/newswire" target="_blank" class="btn-rstar-play" style="flex: 1; justify-content: center; text-decoration: none; padding: 12px 20px; font-family: var(--font-heading); font-size: 0.85rem;">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lire l'Article sur Rockstar Newswire Officiel
+                    </a>
                 </div>
             </div>
         </div>

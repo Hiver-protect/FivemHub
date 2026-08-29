@@ -1323,18 +1323,129 @@ function initUI() {
         });
     });
 
-    // 1. Bouton Synchronisation des Flux en Temps Réel
+    // 1. Gestion des Annonces Rockstar Games en Temps Réel
     const syncFeedBtn = document.getElementById('btn-sync-live-feed');
+    const openNewswireBtn = document.getElementById('btn-open-newswire-center');
     const syncStatusText = document.getElementById('live-feed-status-text');
     const newsContainer = document.getElementById('live-news-scroll-container');
+    const newsModal = document.getElementById('modal-news-detail');
+    const closeNewsModalBtn = document.getElementById('close-news-detail');
 
     const liveNewsFeedItems = [
-        { source: "ROCKSTAR GAMES • EN DIRECT", tag: "text-pink", title: "⭐ Grand Theft Auto VI : Nouvelle analyse des PNJ et de l'IA Leonida", desc: "Les systèmes de vie nocturne et les environnements urbains de Vice City bénéficient de la physique RAGE 9." },
-        { source: "CFX.RE / FIVEM • IL Y A 2 MIN", tag: "text-green", title: "🚀 FiveM Canary b3258 : Shaders 144 FPS actifs", desc: "Mise à jour globale pour le streaming des textures 8K et réduction de la latence réseau." },
-        { source: "ROCKSTAR NEWSWIRE • IL Y A 8 MIN", tag: "text-amber", title: "🌴 GTA Online : Événement spécial braquages et bonus VIP", desc: "Triple GTA$ et RP sur tous les contrats de sécurité et remises exceptionnelles." },
-        { source: "ANTI-CHEAT SÉCURITÉ • IL Y A 15 MIN", tag: "text-cyan", title: "🛡️ Détection active et protection serveurs FiveM", desc: "Nouvelle signature mémoire déployée sur l'ensemble du réseau mondial." },
-        { source: "REDM & RDR2 • IL Y A 30 MIN", tag: "text-pink", title: "🤠 RedM : Passerelle multijoueur améliorée", desc: "Nouveaux outils pour les créateurs de serveurs rôleplay western." }
+        { 
+            source: "ROCKSTAR GAMES • NEWSIRE OFFICIEL", 
+            tag: "text-pink", 
+            minutesAgo: 2,
+            title: "⭐ Grand Theft Auto VI : Leonida State & Vice City en 4K Ray-Tracing", 
+            desc: "Découvrez toutes les innovations techniques du moteur RAGE 9, la physique avancée de l'eau et les reflets néon de Vice City.",
+            content: "Rockstar Games est fier de vous présenter un aperçu exclusif de Leonida State et de la métropole de Vice City. Avec une densité de population inégalée, un système de météo dynamique en temps réel et des textures ultra haute définition en 4K 60FPS, Grand Theft Auto VI repousse les limites du jeu vidéo en monde ouvert."
+        },
+        { 
+            source: "CFX.RE / FIVEM • CANARY BUILD", 
+            tag: "text-green", 
+            minutesAgo: 8,
+            title: "🚀 FiveM Canary Build 3258 Déployé avec Succès", 
+            desc: "Optimisation majeure du streaming des assets mondiaux, réduction de 40% des drops de FPS et allocation mémoire optimisée.",
+            content: "La mise à jour b3258 du client FiveM apporte un support complet pour les nouvelles architectures GPU, une synchronisation d'entités ultra-rapide et une latence réseau réduite à son minimum pour l'ensemble des 5,250 serveurs en ligne."
+        },
+        { 
+            source: "ROCKSTAR NEWSWIRE • GTA ONLINE", 
+            tag: "text-amber", 
+            minutesAgo: 25,
+            title: "🏎️ GTA Online : Nouveaux Véhicules & Événement Double GTA$", 
+            desc: "Récompenses doublées sur les contrats de vol, garages de luxe et remises exclusives sur les supersportives à Los Santos.",
+            content: "Cette semaine à Los Santos, profitez de gains triplés sur les missions de sécurité, de 40% de remise sur les propriétés de luxe et débloquez la toute nouvelle sportive Grotti chez Legendary Motorsport."
+        },
+        { 
+            source: "SÉCURITÉ & ANTI-CHEAT FIVEM", 
+            tag: "text-cyan", 
+            minutesAgo: 45,
+            title: "🛡️ Détection Temps Réel Active & Protection Réseau", 
+            desc: "Blocage automatique des injections mémoire non autorisées et protection renforcée des données serveurs 24/7.",
+            content: "Nos systèmes de protection réseau surveillent en permanence l'intégrité des communications client-serveur afin de garantir une expérience de jeu équitable et sécurisée contre toute tentative de perturbation."
+        },
+        { 
+            source: "RED DEAD REDEMPTION 2 & REDM", 
+            tag: "text-pink", 
+            minutesAgo: 70,
+            title: "🤠 RedM : Passerelle Multijoueur & Outils Créateurs 2026", 
+            desc: "Nouvelles fonctionnalités de météo volumétrique et synchronisation d'animaux sauvages pour les serveurs RP Western.",
+            content: "La communauté RedM bénéficie désormais d'outils de création avancés permettant de scripter des quêtes scénarisées, des duels personnalisés et des camps de pionniers ultra-réalistes."
+        }
     ];
+
+    function renderRealtimeNews() {
+        if (!newsContainer) return;
+        const now = new Date();
+        const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+        newsContainer.innerHTML = liveNewsFeedItems.map((item, idx) => {
+            const timeLabel = item.minutesAgo <= 2 ? 'À L\'INSTANT' : `IL Y A ${item.minutesAgo} MIN`;
+            return `
+                <div class="news-entry entry-3d" data-idx="${idx}">
+                    <span class="news-source ${item.tag}">
+                        <span><i class="fa-solid fa-star"></i> ${item.source}</span>
+                        <span style="color: #ff9800; font-size: 0.62rem;">${timeLabel}</span>
+                    </span>
+                    <h4>${item.title}</h4>
+                    <p>${item.desc}</p>
+                </div>
+            `;
+        }).join('');
+
+        // Clic sur chaque article pour ouvrir la modale détaillée
+        newsContainer.querySelectorAll('.news-entry').forEach(card => {
+            card.addEventListener('click', () => {
+                sfx.playClick();
+                const idx = parseInt(card.dataset.idx, 10);
+                const item = liveNewsFeedItems[idx];
+                if (item) openNewsDetailModal(item);
+            });
+        });
+    }
+
+    function openNewsDetailModal(item) {
+        if (!newsModal) return;
+        const titleEl = document.getElementById('news-detail-title');
+        const metaEl = document.getElementById('news-detail-meta');
+        const bodyEl = document.getElementById('news-detail-body-text');
+
+        if (titleEl) titleEl.textContent = item.title;
+        if (metaEl) metaEl.textContent = `${item.source} • HORODATAGE EN DIRECT`;
+        if (bodyEl) {
+            bodyEl.innerHTML = `
+                <p style="margin-bottom: 12px; font-weight: 700; color: #fff; font-size: 1.05rem;">${item.desc}</p>
+                <p style="color: #94a3b8; line-height: 1.6;">${item.content}</p>
+            `;
+        }
+        openModal('modal-news-detail');
+    }
+
+    if (closeNewsModalBtn) {
+        closeNewsModalBtn.addEventListener('click', () => closeModal('modal-news-detail'));
+    }
+
+    if (openNewswireBtn) {
+        openNewswireBtn.addEventListener('click', () => {
+            sfx.playClick();
+            openNewsDetailModal(liveNewsFeedItems[0]);
+        });
+    }
+
+    // Premier rendu immédiat des annonces
+    renderRealtimeNews();
+
+    // Mises à jour en direct des minutes et du ping Social Club toutes les 10 secondes
+    setInterval(() => {
+        liveNewsFeedItems.forEach(item => { item.minutesAgo++; });
+        renderRealtimeNews();
+
+        const pingEl = document.getElementById('sc-ping-val');
+        const rstarPingEl = document.getElementById('live-rockstar-ping');
+        const randomPing = Math.floor(Math.random() * 4) + 12;
+        if (pingEl) pingEl.textContent = `${randomPing}ms`;
+        if (rstarPingEl) rstarPingEl.innerHTML = `<i class="fa-solid fa-gauge-high text-green"></i> PING ${randomPing} MS`;
+    }, 10000);
 
     if (syncFeedBtn) {
         syncFeedBtn.addEventListener('click', () => {
@@ -1349,19 +1460,14 @@ function initUI() {
                 const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
                 if (syncStatusText) syncStatusText.textContent = `À JOUR (${timeStr})`;
 
-                // Rafraîchissement des annonces en temps réel
-                if (newsContainer) {
-                    newsContainer.innerHTML = liveNewsFeedItems.map(item => `
-                        <div class="news-entry entry-3d">
-                            <span class="news-source ${item.tag}"><i class="fa-solid fa-star"></i> ${item.source}</span>
-                            <h4>${item.title}</h4>
-                            <p>${item.desc}</p>
-                        </div>
-                    `).join('');
-                }
+                // Réinitialisation des temps pour un effet temps réel immédiat
+                liveNewsFeedItems[0].minutesAgo = 0;
+                liveNewsFeedItems[1].minutesAgo = 4;
+                liveNewsFeedItems[2].minutesAgo = 18;
+                renderRealtimeNews();
 
-                showToast("✨ Flux Rockstar Games, Clips GTA VI & Newswire synchronisés en direct !", "success");
-            }, 900);
+                showToast("✨ Flux Rockstar Games & Newswire synchronisés en direct !", "success");
+            }, 800);
         });
     }
 
