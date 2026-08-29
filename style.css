@@ -38,6 +38,14 @@
     --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+html, body {
+    cursor: default;
+}
+
+button, a, input, select, .video-card-item, .live-pill, .icon-tool-btn, .rstar-badge, .news-entry {
+    cursor: pointer;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -77,126 +85,225 @@ body {
     opacity: 0.15;
     background: radial-gradient(circle, var(--primary-cyan) 0%, transparent 70%);
 }
-.cyan-glow { top: -100px; left: 20%; }
-.purple-glow { bottom: -100px; right: 10%; background: radial-gradient(circle, var(--primary-purple) 0%, transparent 70%); }
+/* Masquer toutes les barres de défilement et verrouiller l'écran à 100vh sans aucun scroll */
+html, body {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: rgba(10, 12, 16, 0.8); }
-::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--primary-cyan); }
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar {
+    width: 0px !important;
+    height: 0px !important;
+    display: none !important;
+}
+
 /* ==========================================================================
-   OFFICIAL FIVEM LAUNCHER THEME & ARCHITECTURE
+   PORTAIL OFFICIEL VIDÉOS 4K & ANNONCES ROCKSTAR GAMES / GTA VI / FIVEM
+   Plein Écran, Ultra-Épuré, Immersif et 144 FPS
    ========================================================================== */
-.official-fivem-theme {
-    background: #0d0f12 !important;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    color: #e4e7ec;
+.video-news-hub-container {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+    background: #000000;
     font-family: var(--font-body);
-}
-
-.fivem-main-wrapper {
+    user-select: none;
     display: flex;
     flex-direction: column;
-    height: 100%;
+}
+
+/* 1. Main Video Frame Background */
+.main-video-player-frame {
+    position: absolute;
+    inset: 0;
     width: 100%;
+    height: 100%;
+    z-index: 1;
     overflow: hidden;
 }
 
-/* 1. FiveM Official Top Bar */
-.fivem-top-nav {
-    height: 52px;
-    background: #090b0e;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+.hub-video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 56.25vw; /* 16:9 Aspect Ratio */
+    min-height: 100vh;
+    min-width: 177.77vh;
+    transform: translate(-50%, -50%);
+    border: none;
+    pointer-events: all;
+}
+
+.video-ambient-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, #090a0d 0%, rgba(9, 10, 13, 0.4) 40%, rgba(0,0,0,0.6) 100%),
+                radial-gradient(circle at 10% 20%, rgba(236, 72, 153, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.1), transparent 40%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* 2. Hub Overlay UI */
+.hub-overlay-ui {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 36px;
+    pointer-events: none;
+}
+
+.hub-top-bar, .hub-video-info-center, .hub-bottom-panels {
+    pointer-events: all;
+}
+
+/* Header */
+.hub-top-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
-    flex-shrink: 0;
-    z-index: 100;
+    background: rgba(13, 15, 20, 0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 24px;
+    border-radius: 12px;
 }
 
-.top-nav-left {
+.brand-badge {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
 }
 
-.fps-indicator {
-    font-family: var(--font-sub);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: #64748b;
-}
-
-.fivem-lambda-logo {
-    width: 22px;
-    height: 22px;
+.rstar-badge {
+    width: 38px;
+    height: 38px;
+    background: #ff9800;
+    color: #000;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 900;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
 }
 
-.lambda-svg {
-    width: 100%;
-    height: 100%;
-}
-
-.fivem-links-row {
+.hub-title-group {
     display: flex;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
 }
 
-.top-nav-right {
+.hub-brand-title {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+}
+
+.hub-brand-sub {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    letter-spacing: 1px;
+}
+
+.hub-top-right {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.fivem-user-count {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    font-size: 0.68rem;
+.live-pill {
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+    font-size: 0.75rem;
     font-weight: 700;
-    color: #94a3b8;
-    line-height: 1.2;
-}
-
-.count-row {
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.fivem-cfx-badge {
-    width: 28px;
-    height: 28px;
-    border-radius: 4px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #1e232d;
+.live-pill:hover {
+    background: rgba(34, 197, 94, 0.25);
+    border-color: #22c55e;
+    transform: scale(1.03);
 }
 
-.cfx-tiny-logo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.live-sync-pulse i.rotating {
+    animation: spin 1s linear infinite;
 }
 
-.top-sq-btn {
-    width: 32px;
-    height: 32px;
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* Mode Extinction des Feux Cinéma */
+body.cinema-lights-dimmed .hub-top-bar,
+body.cinema-lights-dimmed .hub-bottom-panels,
+body.cinema-lights-dimmed .live-ticker-bar {
+    opacity: 0.05 !important;
+    pointer-events: none !important;
+    transition: opacity 0.5s ease;
+}
+
+body.cinema-lights-dimmed:hover .hub-top-bar,
+body.cinema-lights-dimmed:hover .hub-bottom-panels,
+body.cinema-lights-dimmed:hover .live-ticker-bar {
+    opacity: 0.95 !important;
+    pointer-events: all !important;
+}
+
+body.cinema-lights-dimmed .hub-video-info-center {
+    opacity: 0.15;
+    transition: opacity 0.5s ease;
+}
+
+body.cinema-lights-dimmed:hover .hub-video-info-center {
+    opacity: 1;
+}
+
+.pulse-dot-green {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 10px #22c55e;
+    animation: pulse 1.5s infinite;
+}
+
+.icon-tool-btn {
+    width: 36px;
+    height: 36px;
     background: #181c24;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: #94a3b8;
-    border-radius: 6px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -204,50 +311,520 @@ body {
     transition: all 0.15s ease;
 }
 
-.top-sq-btn:hover {
+.icon-tool-btn:hover {
     background: #222733;
     color: #ffffff;
 }
 
-.top-sq-btn.close-btn:hover {
+.icon-tool-btn.close-btn:hover {
     background: #ef4444;
     color: #ffffff;
 }
 
-/* Gotham gradient box */
-.gotham-gradient-box {
-    background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%) !important;
+/* Center Video Title */
+.hub-video-info-center {
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.btn-fivem-connect-exact {
-    background: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #0f172a;
-    font-family: var(--font-sub);
-    font-size: 0.82rem;
+.video-tag-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.v-badge {
+    font-size: 0.7rem;
     font-weight: 800;
-    padding: 8px 24px;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.v-rstar { background: #ff9800; color: #000; font-family: var(--font-heading); }
+.v-res { background: rgba(255, 255, 255, 0.15); color: #fff; backdrop-filter: blur(8px); }
+.v-live { background: rgba(236, 72, 153, 0.2); border: 1px solid #ec4899; color: #ec4899; }
+
+.active-video-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.2;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+.active-video-desc {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.video-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn-fullscreen-vid {
+    background: #ff9800;
+    border: none;
+    color: #000;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 20px rgba(255, 152, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+.btn-fullscreen-vid:hover {
+    background: #ffa726;
+    transform: translateY(-2px);
+}
+
+/* Effets 3D & 4K Glassmorphism Avancés */
+.3d-text-glow {
+    text-shadow: 0 0 25px rgba(255, 152, 0, 0.4), 0 4px 20px rgba(0, 0, 0, 0.95);
+    letter-spacing: 1px;
+}
+
+.btn-3d-glow {
+    position: relative;
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transform: translateY(0);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-3d-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 152, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.btn-3d-glass {
+    background: rgba(22, 27, 36, 0.6) !important;
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.btn-3d-glass:hover {
+    background: rgba(30, 38, 52, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    transform: translateY(-2px);
+}
+
+/* Volume Control Pill */
+.volume-control-pill {
+    background: rgba(15, 18, 26, 0.75);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: var(--radius-full);
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn-vol-icon-toggle {
+    background: transparent;
+    border: none;
+    color: #22c55e;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.btn-vol-icon-toggle:hover {
+    color: #fff;
+}
+
+#video-volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+#video-volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+    cursor: pointer;
+}
+
+.vol-number-text {
+    font-family: var(--font-sub);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #22c55e;
+    min-width: 28px;
+}
+
+/* 3D Glass Cards */
+.glass-card-3d {
+    background: rgba(13, 16, 24, 0.75) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.badge-sub-counter {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: #94a3b8;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.card-3d-tilt {
+    position: relative;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #151822 0%, #0d1017 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.card-3d-tilt:hover {
+    transform: translateY(-5px) scale(1.02) !important;
+    border-color: rgba(255, 152, 0, 0.5) !important;
+    box-shadow: 0 14px 35px rgba(255, 152, 0, 0.25) !important;
+}
+
+.tag-4k-pill {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ff9800;
+    font-family: var(--font-heading);
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Live Ticker Bar (Temps Réel 24/7) */
+.live-ticker-bar {
+    background: rgba(10, 12, 18, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+    margin-bottom: 6px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.ticker-badge {
+    background: #ff9800;
+    color: #000;
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 900;
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ticker-content {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    white-space: nowrap;
+    animation: tickerMarquee 35s linear infinite;
+}
+
+@keyframes tickerMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+    font-size: 0.8rem;
+    color: #cbd5e1;
+}
+
+.ticker-item strong {
+    color: #fff;
+}
+
+/* Video Filter Pills */
+.panel-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.video-filter-pills {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vid-filter-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    font-family: var(--font-heading);
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.15s ease;
 }
 
-.btn-fivem-connect-exact:hover {
-    background: #22c55e;
+.vid-filter-btn:hover, .vid-filter-btn.active {
+    background: #ff9800;
+    color: #000;
+    border-color: #ff9800;
+    box-shadow: 0 2px 10px rgba(255, 152, 0, 0.35);
+}
+
+.btn-external-channel {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-family: var(--font-sub);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 12px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+}
+
+/* Modal Cinéma Plein Écran */
+.cinema-fullscreen-modal {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.cinema-fullscreen-modal.active {
+    display: flex;
+}
+
+.cinema-iframe {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+}
+
+.btn-exit-cinema {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    z-index: 1000000;
+    background: rgba(15, 18, 25, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-family: var(--font-sub);
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    transition: all 0.15s ease;
+}
+
+.btn-exit-cinema:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    transform: scale(1.05);
+}
+
+.btn-external-channel:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #fff;
+}
+
+/* Bottom Panels (Videos + News) */
+.hub-bottom-panels {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+}
+
+.video-playlist-carousel, .news-feed-panel {
+    background: rgba(13, 15, 20, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1px;
     color: #ffffff;
 }
 
-.btn-fivem-fav-exact {
-    width: 34px;
-    height: 34px;
-    background: transparent;
-    border: none;
-    color: #64748b;
-    font-size: 1.1rem;
-    cursor: pointer;
+.live-link {
+    font-size: 0.75rem;
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 700;
 }
 
-.btn-fivem-fav-exact:hover {
+.videos-list-scroll {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.video-card-item {
+    background: #151821;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 170px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.video-card-item:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.video-card-item.active {
+    border-color: #ff9800;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+.video-thumb {
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-icon-overlay {
+    width: 28px;
+    height: 28px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.75rem;
+}
+
+.video-meta {
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.video-meta strong {
+    font-size: 0.78rem;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.video-meta span {
+    font-size: 0.68rem;
+    color: #94a3b8;
+}
+
+/* News Scroll */
+.news-items-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 140px;
+    overflow-y: auto;
+}
+
+.news-entry {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+.news-source {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.news-entry h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.news-entry p {
+    font-size: 0.72rem;
+    color: #94a3b8;
+}
     color: #ff2a6d;
 }
 
@@ -2982,115 +3559,39 @@ body {
 }
 
 /* ==========================================================================
-   STYLE DU LOADING SCREEN (LOGO PARFAITEMENT CENTRÉ & BARRE EN BAS)
+   STYLE DU LOADING SCREEN (OPTIMISATION GPU 144 FPS / ZÉRO LAG)
    ========================================================================== */
 .boot-dark-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(10, 12, 16, 0.45) 80%, rgba(6, 8, 12, 0.85) 100%);
+    background: rgba(10, 12, 16, 0.45);
     pointer-events: none;
 }
 
 .gta6-scanline-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    background-size: 100% 4px, 6px 100%;
-    pointer-events: none;
-    opacity: 0.6;
+    display: none; /* Désactivé pour gain massif de performances GPU */
 }
 
-/* HUD Supérieur GTA VI & Leonida State */
-.gta6-top-info-hud {
-    position: absolute;
-    top: 30px;
-    left: 40px;
-    z-index: 150;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.gta6-watermark-tag {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(10, 12, 16, 0.75);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 42, 109, 0.4);
-    padding: 7px 16px;
-    border-radius: var(--radius-full);
-    font-family: var(--font-heading);
-    font-size: 0.78rem;
-    font-weight: 800;
-    color: #ff758c;
-    letter-spacing: 1.5px;
-    box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
-}
-
-.gta6-dot {
-    width: 8px;
-    height: 8px;
-    background: #ff2a6d;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #ff2a6d;
-    animation: pulse 1.5s infinite;
-}
-
-.gta6-build-tag, .gta6-fps-tag, .gta6-vram-tag {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 7px 14px;
-    border-radius: var(--radius-full);
-    font-family: var(--font-sub);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.8);
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* Boîte de Conseils RP Dynamiques */
-.gta6-tip-box {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(10, 12, 16, 0.85);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 8px 18px;
-    border-radius: var(--radius-md);
-    margin-bottom: 12px;
-    font-family: var(--font-sub);
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-}
-
-/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT CENTRÉ AU MILIEU */
+/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT CENTRÉ & ACCÉLÉRÉ MATÉRIELLEMENT (GPU 144 FPS) */
 .gta6-hub-logo-wrap {
     position: absolute;
     top: 45%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate3d(-50%, -50%, 0);
     z-index: 110;
-    width: 380px;
+    width: 360px;
     max-width: 80vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 45px rgba(224, 30, 132, 0.65));
-    animation: hubLogoFloat 3.5s infinite ease-in-out;
+    will-change: transform;
+    animation: hubLogoGpuSmooth 3s infinite alternate ease-in-out;
 }
 
-@keyframes hubLogoFloat {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 45px rgba(224, 30, 132, 0.65)); }
-    50% { transform: translate(-50%, -52%) scale(1.03); filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 1)) drop-shadow(0 0 65px rgba(255, 158, 0, 0.8)); }
+@keyframes hubLogoGpuSmooth {
+    0% { transform: translate3d(-50%, -50%, 0) scale(1); }
+    100% { transform: translate3d(-50%, -52%, 0) scale(1.03); }
 }
 
 .gta6-hub-img {
@@ -3098,6 +3599,7 @@ body {
     height: auto;
     display: block;
     object-fit: contain;
+    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.85));
 }
 
 /* Bouton Discret pour Passer l'Intro */
@@ -3123,6 +3625,7 @@ body {
     gap: 8px;
     transition: var(--transition-fast);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    animation: slideInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .skip-splash-btn:hover {
@@ -3181,7 +3684,8 @@ body {
     border-radius: 6px;
     box-shadow: 0 0 20px rgba(255, 42, 109, 0.9);
     position: relative;
-    transition: width 0.2s ease-out;
+    transition: none !important; /* Contrôlé à 144 FPS natif par requestAnimationFrame */
+    will-change: width;
 }
 
 /* Bonhomme Silhouette en Course Animé */

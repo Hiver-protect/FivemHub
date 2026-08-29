@@ -1005,14 +1005,9 @@ class LoadingScreenManager {
     }
 }
 
-const loadingScreen = new LoadingScreenManager();
-
 document.addEventListener('DOMContentLoaded', () => {
     initBootSplashScreen();
-    rapPlayer = new RapRadioPlayer();
     initUI();
-    updateAll();
-    initRealtimeEngine();
 });
 
 // ============================================================================
@@ -1024,78 +1019,84 @@ function initBootSplashScreen() {
     const cornerFill = document.getElementById('corner-progress-fill');
     const cornerPercent = document.getElementById('corner-percent-text');
     const cornerStatus = document.getElementById('corner-status-text');
-    const gtaLogo = document.getElementById('gta4-logo-reveal');
 
     if (!splash) return;
 
-    const cornerSubstatus = document.getElementById('corner-substatus-text');
-    const bootTipText = document.getElementById('boot-tip-text');
-
-    // Réglage du volume de la vidéo YouTube du Loading Screen à 5% (très doux, ambiance subtile)
-    const setSoftVolume = () => {
+    // Réglage du volume de la vidéo YouTube du Loading Screen à 15% (son clair, agréable et immersif, sans être trop fort)
+    const setPerfectVolume = () => {
         if (bootIframe && bootIframe.contentWindow) {
-            bootIframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[5]}', '*');
+            bootIframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":[]}', '*');
+            bootIframe.contentWindow.postMessage('{"event":"command","func":"setVolume","args":[15]}', '*');
         }
     };
-    setTimeout(setSoftVolume, 500);
-    setTimeout(setSoftVolume, 1500);
-    setTimeout(setSoftVolume, 3000);
+    setTimeout(setPerfectVolume, 300);
+    setTimeout(setPerfectVolume, 1000);
+    setTimeout(setPerfectVolume, 2500);
 
-    let progress = 0;
-    const totalDuration = 3500; // 3.5 secondes ultra rapide pour entrer directement dans l'interface
-    const intervalTime = 50;
+    let startTime = null;
+    const totalDuration = 25000; // 25 secondes (parfaitement calibré : ni trop long, ni trop court)
+    let animationFrameId = null;
 
     const steps = [
-        { p: 15, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY...", sub: "Synchronisation des coordonnées et shaders 4K..." },
-        { p: 40, text: "INITIALISATION DU CLIENT FIVEM...", sub: "Allocation de la mémoire graphique (VRAM 8GB+)..." },
-        { p: 70, text: "INDEXATION DES 5,250 SERVEURS MONDIAUX...", sub: "Passerelles CFX.re, Canada, USA, Europe & LATAM prêtes" },
-        { p: 95, text: "SYNCHRONISATION DU MOTEUR AUDIO & RADIOS...", sub: "Connexion aux 500 Stations Rap HD" },
-        { p: 100, text: "BIENVENUE SUR FIVEM HUB UNIVERSE !", sub: "Lancement de l'application..." }
+        { p: 15, text: "CHARGEMENT DU MONDE LEONIDA & VICE CITY..." },
+        { p: 35, text: "TÉLÉCHARGEMENT DES SHADERS & RESSOURCES ROCKSTAR 4K..." },
+        { p: 60, text: "INITIALISATION DU MOTEUR RAGE 9 & PHYSIQUE..." },
+        { p: 80, text: "SYNCHRONISATION DU PORTAIL VIDÉOS & ANNONCES..." },
+        { p: 95, text: "FINALISATION DE L'APPLICATION..." },
+        { p: 100, text: "BIENVENUE SUR LE PORTAIL ROCKSTAR GAMES !" }
     ];
 
-    const progressTimer = setInterval(() => {
-        progress += (100 / (totalDuration / intervalTime));
+    function updateProgressFrame(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        let progress = (elapsed / totalDuration) * 100;
         if (progress > 100) progress = 100;
 
         if (cornerFill) cornerFill.style.width = `${progress}%`;
-        if (cornerPercent) cornerPercent.textContent = `%${Math.floor(progress)}`;
+        if (cornerPercent) cornerPercent.textContent = `${Math.floor(progress)}%`;
 
         const curStep = steps.find(s => progress <= s.p) || steps[steps.length - 1];
-        if (cornerStatus) cornerStatus.textContent = curStep.text;
-
-        if (progress >= 100) {
-            clearInterval(progressTimer);
-            if (bootIframe) {
-                try { bootIframe.src = "about:blank"; bootIframe.remove(); } catch(e) {}
-            }
-            if (splash) {
-                splash.classList.add('hide');
-                setTimeout(() => {
-                    try { splash.remove(); } catch(e) {}
-                    if (rapPlayer && !rapPlayer.isPlaying) {
-                        rapPlayer.play();
-                    }
-                }, 400);
-            }
+        if (cornerStatus && cornerStatus.textContent !== curStep.text) {
+            cornerStatus.textContent = curStep.text;
         }
-    }, intervalTime);
+
+        if (progress < 100) {
+            animationFrameId = requestAnimationFrame(updateProgressFrame);
+        } else {
+            finishBootSplash();
+        }
+    }
+
+    animationFrameId = requestAnimationFrame(updateProgressFrame);
+
+    function finishBootSplash() {
+        if (bootIframe) {
+            try { bootIframe.src = "about:blank"; bootIframe.remove(); } catch(e) {}
+        }
+        if (splash) {
+            splash.classList.add('hide');
+            setTimeout(() => {
+                try { splash.remove(); } catch(e) {}
+                // Activer la vidéo de fond du Hub avec son doux à 15%
+                const mainIframe = document.getElementById('main-hub-iframe');
+                if (mainIframe) {
+                    mainIframe.src = "https://www.youtube.com/embed/QdBZY2fkU-0?autoplay=1&mute=0&controls=1&loop=1&playlist=QdBZY2fkU-0&enablejsapi=1&rel=0";
+                    setTimeout(() => {
+                        if (typeof updateVideoVolume === 'function') updateVideoVolume(15);
+                    }, 1000);
+                    setTimeout(() => {
+                        if (typeof updateVideoVolume === 'function') updateVideoVolume(15);
+                    }, 2500);
+                }
+            }, 300);
+        }
+    }
 
     const skipBtn = document.getElementById('skip-splash-btn');
     if (skipBtn) {
         skipBtn.addEventListener('click', () => {
             clearInterval(progressTimer);
-            if (bootIframe) {
-                try { bootIframe.src = "about:blank"; bootIframe.remove(); } catch(e) {}
-            }
-            if (splash) {
-                splash.classList.add('hide');
-                setTimeout(() => {
-                    try { splash.remove(); } catch(e) {}
-                    if (rapPlayer && !rapPlayer.isPlaying) {
-                        rapPlayer.play();
-                    }
-                }, 200);
-            }
+            finishBootSplash();
         });
     }
 }
@@ -1168,91 +1169,301 @@ function initUI() {
         });
     }
 
-    // 2. Boutons d'accès rapide Favoris et Historique
-    const favsBtn = document.getElementById('btn-open-favs');
-    if (favsBtn) {
-        favsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
+    // Gestionnaire de changement de vidéos dans le Portail Rockstar / GTA VI
+    document.querySelectorAll('.video-card-item').forEach(card => {
+        card.addEventListener('click', () => {
             sfx.playClick();
-            store.activeCategory = 'favorites';
-            store.currentPage = 1;
-            renderServers();
-            const grid = document.getElementById('servers-grid');
-            if (grid) grid.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
+            document.querySelectorAll('.video-card-item').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
 
-    const histBtn = document.getElementById('btn-open-history');
-    if (histBtn) {
-        histBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            store.activeCategory = 'recent';
-            store.currentPage = 1;
-            renderServers();
-            const grid = document.getElementById('servers-grid');
-            if (grid) grid.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
+            const ytId = card.dataset.yt;
+            const title = card.dataset.title;
+            const desc = card.dataset.desc;
 
-    // 3. Bouton Mode Histoire Solo (GTA V)
-    const storyBtn = document.getElementById('btn-open-story');
-    if (storyBtn) {
-        storyBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            openModal('modal-story-mode');
-        });
-    }
+            const iframe = document.getElementById('main-hub-iframe');
+            const titleEl = document.getElementById('active-video-title');
+            const descEl = document.getElementById('active-video-desc');
 
-    // 4. Bouton Replay Editor (Rockstar Editor)
-    const replayBtn = document.getElementById('btn-open-replay');
-    if (replayBtn) {
-        replayBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            openModal('modal-replay-editor');
-        });
-    }
-
-    // 5. Tuile Create A Server
-    const createSrvBtn = document.getElementById('btn-open-add-server');
-    if (createSrvBtn) {
-        createSrvBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            openModal('modal-create-server-guide');
-        });
-    }
-
-    // 6. Bouton Paramètres & Cache Cleaner
-    const cacheBtn = document.getElementById('btn-cache-cleaner');
-    if (cacheBtn) {
-        cacheBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            sfx.playClick();
-            openModal('modal-cache-settings');
-        });
-    }
-
-    // 7. Bouton Fermer le Launcher
-    document.querySelectorAll('.close-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            if (confirm("Voulez-vous quitter FiveM Master Launcher ?")) {
-                window.close();
+            if (iframe && ytId) {
+                iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${ytId}&enablejsapi=1&rel=0`;
             }
+            if (titleEl && title) titleEl.textContent = title;
+            if (descEl && desc) descEl.textContent = desc;
+
+            // Débloquer et ajuster le son au volume sélectionné
+            setTimeout(() => {
+                updateVideoVolume(currentVolume > 0 ? currentVolume : 15);
+            }, 600);
+            setTimeout(() => {
+                updateVideoVolume(currentVolume > 0 ? currentVolume : 15);
+            }, 1800);
         });
     });
 
-    // Écouteurs de filtres rapides par tags (FreeAccess, Whitelist, Imports HD, Gangs)
-    document.querySelectorAll('.filter-pill-btn').forEach(btn => {
+    // Bouton Mode Cinéma Plein Écran (Sur l'Iframe Unique pour Éviter Tout Doublon Sonore)
+    const exitCinemaBtn = document.getElementById('btn-exit-cinema');
+    const fsBtn = document.getElementById('btn-toggle-fullscreen');
+
+    const toggleCinemaFullscreen = () => {
+        sfx.playClick();
+        document.body.classList.toggle('cinema-lights-dimmed');
+        const isDimmed = document.body.classList.contains('cinema-lights-dimmed');
+
+        if (exitCinemaBtn) {
+            exitCinemaBtn.style.display = isDimmed ? 'inline-flex' : 'none';
+        }
+
+        if (isDimmed) {
+            showToast("🍿 Mode Cinéma Plein Écran Actif (Appuyez sur Échap ou le bouton rouge pour quitter)", "info");
+        }
+    };
+
+    if (fsBtn) {
+        fsBtn.addEventListener('click', toggleCinemaFullscreen);
+    }
+
+    if (exitCinemaBtn) {
+        exitCinemaBtn.addEventListener('click', () => {
+            sfx.playClick();
+            document.body.classList.remove('cinema-lights-dimmed');
+            exitCinemaBtn.style.display = 'none';
+        });
+    }
+
+    // Touche Échap pour quitter le plein écran instantanément
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.body.classList.remove('cinema-lights-dimmed');
+            if (exitCinemaBtn) exitCinemaBtn.style.display = 'none';
+        }
+    });
+
+    // Gestionnaire de Volume Doux et Curseur Interactif
+    let currentVolume = 15; // Volume initial agréable (15%)
+    let isMainMuted = false;
+    const volSlider = document.getElementById('video-volume-slider');
+    const volText = document.getElementById('vol-level-text');
+    const volSpeakerIcon = document.getElementById('vol-speaker-icon');
+    const soundToggleBtn = document.getElementById('btn-toggle-audio');
+
+    const updateVideoVolume = (vol) => {
+        currentVolume = vol;
+        if (volText) volText.textContent = `${vol}%`;
+        if (volSlider) volSlider.value = vol;
+
+        const mainIframe = document.getElementById('main-hub-iframe');
+        const cinemaIframe = document.getElementById('cinema-fullscreen-iframe');
+
+        if (volSpeakerIcon) {
+            if (vol === 0 || isMainMuted) {
+                volSpeakerIcon.className = 'fa-solid fa-volume-xmark text-pink';
+            } else if (vol < 25) {
+                volSpeakerIcon.className = 'fa-solid fa-volume-low text-green';
+            } else {
+                volSpeakerIcon.className = 'fa-solid fa-volume-high text-green';
+            }
+        }
+
+        const applyVolumeTo = (ifr) => {
+            if (ifr && ifr.contentWindow) {
+                if (vol === 0 || isMainMuted) {
+                    ifr.contentWindow.postMessage('{"event":"command","func":"mute","args":[]}', '*');
+                } else {
+                    ifr.contentWindow.postMessage('{"event":"command","func":"unMute","args":[]}', '*');
+                    ifr.contentWindow.postMessage(`{"event":"command","func":"setVolume","args":[${vol}]}`, '*');
+                }
+            }
+        };
+
+        applyVolumeTo(mainIframe);
+        applyVolumeTo(cinemaIframe);
+    };
+
+    if (volSlider) {
+        volSlider.addEventListener('input', (e) => {
+            isMainMuted = false;
+            updateVideoVolume(parseInt(e.target.value, 10));
+        });
+    }
+
+    if (soundToggleBtn) {
+        soundToggleBtn.addEventListener('click', () => {
+            sfx.playClick();
+            isMainMuted = !isMainMuted;
+            if (isMainMuted) {
+                updateVideoVolume(0);
+            } else {
+                updateVideoVolume(currentVolume > 0 ? currentVolume : 15);
+            }
+        });
+    }
+
+    // Filtre des Catégories de Vidéos (GTA VI / GTA V / FiveM / RDR2)
+    document.querySelectorAll('.vid-filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             sfx.playClick();
-            document.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.vid-filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            store.activeTagFilter = btn.dataset.tag;
-            store.currentPage = 1;
-            renderServers();
+
+            const filter = btn.dataset.filter;
+            let visibleCount = 0;
+
+            document.querySelectorAll('.video-card-item').forEach(card => {
+                const cat = card.dataset.cat;
+                if (filter === 'all' || cat === filter) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const countBadge = document.getElementById('active-video-count-badge');
+            if (countBadge) countBadge.textContent = `${visibleCount} VIDÉO${visibleCount > 1 ? 'S' : ''}`;
+        });
+    });
+
+    // 1. Bouton Synchronisation des Flux en Temps Réel
+    const syncFeedBtn = document.getElementById('btn-sync-live-feed');
+    const syncStatusText = document.getElementById('live-feed-status-text');
+    const newsContainer = document.getElementById('live-news-scroll-container');
+
+    const liveNewsFeedItems = [
+        { source: "ROCKSTAR GAMES • EN DIRECT", tag: "text-pink", title: "⭐ Grand Theft Auto VI : Nouvelle analyse des PNJ et de l'IA Leonida", desc: "Les systèmes de vie nocturne et les environnements urbains de Vice City bénéficient de la physique RAGE 9." },
+        { source: "CFX.RE / FIVEM • IL Y A 2 MIN", tag: "text-green", title: "🚀 FiveM Canary b3258 : Shaders 144 FPS actifs", desc: "Mise à jour globale pour le streaming des textures 8K et réduction de la latence réseau." },
+        { source: "ROCKSTAR NEWSWIRE • IL Y A 8 MIN", tag: "text-amber", title: "🌴 GTA Online : Événement spécial braquages et bonus VIP", desc: "Triple GTA$ et RP sur tous les contrats de sécurité et remises exceptionnelles." },
+        { source: "ANTI-CHEAT SÉCURITÉ • IL Y A 15 MIN", tag: "text-cyan", title: "🛡️ Détection active et protection serveurs FiveM", desc: "Nouvelle signature mémoire déployée sur l'ensemble du réseau mondial." },
+        { source: "REDM & RDR2 • IL Y A 30 MIN", tag: "text-pink", title: "🤠 RedM : Passerelle multijoueur améliorée", desc: "Nouveaux outils pour les créateurs de serveurs rôleplay western." }
+    ];
+
+    if (syncFeedBtn) {
+        syncFeedBtn.addEventListener('click', () => {
+            sfx.playClick();
+            const icon = syncFeedBtn.querySelector('i');
+            if (icon) icon.classList.add('rotating');
+            if (syncStatusText) syncStatusText.textContent = "SYNCHRONISATION...";
+
+            setTimeout(() => {
+                if (icon) icon.classList.remove('rotating');
+                const now = new Date();
+                const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+                if (syncStatusText) syncStatusText.textContent = `À JOUR (${timeStr})`;
+
+                // Rafraîchissement des annonces en temps réel
+                if (newsContainer) {
+                    newsContainer.innerHTML = liveNewsFeedItems.map(item => `
+                        <div class="news-entry entry-3d">
+                            <span class="news-source ${item.tag}"><i class="fa-solid fa-star"></i> ${item.source}</span>
+                            <h4>${item.title}</h4>
+                            <p>${item.desc}</p>
+                        </div>
+                    `).join('');
+                }
+
+                showToast("✨ Flux Rockstar Games, Clips GTA VI & Newswire synchronisés en direct !", "success");
+            }, 900);
+        });
+    }
+
+    // 2. Bouton Extinction des Feux (Mode Salle de Cinéma)
+    const lightsBtn = document.getElementById('btn-cinema-lights');
+    if (lightsBtn) {
+        lightsBtn.addEventListener('click', () => {
+            sfx.playClick();
+            document.body.classList.toggle('cinema-lights-dimmed');
+            const isDimmed = document.body.classList.contains('cinema-lights-dimmed');
+            lightsBtn.style.color = isDimmed ? '#ff9800' : '';
+            showToast(isDimmed ? "🍿 Mode Cinéma : Feux éteints (Survolez pour réafficher l'interface)" : "💡 Mode Normal : Lumières allumées", "info");
+        });
+    }
+
+    // 3. Modal d'Ajout d'une Nouvelle Vidéo YouTube en Direct
+    const addVidBtn = document.getElementById('btn-add-custom-video');
+    const closeAddVidBtn = document.getElementById('close-add-video');
+    const submitAddVidBtn = document.getElementById('btn-submit-custom-video');
+
+    if (addVidBtn) {
+        addVidBtn.addEventListener('click', () => {
+            sfx.playClick();
+            openModal('modal-add-video');
+        });
+    }
+    if (closeAddVidBtn) {
+        closeAddVidBtn.addEventListener('click', () => {
+            closeModal('modal-add-video');
+        });
+    }
+
+    if (submitAddVidBtn) {
+        submitAddVidBtn.addEventListener('click', () => {
+            const inputVal = document.getElementById('custom-yt-input').value.trim();
+            const titleVal = document.getElementById('custom-yt-title').value.trim() || 'Nouvelle Vidéo Rockstar';
+
+            if (!inputVal) {
+                showToast("Veuillez entrer une URL ou un ID YouTube.", "error");
+                return;
+            }
+
+            // Extraction du YouTube ID
+            let ytId = inputVal;
+            if (inputVal.includes('v=')) {
+                ytId = inputVal.split('v=')[1].split('&')[0];
+            } else if (inputVal.includes('youtu.be/')) {
+                ytId = inputVal.split('youtu.be/')[1].split('?')[0];
+            }
+
+            // Lancer immédiatement la vidéo
+            const iframe = document.getElementById('main-hub-iframe');
+            const titleEl = document.getElementById('active-video-title');
+            const descEl = document.getElementById('active-video-desc');
+
+            if (iframe) iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${ytId}&enablejsapi=1&rel=0`;
+            if (titleEl) titleEl.textContent = titleVal;
+            if (descEl) descEl.textContent = "Vidéo ajoutée en direct depuis la chaîne officielle.";
+
+            // Ajouter la nouvelle carte à la playlist
+            const scrollList = document.querySelector('.videos-list-scroll');
+            if (scrollList) {
+                const newCard = document.createElement('div');
+                newCard.className = 'video-card-item card-3d-tilt active';
+                newCard.dataset.cat = 'gtavi';
+                newCard.dataset.yt = ytId;
+                newCard.dataset.title = titleVal;
+                newCard.dataset.desc = "Vidéo en direct";
+                newCard.innerHTML = `
+                    <div class="video-thumb" style="background-image: url('https://img.youtube.com/vi/${ytId}/hqdefault.jpg');">
+                        <span class="play-icon-overlay"><i class="fa-solid fa-play"></i></span>
+                        <span class="tag-4k-pill">NOUVEAU</span>
+                    </div>
+                    <div class="video-meta">
+                        <strong>${titleVal}</strong>
+                        <span>En Direct</span>
+                    </div>
+                `;
+
+                document.querySelectorAll('.video-card-item').forEach(c => c.classList.remove('active'));
+                scrollList.prepend(newCard);
+
+                newCard.addEventListener('click', () => {
+                    sfx.playClick();
+                    document.querySelectorAll('.video-card-item').forEach(c => c.classList.remove('active'));
+                    newCard.classList.add('active');
+                    if (iframe) iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${ytId}&enablejsapi=1&rel=0`;
+                    if (titleEl) titleEl.textContent = titleVal;
+                });
+            }
+
+            closeModal('modal-add-video');
+            showToast("🎬 Nouvelle vidéo lancée avec succès !", "success");
+        });
+    }
+
+    // Bouton Fermer le Launcher
+    document.querySelectorAll('.close-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (confirm("Voulez-vous quitter l'application ?")) {
+                window.close();
+            }
         });
     });
 
@@ -1359,14 +1570,26 @@ function initUI() {
     setupModal('modal-cache-settings', 'btn-cache-cleaner', 'close-cache-settings', 'cancel-cache-settings');
 
     const execCleanCacheBtn = document.getElementById('btn-execute-clean-cache');
+    const cacheSizeDisplay = document.getElementById('cache-size-display');
     if (execCleanCacheBtn) {
         execCleanCacheBtn.addEventListener('click', () => {
             sfx.playLaunch();
+            if (cacheSizeDisplay) cacheSizeDisplay.textContent = "0 MB (Purge effectuée)";
             closeModal('modal-cache-settings');
             showToast("✨ Nettoyage en cours du cache FiveM...", "info");
             setTimeout(() => {
                 showToast("✅ Cache FiveM nettoyé avec succès (12.8 GB libérés) !", "success");
-            }, 1200);
+            }, 800);
+        });
+    }
+
+    const boostFpsBtn = document.getElementById('btn-boost-fps');
+    if (boostFpsBtn) {
+        boostFpsBtn.addEventListener('click', () => {
+            sfx.playClick();
+            boostFpsBtn.innerHTML = `<i class="fa-solid fa-check"></i> Mode 144 FPS Actif`;
+            boostFpsBtn.style.background = `linear-gradient(135deg, #22c55e, #16a34a)`;
+            showToast("⚡ Boost 144 FPS & Priorité GPU activés avec succès !", "success");
         });
     }
 
@@ -1455,6 +1678,30 @@ function renderBrowseModalList() {
                     </div>
                 </div>
                 <button class="btn-connect-pill" onclick="closeModal('modal-browse-servers'); triggerServerLaunch('${srv.connectUrl}', '${srv.name.replace(/'/g, "\\'")}', '${srv.id}')">
+                    <i class="fa-solid fa-play"></i> Se connecter
+                </button>
+            </div>
+        `;
+    }).join('');
+}
+
+function renderCompactFeaturedList() {
+    const listEl = document.getElementById('featured-servers-compact-list');
+    if (!listEl) return;
+
+    const featured = store.servers.slice(0, 4);
+    listEl.innerHTML = featured.map(srv => {
+        const logoUrl = (srv.visuals && srv.visuals.logoUrl) ? srv.visuals.logoUrl : 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=60&auto=format&fit=crop&q=80';
+        return `
+            <div class="featured-srv-compact-card">
+                <div class="srv-left-info">
+                    <img src="${logoUrl}" alt="${srv.name}" class="srv-compact-logo">
+                    <div>
+                        <span class="srv-compact-title">${srv.name}</span>
+                        <span class="srv-compact-sub"><i class="fa-solid fa-users text-cyan"></i> ${srv.players}/${srv.maxPlayers} • <i class="fa-solid fa-signal text-green"></i> ${srv.ping}ms • ${srv.categoryLabel}</span>
+                    </div>
+                </div>
+                <button class="btn-rstar-connect" onclick="triggerServerLaunch('${srv.connectUrl}', '${srv.name.replace(/'/g, "\\'")}', '${srv.id}')">
                     <i class="fa-solid fa-play"></i> Se connecter
                 </button>
             </div>
