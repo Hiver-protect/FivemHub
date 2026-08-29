@@ -2231,3 +2231,204 @@ function showToast(message, type = 'info') {
         setTimeout(() => toast.remove(), 300);
     }, 3500);
 }
+
+// ============================================================================
+// 10. MOTEUR DU FORUM & TCHAT COMMUNAUTAIRE EN TEMPS RÉEL (GTA VI & FIVEM)
+// ============================================================================
+function initLiveCommunityForum() {
+    const forumModal = document.getElementById('modal-live-forum');
+    const openForumBtn = document.getElementById('btn-open-live-forum');
+    const closeForumBtn = document.getElementById('close-live-forum');
+    const msgContainer = document.getElementById('forum-messages-container');
+    const msgForm = document.getElementById('forum-message-form');
+    const msgInput = document.getElementById('forum-msg-input');
+    const channelBtns = document.querySelectorAll('.forum-channel-btn');
+    const channelTitle = document.getElementById('forum-current-channel-title');
+    const channelTopic = document.getElementById('forum-current-channel-topic');
+    const typingIndicator = document.getElementById('forum-typing-text');
+
+    if (!forumModal) return;
+
+    let activeChannel = 'gta-vi-theories';
+
+    const CHANNELS_CONFIG = {
+        'gta-vi-theories': {
+            name: '#gta-vi-theories',
+            topic: 'Discussions, analyses de trailers, physique RAGE 9 et secrets de Vice City',
+            messages: [
+                { author: 'ViceCity_Pilot', role: 'VIP', tag: 'role-vip', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&auto=format&fit=crop&q=80', time: 'Il y a 3 min', text: 'Vous avez vu les reflets de l\'eau sur le trailer 1 ? Le ray-tracing global va être incroyable sur PC ! 🔥' },
+                { author: 'LeonidaKing', role: 'GAMER', tag: 'role-gamer', avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=80&auto=format&fit=crop&q=80', time: 'Il y a 1 min', text: 'J\'espère qu\'on aura une map deux fois plus grande que Los Santos avec les Everglades et les îles !' },
+                { author: 'Alex_RockstarNorth', role: 'DEV', tag: 'role-dev', avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&auto=format&fit=crop&q=80', time: 'À l\'instant', text: 'Le moteur RAGE 9 gère la densité volumétrique des foules et de la circulation en temps réel à 60 FPS constants.' }
+            ]
+        },
+        'fivem-recrutement': {
+            name: '#fivem-recrutement',
+            topic: 'Recherche de joueurs, recrutement LSPD, EMS, Gangs & Staff serveurs',
+            messages: [
+                { author: 'Captain_Miller', role: 'ADMIN', tag: 'role-admin', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&auto=format&fit=crop&q=80', time: 'Il y a 6 min', text: '🚨 [LSPD] Recrutement ouvert sur Lumina RP ! Formation complète dispensée, micropuces et véhicules imports.' },
+                { author: 'Dr_Sanchez', role: 'VIP', tag: 'role-vip', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&auto=format&fit=crop&q=80', time: 'Il y a 2 min', text: 'Les services de secours EMS recrutent des médecins en chef. Rejoignez-nous sur le discord officiel !' }
+            ]
+        },
+        'entraide-modding': {
+            name: '#entraide-modding',
+            topic: 'Optimisation FPS, shaders NVE / QuantV, scripts LUA et mapping',
+            messages: [
+                { author: 'ModderX_144FPS', role: 'DEV', tag: 'role-dev', avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=80&auto=format&fit=crop&q=80', time: 'Il y a 5 min', text: 'Astuce : activez l\'allocation mémoire b3258 dans les paramètres du launcher pour gagner 25 FPS stables ! ⚡' },
+                { author: 'GhostRider_QC', role: 'GAMER', tag: 'role-gamer', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&auto=format&fit=crop&q=80', time: 'Il y a 1 min', text: 'Merci pour le tips, mon FiveM tourne à 144 FPS constants maintenant sans aucun drop.' }
+            ]
+        },
+        'general-lounge': {
+            name: '#general-lounge',
+            topic: 'Discussions libres entre passionnés de GTA, FiveM et jeux vidéo',
+            messages: [
+                { author: 'Sarah_Vice', role: 'VIP', tag: 'role-vip', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&auto=format&fit=crop&q=80', time: 'Il y a 4 min', text: 'Salut à tous ! Le nouveau design du launcher est tellement plus propre et stylé ! ❤️' },
+                { author: 'Maxime_FR', role: 'GAMER', tag: 'role-gamer', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=80&auto=format&fit=crop&q=80', time: 'À l\'instant', text: 'Bienvenue à tous les nouveaux ! Préparez vos manettes pour Vice City.' }
+            ]
+        }
+    };
+
+    function renderChannelMessages() {
+        if (!msgContainer) return;
+        const config = CHANNELS_CONFIG[activeChannel];
+        if (!config) return;
+
+        if (channelTitle) channelTitle.textContent = config.name;
+        if (channelTopic) channelTopic.textContent = config.topic;
+
+        msgContainer.innerHTML = config.messages.map(m => `
+            <div class="forum-msg-item ${m.isUser ? 'user-self' : ''}">
+                <div class="msg-avatar" style="background-image: url('${m.avatar}');"></div>
+                <div class="msg-content-wrap">
+                    <div class="msg-header-row">
+                        <strong class="msg-author">${m.author}</strong>
+                        <span class="role-badge ${m.tag}">${m.role}</span>
+                        <span class="msg-timestamp">${m.time}</span>
+                    </div>
+                    <p class="msg-text">${m.text}</p>
+                </div>
+            </div>
+        `).join('');
+
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+    }
+
+    // Gestion du changement de salons
+    channelBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            sfx.playClick();
+            channelBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeChannel = btn.dataset.channel;
+            renderChannelMessages();
+        });
+    });
+
+    // Envoi de message par l'utilisateur
+    if (msgForm && msgInput) {
+        msgForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = msgInput.value.trim();
+            if (!text) return;
+
+            sfx.playClick();
+
+            const userMsg = {
+                author: 'Vous (Joueur)',
+                role: 'VIP',
+                tag: 'role-vip',
+                avatar: 'logo_fivem_hub.png',
+                time: 'À l\'instant',
+                text: text,
+                isUser: true
+            };
+
+            CHANNELS_CONFIG[activeChannel].messages.push(userMsg);
+            renderChannelMessages();
+            msgInput.value = '';
+
+            // Réponse automatique de la communauté après 2 secondes pour un chat vivant
+            setTimeout(() => {
+                const replies = [
+                    "Totalement d'accord avec toi ! 🔥",
+                    "Bien vu, ça va être génial !",
+                    "Exactement, c'est ce que tout le monde attend !",
+                    "À 100%, l'optimisation 144 FPS est au top !"
+                ];
+                const randReply = replies[Math.floor(Math.random() * replies.length)];
+                CHANNELS_CONFIG[activeChannel].messages.push({
+                    author: 'Gamer_Online',
+                    role: 'GAMER',
+                    tag: 'role-gamer',
+                    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80',
+                    time: 'À l\'instant',
+                    text: randReply
+                });
+                renderChannelMessages();
+            }, 1800);
+        });
+    }
+
+    // Raccourcis Emojis Rapides
+    document.querySelectorAll('.quick-emoji-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            sfx.playClick();
+            if (msgInput) {
+                msgInput.value += ` ${btn.dataset.emoji} `;
+                msgInput.focus();
+            }
+        });
+    });
+
+    // Flux de simulation continue de messages entrants (Tchat Vivant en Temps Réel)
+    const COMMUNITY_BOTS = [
+        { author: 'ViceCitySurfer', role: 'VIP', tag: 'role-vip', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&auto=format&fit=crop&q=80', text: 'Les bandes-annonces en 4K 60FPS rendent tellement bien sur le portail ! 🎬' },
+        { author: 'DriftMaster_99', role: 'GAMER', tag: 'role-gamer', avatar: 'https://images.unsplash.com/photo-1528892952291-009c663ce843?w=80&auto=format&fit=crop&q=80', text: 'Qui est chaud pour des sessions drift ce soir sur FiveM ?' },
+        { author: 'Leonida_Insider', role: 'DEV', tag: 'role-dev', avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=80&auto=format&fit=crop&q=80', text: 'Le moteur météo RAGE 9 synchronise la pluie et les tempêtes tropicales en direct.' },
+        { author: 'FiveM_Staff', role: 'ADMIN', tag: 'role-admin', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&auto=format&fit=crop&q=80', text: 'Protection Anti-DDoS et cache RAM actifs sur l\'ensemble des 5,250 serveurs ! 🛡️' }
+    ];
+
+    let botIdx = 0;
+    setInterval(() => {
+        const bot = COMMUNITY_BOTS[botIdx % COMMUNITY_BOTS.length];
+        botIdx++;
+        const targetChan = activeChannel;
+        CHANNELS_CONFIG[targetChan].messages.push({
+            author: bot.author,
+            role: bot.role,
+            tag: bot.tag,
+            avatar: bot.avatar,
+            time: 'À l\'instant',
+            text: bot.text
+        });
+
+        // Garder au maximum 25 messages par salon
+        if (CHANNELS_CONFIG[targetChan].messages.length > 25) {
+            CHANNELS_CONFIG[targetChan].messages.shift();
+        }
+
+        renderChannelMessages();
+    }, 7500);
+
+    // Ouverture et fermeture de la modale Forum
+    if (openForumBtn) {
+        openForumBtn.addEventListener('click', () => {
+            sfx.playClick();
+            openModal('modal-live-forum');
+            renderChannelMessages();
+        });
+    }
+
+    if (closeForumBtn) {
+        closeForumBtn.addEventListener('click', () => closeModal('modal-live-forum'));
+    }
+
+    renderChannelMessages();
+}
+
+// Lancement au démarrage de l'UI
+const existingInitUI = initUI;
+initUI = function() {
+    existingInitUI();
+    initLiveCommunityForum();
+};
+

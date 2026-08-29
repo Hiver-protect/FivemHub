@@ -104,9 +104,14 @@
                 </div>
 
                 <div class="hub-top-right">
+                    <button class="live-pill live-forum-btn" id="btn-open-live-forum" title="Ouvrir le Forum & Tchat Communautaire en Temps Réel" style="background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(139, 92, 246, 0.15)); border-color: rgba(0, 240, 255, 0.4); color: #00f0ff;">
+                        <span class="pulse-dot-green"></span>
+                        <i class="fa-solid fa-comments text-cyan"></i>
+                        <span>FORUM & TCHAT LIVE (4,820 EN LIGNE)</span>
+                    </button>
                     <button class="live-pill live-shield-pulse" id="btn-open-newswire-center" title="Ouvrir le Centre d'Annonces & Mises à Jour Rockstar Games en Direct" style="background: rgba(255, 152, 0, 0.15); border-color: rgba(255, 152, 0, 0.4); color: #ff9800;">
                         <i class="fa-solid fa-bullhorn text-amber"></i>
-                        <span>ANNONCES EN DIRECT (NEWSWIRE)</span>
+                        <span>ANNONCES (NEWSWIRE)</span>
                     </button>
                     <button class="live-pill live-sync-pulse" id="btn-sync-live-feed" title="Rechercher les nouvelles vidéos et annonces Rockstar Games en direct">
                         <span class="pulse-dot-green"></span>
@@ -409,6 +414,87 @@
                 <button type="button" class="btn-play-primary" id="btn-execute-clean-cache" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
                     <i class="fa-solid fa-trash-can"></i> Nettoyer Tout le Cache
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: FORUM & TCHAT COMMUNAUTAIRE EN TEMPS RÉEL -->
+    <div class="modal-backdrop" id="modal-live-forum">
+        <div class="modal-card glass-card-3d forum-modal-card" style="max-width: 960px; width: 92%; height: 82vh; padding: 0; display: flex; flex-direction: column; overflow: hidden;">
+            <!-- Header du Forum -->
+            <div class="forum-modal-header">
+                <div class="forum-header-brand">
+                    <div class="forum-icon-box"><i class="fa-solid fa-comments"></i></div>
+                    <div>
+                        <h3>FORUM & TCHAT COMMUNAUTAIRE EN TEMPS RÉEL</h3>
+                        <p><span class="pulse-dot-green"></span> <strong style="color: #00e676;">4,820 Gamers en direct</strong> • Salons GTA VI, FiveM, Modding & Partage</p>
+                    </div>
+                </div>
+                <button class="modal-close" id="close-live-forum" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Contenu Principal : Salons (Gauche) + Messages (Droite) -->
+            <div class="forum-main-body">
+                <!-- Barre latérale des salons -->
+                <div class="forum-channels-sidebar">
+                    <div class="channel-section-title">SALONS OFFICIELS</div>
+                    <button class="forum-channel-btn active" data-channel="gta-vi-theories">
+                        <i class="fa-solid fa-hashtag text-pink"></i>
+                        <span>#gta-vi-theories</span>
+                    </button>
+                    <button class="forum-channel-btn" data-channel="fivem-recrutement">
+                        <i class="fa-solid fa-hashtag text-cyan"></i>
+                        <span>#fivem-recrutement</span>
+                    </button>
+                    <button class="forum-channel-btn" data-channel="entraide-modding">
+                        <i class="fa-solid fa-hashtag text-green"></i>
+                        <span>#entraide-modding</span>
+                    </button>
+                    <button class="forum-channel-btn" data-channel="general-lounge">
+                        <i class="fa-solid fa-hashtag text-amber"></i>
+                        <span>#general-lounge</span>
+                    </button>
+
+                    <div class="forum-sidebar-status-box">
+                        <span class="status-label">SERVEUR TCHAT</span>
+                        <strong style="color: #22c55e;"><i class="fa-solid fa-signal"></i> 100% OPÉRATIONNEL</strong>
+                        <span style="font-size: 0.7rem; color: #94a3b8; margin-top: 4px;">Latence Tchat : 8ms</span>
+                    </div>
+                </div>
+
+                <!-- Zone de Discussion & Messages en Direct -->
+                <div class="forum-chat-area">
+                    <div class="forum-channel-top-info">
+                        <div>
+                            <span class="active-channel-name" id="forum-current-channel-title">#gta-vi-theories</span>
+                            <span class="active-channel-topic" id="forum-current-channel-topic">Discussions, analyses de trailers, physique RAGE 9 et secrets de Vice City</span>
+                        </div>
+                        <span class="forum-typing-indicator" id="forum-typing-text"><i class="fa-solid fa-pen-nib fa-bounce"></i> 3 membres écrivent...</span>
+                    </div>
+
+                    <!-- Flux des Messages qui Défilent -->
+                    <div class="forum-messages-container" id="forum-messages-container">
+                        <!-- Rempli en direct par app.js -->
+                    </div>
+
+                    <!-- Raccourcis Emojis & Réactions Rapides -->
+                    <div class="forum-quick-emojis">
+                        <span>Réagir rapidement :</span>
+                        <button class="quick-emoji-btn" data-emoji="🔥">🔥 Hype</button>
+                        <button class="quick-emoji-btn" data-emoji="🎮">🎮 Gaming</button>
+                        <button class="quick-emoji-btn" data-emoji="⚡">⚡ 144 FPS</button>
+                        <button class="quick-emoji-btn" data-emoji="❤️">❤️ Vice City</button>
+                    </div>
+
+                    <!-- Formulaire d'Envoi de Message -->
+                    <form class="forum-input-bar" id="forum-message-form">
+                        <input type="text" id="forum-msg-input" placeholder="Envoyer un message en direct sur le forum... (Appuyez sur Entrée)" autocomplete="off" required>
+                        <button type="submit" class="forum-send-btn" id="forum-send-button">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>ENVOYER</span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
