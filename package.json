@@ -16,5 +16,11 @@
     "roleplay"
   ],
   "author": "FiveM Hub Team",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "discord-rpc": "^4.0.1"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0"
+  }
 }
