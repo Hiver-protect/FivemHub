@@ -77,351 +77,126 @@ body {
     opacity: 0.15;
     background: radial-gradient(circle, var(--primary-cyan) 0%, transparent 70%);
 }
-/* Masquer toutes les barres de défilement et verrouiller l'écran à 100vh sans aucun scroll */
-html, body {
-    width: 100vw !important;
-    height: 100vh !important;
-    max-width: 100vw !important;
-    max-height: 100vh !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
-}
+.cyan-glow { top: -100px; left: 20%; }
+.purple-glow { bottom: -100px; right: 10%; background: radial-gradient(circle, var(--primary-purple) 0%, transparent 70%); }
 
-* {
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
-}
-
-*::-webkit-scrollbar {
-    width: 0px !important;
-    height: 0px !important;
-    display: none !important;
-}
-
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(10, 12, 16, 0.8); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-cyan); }
 /* ==========================================================================
-   PORTAIL OFFICIEL VIDÉOS 4K & ANNONCES ROCKSTAR GAMES / GTA VI / FIVEM
-   Plein Écran, Ultra-Épuré, Immersif et 144 FPS
+   OFFICIAL FIVEM LAUNCHER THEME & ARCHITECTURE
    ========================================================================== */
-.video-news-hub-container {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    overflow: hidden !important;
-    background: #000000;
-    font-family: var(--font-body);
-    user-select: none;
+.official-fivem-theme {
+    background: #0d0f12 !important;
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    color: #e4e7ec;
+    font-family: var(--font-body);
 }
 
-/* 1. Main Video Frame Background */
-.main-video-player-frame {
-    position: absolute;
-    inset: 0;
-    width: 100%;
+.fivem-main-wrapper {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    z-index: 1;
+    width: 100%;
     overflow: hidden;
 }
 
-.hub-video-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 56.25vw; /* 16:9 Aspect Ratio */
-    min-height: 100vh;
-    min-width: 177.77vh;
-    transform: translate(-50%, -50%);
-    border: none;
-    pointer-events: all;
-}
-
-.video-ambient-gradient {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(0deg, #090a0d 0%, rgba(9, 10, 13, 0.4) 40%, rgba(0,0,0,0.6) 100%),
-                radial-gradient(circle at 10% 20%, rgba(236, 72, 153, 0.15), transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.1), transparent 40%);
-    pointer-events: none;
-    z-index: 2;
-}
-
-/* 2. Hub Overlay UI */
-.hub-overlay-ui {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 24px 36px;
-    pointer-events: none;
-}
-
-.hub-top-bar, .hub-video-info-center, .hub-bottom-panels {
-    pointer-events: all;
-}
-
-/* Header Luxury Glass */
-.hub-top-bar {
+/* 1. FiveM Official Top Bar */
+.fivem-top-nav {
+    height: 52px;
+    background: #090b0e;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(10, 13, 20, 0.82);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 14px 28px;
-    border-radius: 16px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    padding: 0 16px;
+    flex-shrink: 0;
+    z-index: 100;
 }
 
-.brand-badge {
+.top-nav-left {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
-.rstar-badge {
-    width: 42px;
-    height: 42px;
-    background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
-    color: #000;
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 900;
-    border-radius: 10px;
+.fps-indicator {
+    font-family: var(--font-sub);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #64748b;
+}
+
+.fivem-lambda-logo {
+    width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 20px rgba(255, 152, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    animation: pulse 3s infinite;
 }
 
-.hub-title-group {
+.lambda-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.fivem-links-row {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    align-items: center;
+    gap: 20px;
 }
 
-.hub-brand-title {
-    font-family: var(--font-heading);
-    font-size: 1.05rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-    background: linear-gradient(90deg, #ffffff 0%, #00f0ff 60%, #ff758c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 8px rgba(0, 240, 255, 0.3));
-}
-
-.hub-brand-sub {
-    font-size: 0.72rem;
-    color: #94a3b8;
-    letter-spacing: 1.2px;
-    font-weight: 700;
-}
-
-.hub-top-right {
+.top-nav-right {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.live-pill {
-    background: rgba(34, 197, 94, 0.12);
-    border: 1px solid rgba(34, 197, 94, 0.4);
-    color: #22c55e;
-    font-size: 0.75rem;
-    font-weight: 800;
-    padding: 7px 16px;
-    border-radius: var(--radius-full);
+.fivem-user-count {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    box-shadow: 0 0 14px rgba(34, 197, 94, 0.2);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.live-pill:hover {
-    background: rgba(34, 197, 94, 0.25);
-    border-color: #22c55e;
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
-}
-
-.active-video-title {
-    font-family: var(--font-heading);
-    font-size: 2.35rem;
-    font-weight: 900;
-    line-height: 1.2;
-    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 40%, #00f0ff 80%, #ff2a6d 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 25px rgba(0, 240, 255, 0.3));
-}
-
-.active-video-desc {
-    font-size: 0.92rem;
-    color: #cbd5e1;
-    line-height: 1.55;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
-    max-width: 780px;
-}
-
-.video-actions {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 10px;
-}
-
-.btn-fullscreen-vid {
-    background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #000;
-    font-family: var(--font-heading);
-    font-size: 0.88rem;
-    font-weight: 900;
-    letter-spacing: 1px;
-    padding: 13px 26px;
-    border-radius: 10px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-fullscreen-vid:hover {
-    background: linear-gradient(135deg, #ffa726 0%, #ff7043 100%);
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 12px 35px rgba(255, 152, 0, 0.7);
-}
-
-/* Volume Control Pill Luxury */
-.volume-control-pill {
-    background: rgba(13, 16, 24, 0.82);
-    backdrop-filter: blur(18px);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: var(--radius-full);
-    padding: 7px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.btn-vol-icon-toggle {
-    background: transparent;
-    border: none;
-    color: #22c55e;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: transform 0.15s ease;
-}
-
-.btn-vol-icon-toggle:hover {
-    transform: scale(1.15);
-    color: #4ade80;
-}
-
-#video-volume-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 85px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 4px;
-    outline: none;
-    cursor: pointer;
-}
-
-#video-volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #22c55e, #00f0ff);
-    box-shadow: 0 0 10px #22c55e;
-    cursor: pointer;
-    transition: transform 0.15s ease;
-}
-
-#video-volume-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.25);
-}
-
-.vol-number-text {
-    font-family: var(--font-sub);
-    font-size: 0.78rem;
-    font-weight: 800;
-    color: #22c55e;
-    min-width: 32px;
-}
-
-.live-sync-pulse i.rotating {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    100% { transform: rotate(360deg); }
-}
-
-/* Mode Extinction des Feux Cinéma */
-body.cinema-lights-dimmed .hub-top-bar,
-body.cinema-lights-dimmed .hub-bottom-panels,
-body.cinema-lights-dimmed .live-ticker-bar {
-    opacity: 0.05 !important;
-    pointer-events: none !important;
-    transition: opacity 0.5s ease;
-}
-
-body.cinema-lights-dimmed:hover .hub-top-bar,
-body.cinema-lights-dimmed:hover .hub-bottom-panels,
-body.cinema-lights-dimmed:hover .live-ticker-bar {
-    opacity: 0.95 !important;
-    pointer-events: all !important;
-}
-
-body.cinema-lights-dimmed .hub-video-info-center {
-    opacity: 0.15;
-    transition: opacity 0.5s ease;
-}
-
-body.cinema-lights-dimmed:hover .hub-video-info-center {
-    opacity: 1;
-}
-
-.pulse-dot-green {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #22c55e;
-    box-shadow: 0 0 10px #22c55e;
-    animation: pulse 1.5s infinite;
-}
-
-.icon-tool-btn {
-    width: 36px;
-    height: 36px;
-    background: #181c24;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.68rem;
+    font-weight: 700;
     color: #94a3b8;
-    border-radius: 8px;
+    line-height: 1.2;
+}
+
+.count-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.fivem-cfx-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1e232d;
+}
+
+.cfx-tiny-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.top-sq-btn {
+    width: 32px;
+    height: 32px;
+    background: #181c24;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -429,520 +204,50 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     transition: all 0.15s ease;
 }
 
-.icon-tool-btn:hover {
+.top-sq-btn:hover {
     background: #222733;
     color: #ffffff;
 }
 
-.icon-tool-btn.close-btn:hover {
+.top-sq-btn.close-btn:hover {
     background: #ef4444;
     color: #ffffff;
 }
 
-/* Center Video Title */
-.hub-video-info-center {
-    max-width: 700px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+/* Gotham gradient box */
+.gotham-gradient-box {
+    background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #3b82f6 100%) !important;
 }
 
-.video-tag-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.v-badge {
-    font-size: 0.7rem;
-    font-weight: 800;
-    padding: 4px 10px;
-    border-radius: 4px;
-}
-
-.v-rstar { background: #ff9800; color: #000; font-family: var(--font-heading); }
-.v-res { background: rgba(255, 255, 255, 0.15); color: #fff; backdrop-filter: blur(8px); }
-.v-live { background: rgba(236, 72, 153, 0.2); border: 1px solid #ec4899; color: #ec4899; }
-
-.active-video-title {
-    font-family: var(--font-heading);
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: #ffffff;
-    line-height: 1.2;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
-}
-
-.active-video-desc {
-    font-size: 0.9rem;
-    color: #cbd5e1;
-    line-height: 1.5;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-}
-
-.video-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 8px;
-}
-
-.btn-fullscreen-vid {
-    background: #ff9800;
-    border: none;
-    color: #000;
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
-    font-weight: 900;
-    letter-spacing: 1px;
-    padding: 12px 24px;
-    border-radius: 8px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 8px 20px rgba(255, 152, 0, 0.4);
-    transition: all 0.2s ease;
-}
-
-.btn-fullscreen-vid:hover {
-    background: #ffa726;
-    transform: translateY(-2px);
-}
-
-/* Effets 3D & 4K Glassmorphism Avancés */
-.3d-text-glow {
-    text-shadow: 0 0 25px rgba(255, 152, 0, 0.4), 0 4px 20px rgba(0, 0, 0, 0.95);
-    letter-spacing: 1px;
-}
-
-.btn-3d-glow {
-    position: relative;
-    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-    transform: translateY(0);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-3d-glow:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(255, 152, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-
-.btn-3d-glass {
-    background: rgba(22, 27, 36, 0.6) !important;
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    transition: all 0.2s ease;
-}
-
-.btn-3d-glass:hover {
-    background: rgba(30, 38, 52, 0.8) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    transform: translateY(-2px);
-}
-
-/* Volume Control Pill */
-.volume-control-pill {
-    background: rgba(15, 18, 26, 0.75);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: var(--radius-full);
-    padding: 6px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-.btn-vol-icon-toggle {
-    background: transparent;
-    border: none;
-    color: #22c55e;
-    font-size: 0.95rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-
-.btn-vol-icon-toggle:hover {
-    color: #fff;
-}
-
-#video-volume-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 80px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
-    outline: none;
-    cursor: pointer;
-}
-
-#video-volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #22c55e;
-    box-shadow: 0 0 8px #22c55e;
-    cursor: pointer;
-}
-
-.vol-number-text {
-    font-family: var(--font-sub);
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: #22c55e;
-    min-width: 28px;
-}
-
-/* 3D Glass Cards */
-.glass-card-3d {
-    background: rgba(13, 16, 24, 0.75) !important;
-    backdrop-filter: blur(20px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
-}
-
-.badge-sub-counter {
-    font-size: 0.68rem;
-    font-weight: 800;
-    color: #94a3b8;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 3px 8px;
-    border-radius: 4px;
-}
-
-.card-3d-tilt {
-    position: relative;
-    border-radius: 10px;
-    background: linear-gradient(145deg, #151822 0%, #0d1017 100%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-.card-3d-tilt:hover {
-    transform: translateY(-5px) scale(1.02) !important;
-    border-color: rgba(255, 152, 0, 0.5) !important;
-    box-shadow: 0 14px 35px rgba(255, 152, 0, 0.25) !important;
-}
-
-.tag-4k-pill {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    background: rgba(0, 0, 0, 0.75);
+.btn-fivem-connect-exact {
+    background: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ff9800;
-    font-family: var(--font-heading);
-    font-size: 0.6rem;
-    font-weight: 900;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
-/* Live Ticker Bar (Temps Réel 24/7) */
-.live-ticker-bar {
-    background: rgba(10, 12, 18, 0.85);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    overflow: hidden;
-    margin-bottom: 6px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.ticker-badge {
-    background: #ff9800;
-    color: #000;
-    font-family: var(--font-heading);
-    font-size: 0.72rem;
-    font-weight: 900;
-    padding: 4px 10px;
-    border-radius: 4px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.ticker-content {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    white-space: nowrap;
-    animation: tickerMarquee 35s linear infinite;
-}
-
-@keyframes tickerMarquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-.ticker-item {
-    font-size: 0.8rem;
-    color: #cbd5e1;
-}
-
-.ticker-item strong {
-    color: #fff;
-}
-
-/* Video Filter Pills */
-.panel-title-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.video-filter-pills {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.vid-filter-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #94a3b8;
-    font-family: var(--font-heading);
-    font-size: 0.65rem;
-    font-weight: 800;
-    padding: 4px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-}
-
-.vid-filter-btn:hover, .vid-filter-btn.active {
-    background: #ff9800;
-    color: #000;
-    border-color: #ff9800;
-    box-shadow: 0 2px 10px rgba(255, 152, 0, 0.35);
-}
-
-.btn-external-channel {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #ffffff;
+    color: #0f172a;
     font-family: var(--font-sub);
     font-size: 0.82rem;
-    font-weight: 700;
-    padding: 12px 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    backdrop-filter: blur(10px);
-    transition: all 0.2s ease;
-}
-
-/* Modal Cinéma Plein Écran */
-.cinema-fullscreen-modal {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000000;
-    z-index: 999999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-.cinema-fullscreen-modal.active {
-    display: flex;
-}
-
-.cinema-iframe {
-    width: 100vw;
-    height: 100vh;
-    border: none;
-}
-
-.btn-exit-cinema {
-    position: absolute;
-    top: 24px;
-    right: 28px;
-    z-index: 1000000;
-    background: rgba(15, 18, 25, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #ffffff;
-    font-family: var(--font-sub);
-    font-size: 0.85rem;
     font-weight: 800;
-    padding: 10px 20px;
+    padding: 8px 24px;
     border-radius: var(--radius-full);
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
     transition: all 0.15s ease;
 }
 
-.btn-exit-cinema:hover {
-    background: #ef4444;
-    border-color: #ef4444;
-    transform: scale(1.05);
-}
-
-.btn-external-channel:hover {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: #fff;
-}
-
-/* Bottom Panels (Videos + News) */
-.hub-bottom-panels {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 20px;
-}
-
-.video-playlist-carousel, .news-feed-panel {
-    background: rgba(13, 15, 20, 0.8);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 16px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
-    font-weight: 800;
-    letter-spacing: 1px;
+.btn-fivem-connect-exact:hover {
+    background: #22c55e;
     color: #ffffff;
 }
 
-.live-link {
-    font-size: 0.75rem;
-    color: #38bdf8;
-    text-decoration: none;
-    font-weight: 700;
-}
-
-.videos-list-scroll {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-}
-
-.video-card-item {
-    background: #151821;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    overflow: hidden;
-    width: 170px;
-    flex-shrink: 0;
+.btn-fivem-fav-exact {
+    width: 34px;
+    height: 34px;
+    background: transparent;
+    border: none;
+    color: #64748b;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: all 0.15s ease;
 }
 
-.video-card-item:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-3px);
-}
-
-.video-card-item.active {
-    border-color: #ff9800;
-    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
-}
-
-.video-thumb {
-    height: 80px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.play-icon-overlay {
-    width: 28px;
-    height: 28px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 0.75rem;
-}
-
-.video-meta {
-    padding: 8px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.video-meta strong {
-    font-size: 0.78rem;
-    color: #ffffff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.video-meta span {
-    font-size: 0.68rem;
-    color: #94a3b8;
-}
-
-/* News Scroll */
-.news-items-scroll {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    max-height: 140px;
-    overflow-y: auto;
-}
-
-.news-entry {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 6px;
-    padding: 8px 12px;
-}
-
-.news-source {
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    display: block;
-    margin-bottom: 2px;
-}
-
-.news-entry h4 {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #fff;
-}
-
-.news-entry p {
-    font-size: 0.72rem;
-    color: #94a3b8;
-}
+.btn-fivem-fav-exact:hover {
     color: #ff2a6d;
 }
 
@@ -3577,81 +2882,42 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
     overflow: hidden;
 }
 
-/* Fond CSS pur - ZÉRO iframe, ZÉRO lag réseau */
-.boot-css-bg {
+.app-boot-splash.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.boot-video-container {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 20% 50%, #0d1b2e 0%, #000 60%);
     overflow: hidden;
+    pointer-events: none;
 }
 
-.boot-bg-orb {
+.boot-youtube-bg {
+    width: 100vw;
+    height: 100vh;
+    min-width: 100%;
+    min-height: 100%;
     position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    will-change: transform;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.2);
+    object-fit: cover;
+    opacity: 0.85;
 }
 
-.boot-orb-1 {
-    width: 70vw;
-    height: 70vw;
-    background: radial-gradient(circle, rgba(255, 42, 109, 0.25) 0%, transparent 70%);
-    top: -20%;
-    left: -10%;
-    animation: bootOrb1 12s ease-in-out infinite alternate;
-}
-
-.boot-orb-2 {
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle, rgba(0, 100, 255, 0.20) 0%, transparent 70%);
-    bottom: -20%;
-    right: -10%;
-    animation: bootOrb2 15s ease-in-out infinite alternate;
-}
-
-.boot-orb-3 {
-    width: 40vw;
-    height: 40vw;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
-    top: 30%;
-    left: 35%;
-    animation: bootOrb3 10s ease-in-out infinite alternate;
-}
-
-@keyframes bootOrb1 {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(5%, 8%) scale(1.1); }
-}
-@keyframes bootOrb2 {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(-6%, -5%) scale(1.08); }
-}
-@keyframes bootOrb3 {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(3%, -6%) scale(0.9); }
-}
-
-/* Grille perspective de fond */
-.boot-grid-overlay {
+.boot-video-overlay {
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(10, 12, 16, 0.25) 0%, rgba(10, 12, 16, 0.85) 100%),
+                linear-gradient(180deg, rgba(10, 12, 16, 0.3) 0%, rgba(10, 12, 16, 0.9) 100%);
 }
-
-.boot-dark-overlay {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.75) 100%);
-}
-
 
 /* ==========================================================================
    BARRE DE CHARGEMENT DISCRÈTE EN BAS À GAUCHE & LOGO STYLE GTA IV
@@ -3716,39 +2982,115 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
 }
 
 /* ==========================================================================
-   STYLE DU LOADING SCREEN (OPTIMISATION GPU 144 FPS / ZÉRO LAG)
+   STYLE DU LOADING SCREEN (LOGO PARFAITEMENT CENTRÉ & BARRE EN BAS)
    ========================================================================== */
 .boot-dark-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(10, 12, 16, 0.45);
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(10, 12, 16, 0.45) 80%, rgba(6, 8, 12, 0.85) 100%);
     pointer-events: none;
 }
 
 .gta6-scanline-overlay {
-    display: none; /* Désactivé pour gain massif de performances GPU */
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+    opacity: 0.6;
 }
 
-/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT CENTRÉ & ACCÉLÉRÉ MATÉRIELLEMENT (GPU 144 FPS) */
+/* HUD Supérieur GTA VI & Leonida State */
+.gta6-top-info-hud {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    z-index: 150;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.gta6-watermark-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10, 12, 16, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 42, 109, 0.4);
+    padding: 7px 16px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #ff758c;
+    letter-spacing: 1.5px;
+    box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
+}
+
+.gta6-dot {
+    width: 8px;
+    height: 8px;
+    background: #ff2a6d;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff2a6d;
+    animation: pulse 1.5s infinite;
+}
+
+.gta6-build-tag, .gta6-fps-tag, .gta6-vram-tag {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 7px 14px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sub);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Boîte de Conseils RP Dynamiques */
+.gta6-tip-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(10, 12, 16, 0.85);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 8px 18px;
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    font-family: var(--font-sub);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Logo Officiel FIVEM HUB LAUNCHER VI PARFAITEMENT CENTRÉ AU MILIEU */
 .gta6-hub-logo-wrap {
     position: absolute;
     top: 45%;
     left: 50%;
-    transform: translate3d(-50%, -50%, 0);
+    transform: translate(-50%, -50%);
     z-index: 110;
-    width: 360px;
+    width: 380px;
     max-width: 80vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    will-change: transform;
-    animation: hubLogoGpuSmooth 3s infinite alternate ease-in-out;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 45px rgba(224, 30, 132, 0.65));
+    animation: hubLogoFloat 3.5s infinite ease-in-out;
 }
 
-@keyframes hubLogoGpuSmooth {
-    0% { transform: translate3d(-50%, -50%, 0) scale(1); }
-    100% { transform: translate3d(-50%, -52%, 0) scale(1.03); }
+@keyframes hubLogoFloat {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 45px rgba(224, 30, 132, 0.65)); }
+    50% { transform: translate(-50%, -52%) scale(1.03); filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 1)) drop-shadow(0 0 65px rgba(255, 158, 0, 0.8)); }
 }
 
 .gta6-hub-img {
@@ -3756,10 +3098,39 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     height: auto;
     display: block;
     object-fit: contain;
-    filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.85));
 }
 
-/* skip-splash-btn supprimé - pas de bouton passer */
+/* Bouton Discret pour Passer l'Intro */
+.skip-splash-btn {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+    z-index: 150;
+    background: rgba(10, 12, 16, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sub);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition-fast);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.skip-splash-btn:hover {
+    background: rgba(255, 42, 109, 0.85);
+    border-color: #ff2a6d;
+    box-shadow: 0 0 20px rgba(255, 42, 109, 0.8);
+    transform: translateY(-2px);
+}
 
 /* Barre de Progression Inférieure Pleine Largeur avec Bonhomme qui Court */
 .xrp-bottom-loader {
@@ -3810,7 +3181,7 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     border-radius: 6px;
     box-shadow: 0 0 20px rgba(255, 42, 109, 0.9);
     position: relative;
-    will-change: width;
+    transition: width 0.2s ease-out;
 }
 
 /* Bonhomme Silhouette en Course Animé */
@@ -3983,2487 +3354,6 @@ body.cinema-lights-dimmed:hover .hub-video-info-center {
     flex-direction: column;
     gap: 12px;
 }
-
-/* ==========================================================================
-   CURSEUR PERSONNALISÉ LUMINEUX
-   ========================================================================== */
-*, *::before, *::after {
-    cursor: none !important;
-}
-
-.custom-cursor {
-    position: fixed;
-    width: 12px;
-    height: 12px;
-    background: var(--primary-cyan);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.08s ease, width 0.15s ease, height 0.15s ease, background 0.15s ease;
-    mix-blend-mode: difference;
-    box-shadow: 0 0 12px var(--primary-cyan), 0 0 30px rgba(0, 240, 255, 0.4);
-    will-change: transform, top, left;
-}
-
-.custom-cursor-ring {
-    position: fixed;
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid rgba(0, 240, 255, 0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999998;
-    transform: translate(-50%, -50%);
-    transition: top 0.12s ease, left 0.12s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
-    will-change: transform, top, left;
-}
-
-body:has(button:hover) .custom-cursor,
-body:has(a:hover) .custom-cursor {
-    width: 20px;
-    height: 20px;
-    background: #ff2a6d;
-    box-shadow: 0 0 20px #ff2a6d;
-}
-
-body:has(button:hover) .custom-cursor-ring,
-body:has(a:hover) .custom-cursor-ring {
-    width: 52px;
-    height: 52px;
-    border-color: rgba(255, 42, 109, 0.5);
-}
-
-/* ==========================================================================
-   CANVAS PARTICULES (injecté via JS)
-   ========================================================================== */
-#particle-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.45;
-}
-
-/* ==========================================================================
-   CARTE SERVEUR - EFFETS AVANCÉS
-   ========================================================================== */
-.server-card {
-    transform-style: preserve-3d;
-    perspective: 1000px;
-}
-
-/* Barre de joueurs sur les cartes */
-.players-capacity-bar {
-    width: 100%;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-top: 4px;
-}
-
-.players-capacity-fill {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 1.5s ease;
-    box-shadow: 0 0 6px currentColor;
-}
-
-.players-capacity-fill.low { background: var(--accent-green); color: var(--accent-green); }
-.players-capacity-fill.medium { background: var(--primary-amber); color: var(--primary-amber); }
-.players-capacity-fill.high { background: #ff9800; color: #ff9800; }
-.players-capacity-fill.full { background: var(--accent-red); color: var(--accent-red); }
-
-/* Badge FEATURED premium */
-.badge-featured {
-    background: linear-gradient(135deg, #ff9800, #ff5722);
-    color: #000;
-    font-family: var(--font-heading);
-    font-size: 0.6rem;
-    font-weight: 900;
-    padding: 2px 7px;
-    border-radius: 4px;
-    letter-spacing: 0.5px;
-    animation: featuredGlow 2s infinite alternate;
-}
-
-@keyframes featuredGlow {
-    from { box-shadow: 0 0 5px rgba(255, 152, 0, 0.5); }
-    to { box-shadow: 0 0 15px rgba(255, 152, 0, 0.9), 0 0 30px rgba(255, 87, 34, 0.4); }
-}
-
-/* ==========================================================================
-   RIPPLE EFFECT SUR LES BOUTONS
-   ========================================================================== */
-.ripple-btn {
-    position: relative;
-    overflow: hidden;
-}
-
-.ripple-btn .ripple-wave {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
-    transform: scale(0);
-    animation: rippleAnim 0.6s linear;
-    pointer-events: none;
-}
-
-@keyframes rippleAnim {
-    to { transform: scale(4); opacity: 0; }
-}
-
-/* ==========================================================================
-   MUSIC PLAYER - WAVEFORM VISUALIZER
-   ========================================================================== */
-.waveform-visualizer {
-    display: flex;
-    align-items: flex-end;
-    gap: 2px;
-    height: 28px;
-    padding: 0 4px;
-}
-
-.wave-bar {
-    width: 3px;
-    background: var(--primary-cyan);
-    border-radius: 2px;
-    min-height: 3px;
-    transition: height 0.1s ease;
-    opacity: 0.7;
-}
-
-.wave-bar.active-bar {
-    opacity: 1;
-    box-shadow: 0 0 6px var(--primary-cyan);
-}
-
-.waveform-visualizer.idle .wave-bar {
-    height: 4px !important;
-    opacity: 0.3;
-}
-
-/* ==========================================================================
-   SIDEBAR PREMIUM ENHANCEMENTS
-   ========================================================================== */
-.live-servers-counter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(139, 92, 246, 0.1));
-    border: 1px solid rgba(0, 240, 255, 0.2);
-    border-radius: var(--radius-md);
-    padding: 12px 16px;
-    margin: 0 12px 10px 12px;
-    text-align: center;
-}
-
-.live-count-num {
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: countGlow 3s infinite alternate;
-}
-
-@keyframes countGlow {
-    from { filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.4)); }
-    to { filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.8)); }
-}
-
-.live-count-label {
-    font-size: 0.65rem;
-    font-family: var(--font-sub);
-    font-weight: 700;
-    color: var(--text-muted);
-    letter-spacing: 0.5px;
-    margin-top: 2px;
-}
-
-/* ==========================================================================
-   TOAST NOTIFICATIONS PREMIUM
-   ========================================================================== */
-.toast {
-    animation: toastSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    backdrop-filter: blur(16px) !important;
-    background: rgba(15, 18, 26, 0.95) !important;
-}
-
-@keyframes toastSlideIn {
-    from { transform: translateX(120%) scale(0.85); opacity: 0; }
-    to { transform: translateX(0) scale(1); opacity: 1; }
-}
-
-.toast .toast-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    background: var(--primary-cyan);
-    border-radius: 0 0 4px 4px;
-    animation: toastProgress 3.5s linear forwards;
-}
-
-@keyframes toastProgress {
-    from { width: 100%; }
-    to { width: 0%; }
-}
-
-.toast.success .toast-progress { background: var(--accent-green); }
-.toast.warn .toast-progress { background: var(--primary-amber); }
-.toast.error { border-left-color: var(--accent-red) !important; }
-.toast.error .toast-progress { background: var(--accent-red); }
-
-/* ==========================================================================
-   HUD LIVE INDICATOR - PULSATION RENFORCÉE
-   ========================================================================== */
-.hud-live-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    border-radius: var(--radius-full);
-    padding: 3px 10px;
-    font-family: var(--font-heading);
-    font-size: 0.65rem;
-    font-weight: 800;
-    color: #22c55e;
-    letter-spacing: 0.5px;
-}
-
-.hud-live-dot {
-    width: 6px;
-    height: 6px;
-    background: #22c55e;
-    border-radius: 50%;
-    animation: pulseLive 1.2s infinite;
-    box-shadow: 0 0 8px #22c55e;
-}
-
-@keyframes pulseLive {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: 0.6; }
-}
-
-/* ==========================================================================
-   GLOW EFFECTS SUR LES CARTES ACTIVES / FEATURED
-   ========================================================================== */
-.server-card.is-featured-glow {
-    border-color: rgba(255, 152, 0, 0.4) !important;
-    box-shadow: 0 0 0 1px rgba(255, 152, 0, 0.15), 0 8px 30px rgba(0, 0, 0, 0.5) !important;
-}
-
-.server-card.is-featured-glow::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(135deg, rgba(255, 152, 0, 0.04) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* ==========================================================================
-   SIDEBAR NAV ITEMS - HOVER GLOW
-   ========================================================================== */
-.nav-item {
-    transition: var(--transition-fast), box-shadow 0.2s ease !important;
-}
-
-.nav-item:hover {
-    box-shadow: inset 3px 0 0 var(--primary-cyan) !important;
-}
-
-.nav-item.active {
-    box-shadow: inset 3px 0 0 var(--primary-cyan) !important;
-    background: linear-gradient(90deg, rgba(0, 240, 255, 0.1) 0%, transparent 100%) !important;
-}
-
-/* ==========================================================================
-   HERO FEATURED - ENHANCED BANNER SHIMMER
-   ========================================================================== */
-.featured-hero::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
-    animation: heroShimmer 6s infinite;
-    pointer-events: none;
-    z-index: 1;
-}
-
-@keyframes heroShimmer {
-    0% { left: -100%; }
-    100% { left: 200%; }
-}
-
-/* ==========================================================================
-   SCROLL INDICATOR - SIDEBAR
-   ========================================================================== */
-.sidebar-scroll-wrap {
-    position: relative;
-}
-
-.sidebar-scroll-wrap::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: linear-gradient(0deg, var(--bg-dark), transparent);
-    pointer-events: none;
-    z-index: 5;
-}
-
-/* ==========================================================================
-   GLITCH EFFECT - TITLE ON LOADING
-   ========================================================================== */
-@keyframes glitchEffect {
-    0%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
-    10% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 1px); }
-    20% { clip-path: inset(50% 0 30% 0); transform: translate(2px, -1px); }
-    30% { clip-path: inset(80% 0 5% 0); transform: translate(-1px, 2px); }
-    40% { clip-path: inset(0 0 100% 0); transform: translate(0); }
-}
-
-/* ==========================================================================
-   GRID APPARITION - SERVER CARDS FADE IN
-   ========================================================================== */
-@keyframes cardAppear {
-    from { opacity: 0; transform: translateY(20px) scale(0.97); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.server-card {
-    animation: cardAppear 0.35s ease backwards;
-}
-
-/* ==========================================================================
-   MUSIC PLAYER HUD - ENHANCED GLASS
-   ========================================================================== */
-.music-player-hud {
-    background: rgba(8, 11, 18, 0.97) !important;
-    border-top: 1px solid rgba(0, 240, 255, 0.15) !important;
-    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.9), 0 -1px 0 rgba(0, 240, 255, 0.08) !important;
-}
-
-.music-player-hud::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
-    opacity: 0.4;
-}
-
-/* ==========================================================================
-   STAT COUNTER ANIMATION
-   ========================================================================== */
-@keyframes countUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.count-anim {
-    animation: countUp 0.5s ease;
-}
-
-/* ==========================================================================
-   NETWORK STATUS INDICATOR
-   ========================================================================== */
-.network-status-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: var(--radius-full);
-    font-size: 0.72rem;
-    color: var(--text-dim);
-}
-
-.network-ping-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #22c55e;
-    animation: pulseLive 2s infinite;
-}
-
-/* ==========================================================================
-   BOOT SPLASH - TIP BOX REDESIGN
-   ========================================================================== */
-.gta6-tip-box {
-    background: rgba(10, 12, 16, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-left: 3px solid var(--primary-amber);
-    border-radius: 8px;
-    padding: 10px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.82rem;
-    color: #cbd5e1;
-    margin-bottom: 12px;
-    backdrop-filter: blur(10px);
-}
-
-.gta6-tip-box .text-amber {
-    color: var(--primary-amber);
-    font-size: 1rem;
-}
-
-/* ==========================================================================
-   FLOATING AMBIENT ORBS (pour zones sans canvas)
-   ========================================================================== */
-.ambient-orb {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    filter: blur(80px);
-    animation: orbFloat 15s infinite ease-in-out;
-}
-
-.ambient-orb-1 {
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(0, 240, 255, 0.07) 0%, transparent 70%);
-    top: 10%;
-    left: 5%;
-    animation-delay: 0s;
-}
-
-.ambient-orb-2 {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
-    bottom: 15%;
-    right: 8%;
-    animation-delay: -7s;
-}
-
-.ambient-orb-3 {
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(255, 42, 109, 0.05) 0%, transparent 70%);
-    top: 60%;
-    left: 40%;
-    animation-delay: -12s;
-}
-
-@keyframes orbFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(20px, -25px) scale(1.05); }
-    66% { transform: translate(-15px, 20px) scale(0.95); }
-}
-
-/* ==========================================================================
-   TEXT CYAN / GREEN / PINK / AMBER UTILITIES
-   ========================================================================== */
-.text-cyan { color: var(--primary-cyan) !important; }
-.text-green { color: var(--accent-green) !important; }
-.text-pink { color: #ec4899 !important; }
-.text-amber { color: var(--primary-amber) !important; }
-.text-purple { color: var(--primary-purple) !important; }
-
-/* ==========================================================================
-   PULSE ANIMATION GLOBAL
-   ========================================================================== */
-@keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.95); }
-}
-
-/* ==========================================================================
-   ANIMATION D'INTRO PAGE (fade in du contenu principal)
-   ========================================================================== */
-@keyframes pageReveal {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.app-container {
-    animation: pageReveal 0.6s ease both;
-    animation-delay: 0.1s;
-}
-
-/* ==========================================================================
-   SERVER CARD - STAGGER ANIMATION DELAY
-   ========================================================================== */
-.server-card:nth-child(1)  { animation-delay: 0.02s; }
-.server-card:nth-child(2)  { animation-delay: 0.04s; }
-.server-card:nth-child(3)  { animation-delay: 0.06s; }
-.server-card:nth-child(4)  { animation-delay: 0.08s; }
-.server-card:nth-child(5)  { animation-delay: 0.10s; }
-.server-card:nth-child(6)  { animation-delay: 0.12s; }
-.server-card:nth-child(7)  { animation-delay: 0.14s; }
-.server-card:nth-child(8)  { animation-delay: 0.16s; }
-.server-card:nth-child(9)  { animation-delay: 0.18s; }
-.server-card:nth-child(10) { animation-delay: 0.20s; }
-.server-card:nth-child(11) { animation-delay: 0.22s; }
-.server-card:nth-child(12) { animation-delay: 0.24s; }
-.server-card:nth-child(n+13) { animation-delay: 0.26s; }
-
-/* ==========================================================================
-   GRADIENT TEXT UTILITY
-   ========================================================================== */
-.gradient-text {
-    background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* ==========================================================================
-   VIDEO PORTAL - NEWS ENTRY HOVER
-   ========================================================================== */
-.news-entry {
-    transition: all 0.2s ease;
-    border-left: 2px solid transparent;
-}
-
-.news-entry:hover {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border-left-color: var(--primary-cyan);
-    transform: translateX(4px);
-}
-
-/* ==========================================================================
-   FEATURED SERVER RIBBON PILLS - HOVER GLOW
-   ========================================================================== */
-.ribbon-card-pill.active,
-.ribbon-card-pill:hover {
-    background: linear-gradient(135deg, #1e2d4a, #1a1e2a) !important;
-    border-color: var(--primary-cyan) !important;
-    box-shadow: 0 0 12px rgba(0, 240, 255, 0.2) !important;
-    color: var(--primary-cyan) !important;
-}
-
-/* ==========================================================================
-   PLAY BUTTON MAIN - PULSATION
-   ========================================================================== */
-.player-btn.play-main {
-    animation: none;
-    transition: all 0.2s ease;
-}
-
-.player-btn.play-main:hover {
-    transform: scale(1.15);
-    box-shadow: 0 0 25px var(--primary-cyan-glow);
-}
-
-/* ==========================================================================
-   SEARCH BAR - FOCUS AVEC GLOW AMÉLIORÉ
-   ========================================================================== */
-.search-bar-wrapper input:focus {
-    box-shadow: 0 0 0 1px var(--primary-cyan), 0 0 25px rgba(0, 240, 255, 0.2) !important;
-}
-
-/* ==========================================================================
-   CATEGORY NAV BADGE COUNT ANIMATION
-   ========================================================================== */
-.nav-badge {
-    transition: all 0.3s ease;
-}
-
-.nav-badge.updated {
-    animation: badgePop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes badgePop {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.3); background: var(--primary-cyan); color: #000; }
-    100% { transform: scale(1); }
-}
-
-/* ==========================================================================
-   ADDITIONAL VISUAL TOUCH : CARD INNER GLOW ON HOVER
-   ========================================================================== */
-.server-card:hover .card-body {
-    background: radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.03) 0%, transparent 70%);
-}
-
-/* ==========================================================================
-   VIDEO PLAYLIST CARDS - ACTIVE BORDER GLOW
-   ========================================================================== */
-.video-card-item.active {
-    box-shadow: 0 0 0 1px rgba(255, 152, 0, 0.6), 0 4px 20px rgba(255, 152, 0, 0.25) !important;
-}
-
-/* ==========================================================================
-   SCROLL PROGRESS BAR - TOP OF PAGE
-   ========================================================================== */
-#scroll-progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--primary-cyan), var(--primary-purple), #ff2a6d);
-    z-index: 999999;
-    width: 0%;
-    transition: width 0.1s linear;
-    box-shadow: 0 0 8px var(--primary-cyan);
-}
-
-/* ==========================================================================
-   PLAYER TRACK COVER - ROTATING VINYL EFFECT WHEN PLAYING
-   ========================================================================== */
-.track-cover-wrap.is-playing .track-cover {
-    animation: vinylSpin 8s linear infinite;
-}
-
-@keyframes vinylSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* ==========================================================================
-   MODAL - ENHANCED ANIMATION
-   ========================================================================== */
-.modal-backdrop.open .modal-card {
-    transform: scale(1) !important;
-    animation: modalReveal 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes modalReveal {
-    from { transform: scale(0.92) translateY(20px); opacity: 0; }
-    to { transform: scale(1) translateY(0); opacity: 1; }
-}
-
-/* ==========================================================================
-   PLAYLIST DRAWER - TRACK HOVER EFFECT
-   ========================================================================== */
-.drawer-track-row:hover {
-    background: rgba(255, 255, 255, 0.06) !important;
-    padding-left: 14px !important;
-    border-left: 2px solid var(--primary-cyan) !important;
-}
-
-/* ==========================================================================
-   GTA6 TOP HUD BADGES
-   ========================================================================== */
-.gta6-top-info-hud {
-    position: absolute;
-    top: 20px;
-    right: 40px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    z-index: 200;
-}
-
-.gta6-watermark-tag,
-.gta6-build-tag,
-.gta6-fps-tag,
-.gta6-vram-tag {
-    font-family: var(--font-sub);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.7);
-    letter-spacing: 0.5px;
-    background: rgba(10, 12, 16, 0.6);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 4px 10px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.gta6-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #22c55e;
-    box-shadow: 0 0 8px #22c55e;
-    animation: pulseLive 1.5s infinite;
-}
-
-/* ==========================================================================
-   EXTRA: ICON TOOL BUTTONS - ENHANCED HOVER
-   ========================================================================== */
-.icon-tool-btn {
-    position: relative;
-    overflow: hidden;
-}
-
-.icon-tool-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0);
-    border-radius: inherit;
-    transition: background 0.15s ease;
-}
-
-.icon-tool-btn:hover::after {
-    background: rgba(255, 255, 255, 0.06);
-}
-
-
-
-
-
-
-/* ==========================================================================
-   WIDGET DISCORD RICH PRESENCE - PANNEAU FLOTTANT PREMIUM
-   ========================================================================== */
-
-/* Conteneur principal - positionné en bas à gauche (au-dessus du player) */
-.discord-widget {
-    position: fixed;
-    bottom: 95px;
-    left: 24px;
-    z-index: 500;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 8px;
-}
-
-/* Bouton Toggle Compact */
-.discord-toggle-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(88, 101, 242, 0.2);
-    border: 1px solid rgba(88, 101, 242, 0.4);
-    color: #fff;
-    padding: 8px 14px 8px 12px;
-    border-radius: 50px;
-    font-family: var(--font-sub);
-    font-size: 0.8rem;
-    font-weight: 700;
-    cursor: pointer;
-    backdrop-filter: blur(16px);
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 20px rgba(88, 101, 242, 0.25);
-    position: relative;
-}
-
-.discord-toggle-btn:hover {
-    background: rgba(88, 101, 242, 0.35);
-    border-color: rgba(88, 101, 242, 0.7);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(88, 101, 242, 0.4);
-}
-
-.discord-logo-svg {
-    width: 20px;
-    height: 20px;
-    color: #5865F2;
-    flex-shrink: 0;
-}
-
-.discord-toggle-label {
-    letter-spacing: 0.5px;
-}
-
-.discord-status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #747f8d;
-    margin-left: 2px;
-    transition: background 0.3s ease;
-    box-shadow: 0 0 0 2px rgba(0,0,0,0.3);
-}
-
-.discord-status-dot.connected {
-    background: #23d160;
-    box-shadow: 0 0 8px rgba(35, 209, 96, 0.8), 0 0 0 2px rgba(0,0,0,0.3);
-    animation: discordPulse 2s infinite;
-}
-
-@keyframes discordPulse {
-    0%, 100% { box-shadow: 0 0 8px rgba(35, 209, 96, 0.8), 0 0 0 2px rgba(0,0,0,0.3); }
-    50%       { box-shadow: 0 0 16px rgba(35, 209, 96, 0.5), 0 0 0 2px rgba(0,0,0,0.3); }
-}
-
-/* Panneau déroulant */
-.discord-panel {
-    width: 320px;
-    background: rgba(30, 33, 36, 0.98);
-    border: 1px solid rgba(88, 101, 242, 0.3);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(255,255,255,0.04),
-        inset 0 1px 0 rgba(255,255,255,0.06);
-    backdrop-filter: blur(24px);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(12px) scale(0.97);
-    transform-origin: bottom left;
-    transition: opacity 0.25s cubic-bezier(0.16,1,0.3,1),
-                transform 0.25s cubic-bezier(0.16,1,0.3,1),
-                visibility 0.25s;
-}
-
-.discord-panel.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
-}
-
-/* En-tête du panneau */
-.discord-panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 16px 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    background: rgba(88, 101, 242, 0.08);
-}
-
-.discord-panel-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-sub);
-    font-size: 0.9rem;
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: 0.3px;
-}
-
-.discord-close-btn {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #aaa;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 0.8rem;
-    transition: all 0.15s ease;
-}
-
-.discord-close-btn:hover {
-    background: rgba(255, 56, 56, 0.2);
-    border-color: rgba(255, 56, 56, 0.4);
-    color: #ff3838;
-}
-
-/* Ligne de connexion */
-.discord-connection-row {
-    padding: 10px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-
-.discord-conn-indicator {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.78rem;
-    color: #94a3b8;
-    font-family: var(--font-sub);
-}
-
-.discord-conn-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #747f8d;
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-}
-
-.discord-conn-dot.connected   { background: #23d160; box-shadow: 0 0 8px rgba(35, 209, 96, 0.7); }
-.discord-conn-dot.connecting  { background: #faa61a; animation: discordPulse 1s infinite; }
-.discord-conn-dot.disconnected{ background: #ed4245; }
-
-/* Carte présence */
-.discord-presence-card {
-    display: flex;
-    gap: 12px;
-    padding: 14px 16px;
-    background: rgba(255,255,255,0.02);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-
-.discord-presence-logo {
-    position: relative;
-    flex-shrink: 0;
-}
-
-.discord-app-logo {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-    object-fit: cover;
-    border: 2px solid rgba(88, 101, 242, 0.4);
-    display: block;
-}
-
-.discord-app-logo-fallback {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #5865F2, #3b5bdb);
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    color: #fff;
-}
-
-.discord-presence-live-badge {
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #ed4245;
-    color: #fff;
-    font-family: var(--font-heading);
-    font-size: 0.5rem;
-    font-weight: 900;
-    padding: 1px 5px;
-    border-radius: 3px;
-    letter-spacing: 0.5px;
-    animation: liveBadgePulse 2s infinite alternate;
-}
-
-@keyframes liveBadgePulse {
-    from { box-shadow: 0 0 4px rgba(237,66,69,0.5); }
-    to   { box-shadow: 0 0 12px rgba(237,66,69,0.9); }
-}
-
-.discord-presence-info {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.discord-presence-app {
-    font-family: var(--font-sub);
-    font-size: 0.82rem;
-    font-weight: 800;
-    color: #fff;
-}
-
-.discord-presence-details {
-    font-size: 0.78rem;
-    color: #b9bbbe;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: all 0.3s ease;
-}
-
-.discord-presence-state {
-    font-size: 0.75rem;
-    color: #72767d;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.discord-presence-timer {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-family: monospace;
-    font-size: 0.72rem;
-    color: #5865F2;
-    margin-top: 2px;
-}
-
-/* Divider */
-.discord-divider {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px 6px;
-    font-family: var(--font-sub);
-    font-size: 0.65rem;
-    font-weight: 800;
-    color: #4f545c;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.discord-divider::before,
-.discord-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(255,255,255,0.06);
-}
-
-/* Grille de boutons */
-.discord-actions-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    padding: 6px 14px 10px;
-}
-
-.discord-action-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    padding: 9px 10px;
-    border-radius: 10px;
-    font-family: var(--font-sub);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    transition: all 0.18s ease;
-    letter-spacing: 0.2px;
-}
-
-.discord-btn-install {
-    background: rgba(0, 240, 255, 0.12);
-    border: 1px solid rgba(0, 240, 255, 0.25);
-    color: #00f0ff;
-}
-.discord-btn-install:hover {
-    background: rgba(0, 240, 255, 0.22);
-    border-color: rgba(0, 240, 255, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
-}
-
-.discord-btn-join {
-    background: rgba(88, 101, 242, 0.18);
-    border: 1px solid rgba(88, 101, 242, 0.35);
-    color: #7289da;
-}
-.discord-btn-join:hover {
-    background: rgba(88, 101, 242, 0.3);
-    border-color: rgba(88, 101, 242, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.25);
-}
-
-.discord-btn-invite {
-    background: rgba(139, 92, 246, 0.12);
-    border: 1px solid rgba(139, 92, 246, 0.25);
-    color: #a78bfa;
-}
-.discord-btn-invite:hover {
-    background: rgba(139, 92, 246, 0.22);
-    border-color: rgba(139, 92, 246, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
-}
-
-.discord-btn-news {
-    background: rgba(255, 152, 0, 0.12);
-    border: 1px solid rgba(255, 152, 0, 0.25);
-    color: #fb923c;
-}
-.discord-btn-news:hover {
-    background: rgba(255, 152, 0, 0.22);
-    border-color: rgba(255, 152, 0, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
-}
-
-/* Membres row */
-.discord-members-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px 10px;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    font-size: 0.75rem;
-    color: #72767d;
-}
-
-.discord-member-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #747f8d;
-    flex-shrink: 0;
-}
-
-.discord-member-dot.online {
-    background: #23d160;
-    box-shadow: 0 0 6px rgba(35,209,96,0.6);
-}
-
-.discord-members-online {
-    color: #23d160;
-    font-weight: 700;
-}
-
-.discord-members-total {
-    margin-left: auto;
-    font-size: 0.7rem;
-}
-
-/* Footer */
-.discord-panel-footer {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 9px 16px;
-    background: rgba(0,0,0,0.2);
-    font-size: 0.68rem;
-    color: #4f545c;
-    border-top: 1px solid rgba(255,255,255,0.04);
-}
-
-/* ==========================================================================
-   NAVIGATION PAR ONGLETS & SECTIONS PRINCIPALES
-   ========================================================================== */
-.nav-tab-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #94a3b8;
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-family: var(--font-sub);
-    font-size: 0.82rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    letter-spacing: 0.5px;
-}
-
-.nav-tab-btn:hover {
-    background: rgba(0, 240, 255, 0.12);
-    border-color: rgba(0, 240, 255, 0.3);
-    color: #00f0ff;
-    transform: translateY(-1px);
-}
-
-.nav-tab-btn.active {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(139, 92, 246, 0.25));
-    border-color: #00f0ff;
-    color: #ffffff;
-    box-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
-}
-
-.main-view-section {
-    width: 100%;
-    height: calc(100vh - 54px);
-    overflow: hidden;
-    position: relative;
-}
-
-#view-servers-section {
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-#view-videos-section {
-    overflow: hidden;
-    height: calc(100vh - 54px);
-}
-
-/* Contrôles Haut Droit du Splash Screen */
-.boot-splash-controls {
-    position: absolute;
-    top: 24px;
-    right: 28px;
-    z-index: 10005;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.boot-audio-btn {
-    background: rgba(16, 20, 29, 0.75);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(34, 197, 94, 0.4);
-    color: #cbd5e1;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-family: var(--font-sub);
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-}
-
-.boot-audio-btn:hover {
-    background: rgba(34, 197, 94, 0.25);
-    border-color: #22c55e;
-    color: #fff;
-    transform: scale(1.04);
-    box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
-}
-
-/* Bouton Skip Intro sur le Splash Screen */
-.skip-splash-btn {
-    background: rgba(16, 20, 29, 0.75);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #cbd5e1;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-family: var(--font-sub);
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-}
-
-.skip-splash-btn:hover {
-    background: rgba(255, 42, 109, 0.35);
-    border-color: #ff2a6d;
-    color: #fff;
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
-}
-
-/* Résultats meta row */
-.results-meta-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 4px 10px 4px;
-}
-
-.results-count-badge {
-    font-family: var(--font-sub);
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #94a3b8;
-    letter-spacing: 0.5px;
-}
-
-.live-sync-tag {
-    font-family: var(--font-sub);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #00e676;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.pulse-dot {
-    animation: pulse 1.5s infinite;
-}
-
-.sort-selector-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.sort-select {
-    background: #11141c;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #cbd5e1;
-    padding: 7px 12px;
-    border-radius: 6px;
-    font-family: var(--font-body);
-    font-size: 0.78rem;
-    outline: none;
-    cursor: pointer;
-}
-
-.btn-tool-refresh {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #cbd5e1;
-    padding: 7px 11px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-tool-refresh:hover {
-    background: rgba(0, 240, 255, 0.2);
-    border-color: #00f0ff;
-    color: #00f0ff;
-}
-
-/* Clear search button */
-.clear-search-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #94a3b8;
-    cursor: pointer;
-    padding: 4px;
-}
-
-.clear-search-btn:hover {
-    color: #ff3860;
-}
-
-/* ==========================================================================
-   ÉCRAN DE DÉMARRAGE CINÉMATIQUE GTA VI AVEC FOND VIDÉO HD (144 FPS)
-   ========================================================================== */
-.app-boot-splash {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background: #000000;
-    z-index: 999999 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden !important;
-    user-select: none;
-}
-
-.boot-video-container {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.boot-youtube-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 56.25vw; /* 16:9 Aspect */
-    min-height: 100vh;
-    min-width: 177.77vh;
-    transform: translate(-50%, -50%) scale(1.15);
-    border: none;
-    opacity: 0.85;
-    pointer-events: none;
-}
-
-.boot-dark-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(10, 12, 16, 0.45);
-    z-index: 2;
-    pointer-events: none;
-}
-
-.boot-video-overlay {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(10, 12, 16, 0.15) 0%, rgba(10, 12, 16, 0.85) 100%),
-                linear-gradient(180deg, rgba(10, 12, 16, 0.25) 0%, rgba(10, 12, 16, 0.9) 100%);
-    z-index: 3;
-    pointer-events: none;
-}
-
-/* Badges Leonida State & FPS HUD */
-.gta6-top-info-hud {
-    position: absolute;
-    top: 24px;
-    left: 32px;
-    z-index: 120;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.gta6-watermark-tag {
-    background: rgba(13, 15, 20, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    font-weight: 800;
-    padding: 6px 14px;
-    border-radius: 6px;
-    letter-spacing: 1.5px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.gta6-dot {
-    width: 7px;
-    height: 7px;
-    background: #ff2a6d;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #ff2a6d;
-    animation: pulse 1.5s infinite;
-}
-
-.gta6-build-tag {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #94a3b8;
-    font-family: var(--font-sub);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 6px;
-    letter-spacing: 1px;
-}
-
-.gta6-fps-tag, .gta6-vram-tag {
-    background: rgba(13, 15, 20, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #cbd5e1;
-    font-family: var(--font-sub);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* Logo Officiel Centré & Flottant avec Ombre Profonde */
-.gta6-hub-logo-wrap {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    z-index: 110;
-    width: 360px;
-    max-width: 80vw;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    will-change: transform;
-    animation: hubLogoGpuSmooth 3s infinite alternate ease-in-out;
-}
-
-@keyframes hubLogoGpuSmooth {
-    0% { transform: translate3d(-50%, -50%, 0) scale(1); }
-    100% { transform: translate3d(-50%, -52%, 0) scale(1.03); }
-}
-
-.gta6-hub-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-    filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.9));
-}
-
-/* Barre de Progression Inférieure & Bonhomme Animé */
-.xrp-bottom-loader {
-    position: absolute;
-    bottom: 36px;
-    left: 60px;
-    right: 60px;
-    z-index: 120;
-}
-
-.gta6-tip-box {
-    background: rgba(13, 15, 20, 0.85);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-    padding: 8px 16px;
-    margin-bottom: 12px;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: #cbd5e1;
-    font-size: 0.85rem;
-    font-family: var(--font-body);
-}
-
-.xrp-load-info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-    font-family: var(--font-sub);
-    font-weight: 800;
-}
-
-.xrp-status-text {
-    color: #ffffff;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    font-style: italic;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-}
-
-.xrp-percent-text {
-    color: #ffffff;
-    font-family: var(--font-heading);
-    font-size: 1.15rem;
-    font-weight: 900;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-}
-
-.xrp-progress-track {
-    width: 100%;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 6px;
-    position: relative;
-}
-
-.xrp-progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #ff2a6d, #ff758c);
-    border-radius: 6px;
-    box-shadow: 0 0 20px rgba(255, 42, 109, 0.9);
-    position: relative;
-    transition: none !important;
-    will-change: width;
-}
-
-.xrp-running-runner {
-    position: absolute;
-    right: -16px;
-    top: -40px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95));
-    animation: runnerBob 0.35s infinite alternate ease-in-out;
-}
-
-@keyframes runnerBob {
-    0% { transform: translateY(0) rotate(-4deg); }
-    100% { transform: translateY(-4px) rotate(4deg); }
-}
-
-.runner-svg {
-    width: 100%;
-    height: 100%;
-}
-
-.runner-glow-dot {
-    position: absolute;
-    bottom: -8px;
-    width: 16px;
-    height: 16px;
-    background: #ffffff;
-    border-radius: 50%;
-    box-shadow: 0 0 14px #ffffff;
-}
-
-.boot-video-ambient-overlay {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(10, 12, 16, 0.1) 0%, rgba(10, 12, 16, 0.75) 100%),
-                linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(10, 12, 16, 0.8) 100%);
-    pointer-events: none;
-    z-index: 2;
-}
-
-/* ==========================================================================
-   CURSEUR PERSONNALISÉ LUMINEUX (ZÉRO LAG & ULTRA-RÉACTIF TOUJOURS VISIBLE)
-   ========================================================================== */
-.custom-cursor {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    background: #00f0ff;
-    border-radius: 50%;
-    pointer-events: none !important;
-    z-index: 2147483647 !important;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
-    transition: transform 0.1s ease-out, background 0.2s ease;
-    display: block !important;
-}
-
-.custom-cursor-ring {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 36px;
-    height: 36px;
-    border: 2px solid rgba(0, 240, 255, 0.6);
-    border-radius: 50%;
-    pointer-events: none !important;
-    z-index: 2147483646 !important;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
-    transition: width 0.18s cubic-bezier(0.16, 1, 0.3, 1), 
-                height 0.18s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-color 0.2s ease, 
-                box-shadow 0.2s ease;
-    display: block !important;
-}
-
-/* Curseur actif au hover d'éléments interactifs */
-.custom-cursor-ring.active-hover {
-    width: 54px;
-    height: 54px;
-    border-color: #ff2a6d;
-    box-shadow: 0 0 25px rgba(255, 42, 109, 0.7);
-}
-
-.custom-cursor.active-hover {
-    background: #ff2a6d;
-    box-shadow: 0 0 12px #ff2a6d, 0 0 24px #ff2a6d;
-}
-
-/* ==========================================================================
-   MINI RADIO RAP GAMING DANS LE HEADER (SANS PUB & ULTRA-FLUIDE)
-   ========================================================================== */
-.hub-radio-mini-widget {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(16, 20, 29, 0.85);
-    border: 1px solid rgba(0, 240, 255, 0.25);
-    padding: 6px 14px;
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    transition: all 0.25s ease;
-}
-
-.hub-radio-mini-widget:hover {
-    border-color: #00f0ff;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-}
-
-.radio-play-btn {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #00f0ff, #8b5cf6);
-    border: none;
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 0.75rem;
-    transition: transform 0.18s ease;
-}
-
-.radio-play-btn:hover {
-    transform: scale(1.1);
-}
-
-.radio-info-mini {
-    display: flex;
-    flex-direction: column;
-}
-
-.radio-title-mini {
-    font-family: var(--font-sub);
-    font-size: 0.78rem;
-    font-weight: 800;
-    color: #ffffff;
-    max-width: 140px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.radio-tag-mini {
-    font-size: 0.65rem;
-    color: #94a3b8;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.radio-vol-mini {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.radio-vol-mini input[type="range"] {
-    width: 50px;
-    height: 4px;
-    accent-color: #00f0ff;
-    cursor: pointer;
-}
-
-/* ==========================================================================
-   MODE CINÉMA IMMERSIF (EXTINCTION DES FEUX & SALLE OBSCURCIE)
-   ========================================================================== */
-body.cinema-lights-dimmed .hub-top-bar,
-body.cinema-lights-dimmed .hub-bottom-panels {
-    opacity: 0.08;
-    filter: blur(4px);
-    transition: opacity 0.5s ease, filter 0.5s ease;
-}
-
-body.cinema-lights-dimmed .hub-top-bar:hover,
-body.cinema-lights-dimmed .hub-bottom-panels:hover {
-    opacity: 1;
-    filter: blur(0px);
-}
-
-body.cinema-lights-dimmed .video-ambient-gradient {
-    opacity: 0.2;
-}
-
-body.cinema-lights-dimmed .btn-exit-cinema {
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    z-index: 10000;
-    display: inline-flex !important;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 42, 109, 0.9);
-    border: 1px solid #ff758c;
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 20px;
-    font-family: var(--font-sub);
-    font-size: 0.82rem;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 0 20px rgba(255, 42, 109, 0.8);
-    animation: pulse 2s infinite;
-}
-
-/* ==========================================================================
-   BANDEAU FLASH DÉFILANT ROCKSTAR GAMES EN TEMPS RÉEL (TICKER)
-   ========================================================================== */
-.live-breaking-ticker {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(13, 16, 24, 0.85);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 152, 0, 0.25);
-    border-radius: 8px;
-    padding: 6px 14px;
-    margin: 8px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-.ticker-badge {
-    background: linear-gradient(135deg, #ff9800, #ff5722);
-    color: #000;
-    font-family: var(--font-heading);
-    font-size: 0.72rem;
-    font-weight: 900;
-    padding: 3px 8px;
-    border-radius: 4px;
-    letter-spacing: 1px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.ticker-content-track {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    font-family: var(--font-body);
-    font-size: 0.82rem;
-    color: #cbd5e1;
-    animation: tickerScroll 25s linear infinite;
-}
-
-.ticker-content-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes tickerScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-.ticker-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.ticker-divider {
-    color: rgba(255, 255, 255, 0.25);
-}
-
-/* ==========================================================================
-   GRILLE DES SERVICES ROCKSTAR GAMES EN TEMPS RÉEL
-   ========================================================================== */
-.rockstar-services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 8px;
-}
-
-.service-pill {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
-    padding: 6px 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-}
-
-.service-pill:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(0, 240, 255, 0.3);
-    transform: translateY(-1px);
-}
-
-.srv-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #747f8d;
-    flex-shrink: 0;
-}
-
-.srv-dot.online {
-    background: #22c55e;
-    box-shadow: 0 0 8px #22c55e;
-    animation: pulse 2s infinite;
-}
-
-.srv-name {
-    font-family: var(--font-sub);
-    font-size: 0.76rem;
-    font-weight: 700;
-    color: #f1f5f9;
-    flex-grow: 1;
-}
-
-.srv-ping {
-    font-family: var(--font-body);
-    font-size: 0.7rem;
-    font-weight: 800;
-    color: #22c55e;
-}
-
-.live-status-badge {
-    background: rgba(34, 197, 94, 0.15);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    color: #22c55e;
-    font-size: 0.7rem;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-}
-
-/* ==========================================================================
-   ENTRÉES D'ACTUALITÉS ROCKSTAR CLIC-DÉTAILS 3D
-   ========================================================================== */
-.news-items-scroll {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-height: 180px;
-    overflow-y: auto;
-}
-
-.news-entry {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
-    padding: 10px 14px;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.news-entry:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 152, 0, 0.4);
-    transform: translateX(4px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.news-source {
-    font-family: var(--font-heading);
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 4px;
-}
-
-.news-entry h4 {
-    font-family: var(--font-sub);
-    font-size: 0.88rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 3px;
-}
-
-.news-entry p {
-    font-size: 0.78rem;
-    color: #94a3b8;
-    line-height: 1.4;
-}
-
-.v-badge.v-ping {
-    background: rgba(34, 197, 94, 0.12);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    color: #22c55e;
-}
-
-/* ==========================================================================
-   CARROUSEL DE BANDES-ANNONCES 4K & CARTES 3D GLOW
-   ========================================================================== */
-.video-playlist-carousel {
-    background: rgba(10, 13, 20, 0.85);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
-    padding: 14px 18px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-}
-
-.videos-list-scroll {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    overflow-x: auto;
-    padding-bottom: 6px;
-}
-
-.video-card-item {
-    background: rgba(18, 23, 33, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-    width: 175px;
-    flex-shrink: 0;
-    cursor: pointer;
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.video-card-item:hover {
-    border-color: #00f0ff;
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 8px 25px rgba(0, 240, 255, 0.35);
-}
-
-.video-card-item.active {
-    border-color: #ff2a6d;
-    box-shadow: 0 0 20px rgba(255, 42, 109, 0.6);
-    background: linear-gradient(180deg, rgba(255, 42, 109, 0.15) 0%, rgba(18, 23, 33, 0.95) 100%);
-}
-
-.video-thumb {
-    width: 100%;
-    height: 98px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.play-icon-overlay {
-    width: 32px;
-    height: 32px;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 0.75rem;
-    transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.video-card-item:hover .play-icon-overlay {
-    transform: scale(1.2);
-    background: #ff2a6d;
-    border-color: #ff758c;
-}
-
-.tag-4k-pill {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    background: rgba(0, 0, 0, 0.75);
-    border: 1px solid rgba(0, 240, 255, 0.5);
-    color: #00f0ff;
-    font-family: var(--font-heading);
-    font-size: 0.62rem;
-    font-weight: 800;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
-.video-meta {
-    padding: 8px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.video-meta strong {
-    font-family: var(--font-sub);
-    font-size: 0.82rem;
-    font-weight: 800;
-    color: #ffffff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.video-meta span {
-    font-size: 0.7rem;
-    color: #94a3b8;
-}
-
-/* ==========================================================================
-   BOUCLIER DE SÉCURITÉ RÉSEAU ANTI-DDOS / ANTI-LEAK
-   ========================================================================== */
-.live-shield-pulse {
-    border-color: rgba(0, 240, 255, 0.4) !important;
-    background: rgba(0, 240, 255, 0.1) !important;
-    color: #00f0ff !important;
-    box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
-    animation: shieldGlow 3s infinite;
-}
-
-@keyframes shieldGlow {
-    0%, 100% {
-        box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
-        border-color: rgba(0, 240, 255, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 22px rgba(0, 240, 255, 0.7);
-        border-color: #00f0ff;
-    }
-}
-
-/* ==========================================================================
-   CURSEUR DU SYSTÈME VISIBLE & FLUIDE PARTOUT
-   ========================================================================== */
-html, body {
-    cursor: default !important;
-}
-
-button, a, input, select, .video-card-item, .live-pill, .icon-tool-btn, .rstar-badge, .news-entry {
-    cursor: pointer !important;
-}
-
-/* ==========================================================================
-   ÉCRAN DE CHARGEMENT INTRO GTA VI (BARRE ANIMÉE 0-100% & RUNNER)
-   ========================================================================== */
-.app-boot-splash {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 999999;
-    background: #080a0f;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 30px 40px;
-    overflow: hidden;
-}
-
-.boot-video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    overflow: hidden;
-    background: #000;
-}
-
-.boot-youtube-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 56.25vw;
-    min-height: 100vh;
-    min-width: 177.77vh;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    border: none;
-}
-
-.boot-video-ambient-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(10, 13, 20, 0.2) 0%, rgba(10, 13, 20, 0.75) 100%);
-    pointer-events: none;
-}
-
-.gta6-top-info-hud {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.gta6-watermark-tag {
-    background: rgba(16, 20, 29, 0.85);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 42, 109, 0.4);
-    color: #ffffff;
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    font-weight: 900;
-    padding: 6px 14px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
-}
-
-.gta6-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #ff2a6d;
-    box-shadow: 0 0 10px #ff2a6d;
-    animation: pulse 1.5s infinite;
-}
-
-.gta6-build-tag, .gta6-fps-tag, .gta6-vram-tag {
-    background: rgba(16, 20, 29, 0.8);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #cbd5e1;
-    font-family: var(--font-sub);
-    font-size: 0.74rem;
-    font-weight: 800;
-    padding: 6px 12px;
-    border-radius: 20px;
-}
-
-.gta6-hub-logo-wrap {
-    position: absolute;
-    top: 42%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    pointer-events: none;
-    text-align: center;
-}
-
-.gta6-hub-img {
-    max-width: 320px;
-    height: auto;
-    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 35px rgba(0, 240, 255, 0.4));
-    animation: logoFloat 4s ease-in-out infinite;
-}
-
-@keyframes logoFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-/* Loader Inférieur avec Bonhomme et Barre de Progression */
-.xrp-bottom-loader {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    max-width: 950px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.gta6-tip-box {
-    background: rgba(16, 20, 29, 0.85);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-    padding: 8px 16px;
-    color: #cbd5e1;
-    font-size: 0.82rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-.xrp-load-info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--font-sub);
-    font-size: 0.82rem;
-    font-weight: 900;
-}
-
-.xrp-status-text {
-    color: #ffffff;
-    letter-spacing: 1px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-}
-
-.xrp-percent-text {
-    color: #00f0ff;
-    font-size: 1.1rem;
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
-}
-
-.xrp-progress-track {
-    width: 100%;
-    height: 10px;
-    background: rgba(10, 13, 20, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    position: relative;
-    overflow: visible;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.xrp-progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #ff2a6d 0%, #00f0ff 60%, #22c55e 100%);
-    border-radius: 20px;
-    position: relative;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.7);
-    transition: width 0.05s linear;
-}
-
-.xrp-running-runner {
-    position: absolute;
-    right: -12px;
-    top: -24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    pointer-events: none;
-}
-
-.runner-svg {
-    width: 24px;
-    height: 24px;
-    filter: drop-shadow(0 0 8px #00f0ff);
-    animation: runnerBob 0.3s ease-in-out infinite alternate;
-}
-
-@keyframes runnerBob {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-4px); }
-}
-
-.runner-glow-dot {
-    width: 6px;
-    height: 6px;
-    background: #00f0ff;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #00f0ff;
-    margin-top: -2px;
-}
-
-/* ==========================================================================
-   MISE EN PAGE DU PORTAIL VIDÉOS & PANNEAUX INFÉRIEURS (GRID 2 COLONNES)
-   ========================================================================== */
-.video-news-hub-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: #080a0f;
-}
-
-.main-video-player-frame {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.hub-video-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 56.25vw;
-    min-height: 100vh;
-    min-width: 177.77vh;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    border: none;
-}
-
-.video-ambient-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(8, 10, 15, 0.4) 0%, rgba(8, 10, 15, 0.75) 60%, rgba(8, 10, 15, 0.95) 100%);
-    pointer-events: none;
-}
-
-.hub-overlay-ui {
-    position: relative;
-    z-index: 10;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 16px 28px;
-    box-sizing: border-box;
-    overflow: hidden;
-}
-
-.hub-bottom-panels {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 16px;
-    width: 100%;
-    margin-top: auto;
-    max-height: 230px;
-}
-
-.video-playlist-carousel {
-    background: rgba(10, 13, 20, 0.88);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    padding: 12px 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-}
-
-.news-feed-panel {
-    background: rgba(10, 13, 20, 0.88);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    padding: 12px 16px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-}
-
-.panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-
-.panel-title-group {
-    font-family: var(--font-heading);
-    font-size: 0.76rem;
-    font-weight: 900;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.badge-sub-counter {
-    background: rgba(255, 42, 109, 0.2);
-    border: 1px solid rgba(255, 42, 109, 0.4);
-    color: #ff758c;
-    font-size: 0.64rem;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
-.video-filter-pills {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.vid-filter-btn {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #94a3b8;
-    font-family: var(--font-heading);
-    font-size: 0.68rem;
-    font-weight: 800;
-    padding: 3px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.18s ease;
-}
-
-.vid-filter-btn:hover,
-.vid-filter-btn.active {
-    background: #ff2a6d;
-    border-color: #ff758c;
-    color: #ffffff;
-    box-shadow: 0 0 10px rgba(255, 42, 109, 0.5);
-}
-
-.live-link {
-    color: #ff9800;
-    font-size: 0.72rem;
-    font-weight: 800;
-    text-decoration: none;
-}
-
-.live-link:hover {
-    text-decoration: underline;
-}
-
-
-
-
-
 
 
 
